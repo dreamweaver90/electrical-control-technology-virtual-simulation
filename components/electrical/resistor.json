@@ -1,0 +1,86 @@
+{
+  "class": "ComponentInstance",
+  "category": "其它",
+  "id": "resistor",
+  "name": "电阻",
+  "description": "可调电阻，串联到回路中限流/分压（如三相电机串电阻降压启动）",
+  "tags": [
+    "电阻",
+    "负载",
+    "限流"
+  ],
+  "size": {
+    "width": 203,
+    "height": 80
+  },
+  "thumbnail": "<div><img src='images/电阻.png' width='203' height='80'></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/电阻.png' width='203' height='80'></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "r1": {
+          "x": 9,
+          "y": 39,
+          "dir": "down",
+          "tip": "电阻端1"
+        },
+        "r2": {
+          "x": 193,
+          "y": 38,
+          "dir": "down",
+          "tip": "电阻端2"
+        }
+      },
+      "contacts": {},
+      "loads": {
+        "r": {
+          "pins": [
+            "r1",
+            "r2"
+          ],
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "impedance",
+      "label": "电阻值",
+      "type": "number",
+      "unit": "Ω",
+      "min": 0.5,
+      "max": 500,
+      "step": 0.5,
+      "default": 10,
+      "adjustable": true
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 101,
+        "y": 39,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

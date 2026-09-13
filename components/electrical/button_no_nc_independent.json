@@ -1,0 +1,175 @@
+{
+  "class": "ComponentInstance",
+  "category": "按钮&指示灯",
+  "id": "button_no_nc_independent",
+  "name": "独立按钮",
+  "description": "独立按钮，含一对常开触点和一对常闭触点，自复位式；钮帽颜色右键可选（红/黄/蓝/绿/白/黑）",
+  "tags": [
+    "按钮",
+    "常开",
+    "常闭",
+    "自复位"
+  ],
+  "zones": [
+    {
+      "id": "sb",
+      "event": "press",
+      "action": "toggle",
+      "tips": "自复位按钮",
+      "state": "pushed",
+      "x": 94.81,
+      "y": 15.5,
+      "r": 13
+    }
+  ],
+  "terminalHitRadius": 8,
+  "size": {
+    "width": 183,
+    "height": 156
+  },
+  "image": [
+    {
+      "id": "复位",
+      "x": 0,
+      "y": 0,
+      "bind": "!pushed",
+      "classBind": {
+        "cap": "capColor"
+      },
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='183' height='130' viewBox='0 0 183 130'><rect x='61.56' y='50.5' width='66.5' height='74.2' fill='none' stroke='#000000' stroke-width='2.8' stroke-dasharray='7 3.5'/><rect x='19' y='61' width='60.06' height='5.6' fill='#ffffff' stroke='#000000' stroke-width='2.8'/><rect x='47.56' y='108.6' width='31.5' height='5.6' fill='#ffffff' stroke='#000000' stroke-width='2.8'/><rect x='110.56' y='61' width='60.06' height='5.6' fill='#ffffff' stroke='#000000' stroke-width='2.8'/><rect x='110.56' y='108.6' width='31.5' height='5.6' fill='#ffffff' stroke='#000000' stroke-width='2.8'/><path d='M79.06 66.6 A5.6 5.6 0 0 1 67.86 66.6' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M121.76 66.6 A5.6 5.6 0 0 1 110.56 66.6' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M67.86 108.6 A5.6 5.6 0 0 1 79.06 108.6' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M110.56 108.6 A5.6 5.6 0 0 1 121.76 108.6' fill='none' stroke='#000000' stroke-width='2.8'/><rect data-bind='cap' class='cap-red' fill='#e74c3c' x='79.06' y='5' width='31.5' height='21' stroke='#000000' stroke-width='2.8'/><rect x='89.56' y='26' width='10.5' height='51.8' fill='none' stroke='#000000' stroke-width='2.8'/><rect x='67.86' y='77.8' width='53.9' height='5.6' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M67.86 77.8 A5.6 5.6 0 0 1 79.06 77.8' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M110.56 77.8 A5.6 5.6 0 0 1 121.76 77.8' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M79.06 83.4 A5.6 5.6 0 0 1 67.86 83.4' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M121.76 83.4 A5.6 5.6 0 0 1 110.56 83.4' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M89.56 26 L79.06 30.9 L110.56 35.8 L79.06 40.7 L110.56 45.6 L100.06 50.5' fill='none' stroke='#000000' stroke-width='1.4'/><circle cx='19' cy='63.8' r='9.2' fill='#ffffff' stroke='#000000' stroke-width='3.2'/><path d='M13.6 63.8 H24.4 M19 58.4 V69.2' stroke='#8a8a8a' stroke-width='2.8' fill='none'/><circle cx='170.62' cy='63.8' r='9.2' fill='#ffffff' stroke='#000000' stroke-width='3.2'/><path d='M165.22 63.8 H176.02 M170.62 58.4 V69.2' stroke='#8a8a8a' stroke-width='2.8' fill='none'/><circle cx='47.56' cy='111.4' r='9.2' fill='#ffffff' stroke='#000000' stroke-width='3.2'/><path d='M42.16 111.4 H52.96 M47.56 106 V116.8' stroke='#8a8a8a' stroke-width='2.8' fill='none'/><circle cx='142.06' cy='111.4' r='9.2' fill='#ffffff' stroke='#000000' stroke-width='3.2'/><path d='M136.66 111.4 H147.46 M142.06 106 V116.8' stroke='#8a8a8a' stroke-width='2.8' fill='none'/></svg></div>"
+    },
+    {
+      "id": "动作",
+      "x": 0,
+      "y": 0,
+      "bind": "pushed",
+      "classBind": {
+        "cap": "capColor"
+      },
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='183' height='130' viewBox='0 0 183 130'><rect x='61.56' y='50.5' width='66.5' height='74.2' fill='none' stroke='#000000' stroke-width='2.8' stroke-dasharray='7 3.5'/><rect x='19' y='61' width='60.06' height='5.6' fill='#ffffff' stroke='#000000' stroke-width='2.8'/><rect x='47.56' y='108.6' width='31.5' height='5.6' fill='#ffffff' stroke='#000000' stroke-width='2.8'/><rect x='110.56' y='61' width='60.06' height='5.6' fill='#ffffff' stroke='#000000' stroke-width='2.8'/><rect x='110.56' y='108.6' width='31.5' height='5.6' fill='#ffffff' stroke='#000000' stroke-width='2.8'/><path d='M79.06 66.6 A5.6 5.6 0 0 1 67.86 66.6' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M121.76 66.6 A5.6 5.6 0 0 1 110.56 66.6' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M67.86 108.6 A5.6 5.6 0 0 1 79.06 108.6' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M110.56 108.6 A5.6 5.6 0 0 1 121.76 108.6' fill='none' stroke='#000000' stroke-width='2.8'/><rect data-bind='cap' class='cap-red' fill='#e74c3c' x='79.06' y='19' width='31.5' height='21' stroke='#000000' stroke-width='2.8'/><rect x='89.56' y='40' width='10.5' height='51.8' fill='none' stroke='#000000' stroke-width='2.8'/><rect x='67.86' y='91.8' width='53.9' height='5.6' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M67.86 91.8 A5.6 5.6 0 0 1 79.06 91.8' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M110.56 91.8 A5.6 5.6 0 0 1 121.76 91.8' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M79.06 97.4 A5.6 5.6 0 0 1 67.86 97.4' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M121.76 97.4 A5.6 5.6 0 0 1 110.56 97.4' fill='none' stroke='#000000' stroke-width='2.8'/><path d='M89.56 40 L79.06 42.1 L110.56 44.2 L79.06 46.3 L110.56 48.4 L100.06 50.5' fill='none' stroke='#000000' stroke-width='1.4'/><circle cx='19' cy='63.8' r='9.2' fill='#ffffff' stroke='#000000' stroke-width='3.2'/><path d='M13.6 63.8 H24.4 M19 58.4 V69.2' stroke='#8a8a8a' stroke-width='2.8' fill='none'/><circle cx='170.62' cy='63.8' r='9.2' fill='#ffffff' stroke='#000000' stroke-width='3.2'/><path d='M165.22 63.8 H176.02 M170.62 58.4 V69.2' stroke='#8a8a8a' stroke-width='2.8' fill='none'/><circle cx='47.56' cy='111.4' r='9.2' fill='#ffffff' stroke='#000000' stroke-width='3.2'/><path d='M42.16 111.4 H52.96 M47.56 106 V116.8' stroke='#8a8a8a' stroke-width='2.8' fill='none'/><circle cx='142.06' cy='111.4' r='9.2' fill='#ffffff' stroke='#000000' stroke-width='3.2'/><path d='M136.66 111.4 H147.46 M142.06 106 V116.8' stroke='#8a8a8a' stroke-width='2.8' fill='none'/></svg></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "nc_1_u": {
+          "x": 19,
+          "y": 63.8,
+          "dir": "down",
+          "tip": "常闭左"
+        },
+        "nc_1_d": {
+          "x": 170.62,
+          "y": 63.8,
+          "dir": "down",
+          "tip": "常闭右"
+        },
+        "no_1_u": {
+          "x": 47.56,
+          "y": 111.4,
+          "dir": "down",
+          "tip": "常开左"
+        },
+        "no_1_d": {
+          "x": 142.06,
+          "y": 111.4,
+          "dir": "down",
+          "tip": "常开右"
+        }
+      },
+      "contacts": {
+        "no": {
+          "pairs": [
+            [
+              "no_1_u",
+              "no_1_d"
+            ]
+          ],
+          "when": "pushed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "nc": {
+          "pairs": [
+            [
+              "nc_1_u",
+              "nc_1_d"
+            ]
+          ],
+          "when": "!pushed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "pushed",
+      "default": false
+    },
+    {
+      "id": "capColor",
+      "label": "钮帽颜色",
+      "type": "select",
+      "options": [
+        {
+          "value": "cap-red",
+          "label": "红"
+        },
+        {
+          "value": "cap-yellow",
+          "label": "黄"
+        },
+        {
+          "value": "cap-blue",
+          "label": "蓝"
+        },
+        {
+          "value": "cap-green",
+          "label": "绿"
+        },
+        {
+          "value": "cap-white",
+          "label": "白"
+        },
+        {
+          "value": "cap-black",
+          "label": "黑"
+        }
+      ],
+      "default": "cap-red",
+      "adjustable": true
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 95,
+        "y": 143,
+        "fontSize": 14,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

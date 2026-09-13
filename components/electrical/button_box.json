@@ -1,0 +1,329 @@
+{
+  "class": "ComponentInstance",
+  "category": "按钮&指示灯",
+  "id": "button_box",
+  "name": "按钮盒",
+  "description": "按钮盒：红色/白色/黑色三个自复位按钮。端子在底部自左至右：红常开×2、红常闭×2、白常开×2、白常闭×2、黑常开×2、黑常闭×2",
+  "tags": [
+    "按钮盒",
+    "按钮",
+    "常开",
+    "常闭",
+    "自复位"
+  ],
+  "zones": [
+    {
+      "id": "red",
+      "event": "press",
+      "action": "toggle",
+      "tips": "红色按钮，自复位式",
+      "state": "red_pressed",
+      "x": 79,
+      "y": 81,
+      "r": 25
+    },
+    {
+      "id": "white",
+      "event": "press",
+      "action": "toggle",
+      "tips": "白色按钮，自复位式",
+      "state": "white_pressed",
+      "x": 79,
+      "y": 150,
+      "r": 25
+    },
+    {
+      "id": "black",
+      "event": "press",
+      "action": "toggle",
+      "tips": "黑色按钮，自复位式",
+      "state": "black_pressed",
+      "x": 81,
+      "y": 220,
+      "r": 25
+    }
+  ],
+  "terminalHitRadius": 10,
+  "size": {
+    "width": 162,
+    "height": 300
+  },
+  "thumbnail": "<div><img src='images/按钮盒.png' width='162' height='300'></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/按钮盒.png' width='162' height='300'></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "r_no1": {
+          "x": 51,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "红色常开 1",
+          "faultLevel":10
+        },
+        "r_no2": {
+          "x": 56,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "红色常开 2",
+          "faultLevel":10
+        },
+        "r_nc1": {
+          "x": 61,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "红色常闭 1",
+          "faultLevel":10
+        },
+        "r_nc2": {
+          "x": 65,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "红色常闭 2",
+          "faultLevel":10
+        },
+        "w_no1": {
+          "x": 70,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "白色常开 1",
+          "faultLevel":10
+        },
+        "w_no2": {
+          "x": 75,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "白色常开 2",
+          "faultLevel":10
+        },
+        "w_nc1": {
+          "x": 80,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "白色常闭 1",
+          "faultLevel":10
+        },
+        "w_nc2": {
+          "x": 85,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "白色常闭 2",
+          "faultLevel":10
+        },
+        "b_no1": {
+          "x": 89,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "黑色常开 1",
+          "faultLevel":10
+        },
+        "b_no2": {
+          "x": 94,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "黑色常开 2",
+          "faultLevel":10
+        },
+        "b_nc1": {
+          "x": 99,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "黑色常闭 1",
+          "faultLevel":10
+        },
+        "b_nc2": {
+          "x": 104,
+          "y": 288,
+          "dir": "down",
+          "connectLimit": 1,
+          "tip": "黑色常闭 2",
+          "faultLevel":10
+        }
+      },
+      "contacts": {
+        "r_nc": {
+          "pairs": [
+            [
+              "r_nc1",
+              "r_nc2"
+            ]
+          ],
+          "when": "!red_pressed",
+          "fault": {
+            "level": 10,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "w_no": {
+          "pairs": [
+            [
+              "w_no1",
+              "w_no2"
+            ]
+          ],
+          "when": "white_pressed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 10,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "w_nc": {
+          "pairs": [
+            [
+              "w_nc1",
+              "w_nc2"
+            ]
+          ],
+          "when": "!white_pressed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 10,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "b_no": {
+          "pairs": [
+            [
+              "b_no1",
+              "b_no2"
+            ]
+          ],
+          "when": "black_pressed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 10,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "b_nc": {
+          "pairs": [
+            [
+              "b_nc1",
+              "b_nc2"
+            ]
+          ],
+          "when": "!black_pressed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 10,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "r_no": {
+          "pairs": [
+            [
+              "r_no1",
+              "r_no2"
+            ]
+          ],
+          "when": "red_pressed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 10,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "red_pressed",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "white_pressed",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "black_pressed",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "name_red",
+      "label": "红色按钮名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 133,
+        "y": 81,
+        "fontSize": 10,
+        "class": "yellow-plate"
+      }
+    },
+    {
+      "id": "name_white",
+      "label": "白色按钮名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 133,
+        "y": 152,
+        "fontSize": 10,
+        "class": "yellow-plate"
+      }
+    },
+    {
+      "id": "name_black",
+      "label": "黑色按钮名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 133,
+        "y": 222,
+        "fontSize": 10,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+# IDE / 编辑器
+.vs/
+.vscode/
+.idea/
+
+# 部署安全加固指南（含服务器地址等敏感信息，不公开）
+部署安全加固指南.md
+
+# 临时验证页与调试输出
+_preview_*.html
+_test_*.html
+_e2e_out.txt
+
+# 系统与临时文件
+Thumbs.db
+Desktop.ini
+*.tmp
+*.log
+node_modules/
+package.json
+package-lock.json
+
+# 工具临时文件
+_github_ssh_pubkey.txt

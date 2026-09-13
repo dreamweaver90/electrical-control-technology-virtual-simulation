@@ -1,0 +1,215 @@
+{
+  "class": "TransformerInstance",
+  "category": "电源",
+  "id": "transformer_1p",
+  "name": "变压器",
+  "description": "单相变压器：初级接两相火线（默认380V，可修改），次级输出交流电压（默认220V，可修改）；输入电压符合要求才输出电压带负载；输出与其他电源混接判短路；输入功率按次级负载功率折算（初级电流随负载变化）",
+  "tags": [
+    "电源",
+    "变压器",
+    "AC",
+    "隔离"
+  ],
+  "source": {
+    "type": "ac",
+    "voltage": 220,
+    "phases": [
+      {
+        "pin": "s1",
+        "angle": 0,
+        "magnitude": 220
+      },
+      {
+        "pin": "s2",
+        "angle": 0,
+        "magnitude": 0
+      }
+    ]
+  },
+  "input": {
+    "pins": [
+      "p1",
+      "p2"
+    ],
+    "voltage": 380,
+    "tolerance": 0.1
+  },
+  "params": [
+    {
+      "id": "inputVoltage",
+      "label": "输入电压",
+      "type": "number",
+      "unit": "V",
+      "min": 50,
+      "max": 450,
+      "step": 10,
+      "default": 380,
+      "adjustable": true
+    },
+    {
+      "id": "outputVoltage",
+      "label": "输出电压",
+      "type": "number",
+      "unit": "V",
+      "min": 5,
+      "max": 400,
+      "step": 5,
+      "default": 220,
+      "adjustable": true
+    },
+    {
+      "id": "sourceImpedance",
+      "label": "次级内阻",
+      "type": "number",
+      "unit": "Ω",
+      "min": 0.01,
+      "max": 10,
+      "step": 0.05,
+      "default": 0.5
+    },
+    {
+      "id": "noLoadImpedance",
+      "label": "空载阻抗",
+      "type": "number",
+      "unit": "Ω",
+      "min": 100,
+      "max": 100000,
+      "step": 100,
+      "default": 5000
+    },
+    {
+      "id": "noLoadPowerFactor",
+      "label": "空载功率因数",
+      "type": "number",
+      "min": 0.01,
+      "max": 0.5,
+      "step": 0.01,
+      "default": 0.1
+    },
+    {
+      "id": "minInputImpedance",
+      "label": "最小折算阻抗",
+      "type": "number",
+      "unit": "Ω",
+      "min": 1,
+      "max": 1000,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "id": "dcResistance",
+      "label": "初级绕组电阻",
+      "type": "number",
+      "unit": "Ω",
+      "min": 0.1,
+      "max": 1000,
+      "step": 0.5,
+      "default": 20
+    },
+    {
+      "id": "switch",
+      "default": true
+    },
+    {
+      "id": "energized",
+      "default": false
+    },
+    {
+      "id": "short_circuit",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 60,
+        "y": 16,
+        "fontSize": 12,
+        "class": "yellow-plate"
+      }
+    }
+  ],
+  "terminalHitRadius": 10,
+  "zones": [
+    {
+      "id": "fuse",
+      "event": "click",
+      "action": "reset",
+      "state": "short_circuit",
+      "tips": "点击更换熔断器（短路锁死后复位）",
+      "x": 60,
+      "y": 100,
+      "r": 12
+    }
+  ],
+  "size": {
+    "width": 120,
+    "height": 200
+  },
+  "thumbnail": "<div><svg xmlns='http://www.w3.org/2000/svg' width='120' height='200'><rect x='4' y='4' width='112' height='192' rx='8' fill='#fdfdfd' stroke='#333' stroke-width='2'/><line x1='35' y1='32' x2='35' y2='46' stroke='#333' stroke-width='2'/><line x1='85' y1='32' x2='85' y2='46' stroke='#333' stroke-width='2'/><path d='M35 46 q8 -14 16 0 q8 -14 16 0 q8 -14 16 0' fill='none' stroke='#333' stroke-width='2'/><line x1='52' y1='62' x2='52' y2='136' stroke='#333' stroke-width='2'/><line x1='68' y1='62' x2='68' y2='136' stroke='#333' stroke-width='2'/><path d='M35 154 q8 -14 16 0 q8 -14 16 0 q8 -14 16 0' fill='none' stroke='#333' stroke-width='2'/><line x1='35' y1='154' x2='35' y2='168' stroke='#333' stroke-width='2'/><line x1='85' y1='154' x2='85' y2='168' stroke='#333' stroke-width='2'/></svg></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='120' height='200'><rect x='4' y='4' width='112' height='192' rx='8' fill='#fdfdfd' stroke='#333' stroke-width='2'/><line x1='35' y1='32' x2='35' y2='46' stroke='#333' stroke-width='2'/><line x1='85' y1='32' x2='85' y2='46' stroke='#333' stroke-width='2'/><path d='M35 46 q8 -14 16 0 q8 -14 16 0 q8 -14 16 0' fill='none' stroke='#333' stroke-width='2'/><line x1='52' y1='62' x2='52' y2='136' stroke='#333' stroke-width='2'/><line x1='68' y1='62' x2='68' y2='136' stroke='#333' stroke-width='2'/><path d='M35 154 q8 -14 16 0 q8 -14 16 0 q8 -14 16 0' fill='none' stroke='#333' stroke-width='2'/><line x1='35' y1='154' x2='35' y2='168' stroke='#333' stroke-width='2'/><line x1='85' y1='154' x2='85' y2='168' stroke='#333' stroke-width='2'/></svg></div>"
+    },
+    {
+      "id": "短路熔断",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='120' height='200'><rect x='4' y='4' width='112' height='192' rx='8' fill='#fdfdfd' stroke='#333' stroke-width='2'/><text x='60' y='100' font-size='22' fill='#e74c3c' text-anchor='middle' font-weight='bold'>熔断</text></svg></div>",
+      "bind": "short_circuit"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "p1": {
+          "x": 35,
+          "y": 30,
+          "dir": "up",
+          "tip": "初级1",
+          "faultLevel":1
+        },
+        "p2": {
+          "x": 85,
+          "y": 30,
+          "dir": "up",
+          "tip": "初级2",
+          "faultLevel":1
+        },
+        "s1": {
+          "x": 35,
+          "y": 170,
+          "dir": "down",
+          "tip": "次级1"
+        },
+        "s2": {
+          "x": 85,
+          "y": 170,
+          "dir": "down",
+          "tip": "次级2"
+        }
+      },
+      "contacts": {},
+      "loads": {
+        "reflect": {
+          "pins": [
+            "p1",
+            "p2"
+          ],
+          "computed": "reflect",
+          "fault": {
+            "level": 10
+          }
+        }
+      },
+      "permanent": {},
+      "sensors": {}
+    }
+  }
+}

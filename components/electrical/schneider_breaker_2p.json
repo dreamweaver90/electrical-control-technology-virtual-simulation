@@ -1,0 +1,123 @@
+{
+  "class": "BreakerInstance",
+  "category": "开关",
+  "id": "schneider_breaker_2p",
+  "name": "断路器",
+  "description": "施耐德2极断路器",
+  "tags": [
+    "断路器",
+    "施耐德",
+    "2P"
+  ],
+  "terminalHitRadius": 14,
+  "size": {
+    "width": 125,
+    "height": 300
+  },
+  "image": [
+    {
+      "id": "断开",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/两极断路器.png' width='125' height='300'></div>",
+      "bind": "!switch"
+    },
+    {
+      "id": "闭合",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/两极断路器_闭合.png' width='125' height='300'></div>",
+      "bind": "switch"
+    }
+  ],
+  "zones": [
+    {
+      "id": "switch",
+      "event": "click",
+      "action": "toggle",
+      "state": "switch",
+      "tips": "点击合闸或分闸",
+      "x": 58,
+      "y": 191,
+      "r": 35
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "main_no_1_u": {
+          "x": 31,
+          "y": 41,
+          "dir": "up",
+          "tip": "第1极上",
+          "faultLevel":2
+        },
+        "main_no_1_d": {
+          "x": 33,
+          "y": 268,
+          "dir": "down",
+          "tip": "第1极下"
+        },
+        "main_no_2_u": {
+          "x": 89,
+          "y": 41,
+          "dir": "up",
+          "tip": "第2极上",
+          "faultLevel":2
+        },
+        "main_no_2_d": {
+          "x": 91,
+          "y": 269,
+          "dir": "down",
+          "tip": "第2极下"
+        }
+      },
+      "contacts": {
+        "main_no": {
+          "pairs": [
+            [
+              "main_no_1_u",
+              "main_no_1_d"
+            ],
+            [
+              "main_no_2_u",
+              "main_no_2_d"
+            ]
+          ],
+          "when": "switch",
+          "closeDelay": 0,
+          "openDelay": 0,
+          "resistance": 0.001,
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "switch",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 90,
+        "y": 115,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

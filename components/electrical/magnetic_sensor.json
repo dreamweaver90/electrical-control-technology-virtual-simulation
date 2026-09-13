@@ -1,0 +1,193 @@
+{
+  "class": "MagneticSensorInstance",
+  "category": "传感器",
+  "id": "magnetic_sensor",
+  "name": "磁性传感器",
+  "description": "磁性接近开关（三线制），检测气缸位置：红(+24V)/蓝(0V) 供电（电压范围 ±容差，接交流或超压报警，反接/欠压不工作），黑为信号输出——NPN：工作且到位时 黑-蓝 导通（负载接 红-黑）；PNP：工作且到位时 黑-红 导通（负载接 蓝-黑）。右键绑定气缸、选择检测单元与检测位置（0~1）。",
+  "tags": [
+    "磁性传感器",
+    "接近开关",
+    "气缸检测",
+    "NPN",
+    "PNP"
+  ],
+  "terminalHitRadius": 9,
+  "size": {
+    "width": 87,
+    "height": 200
+  },
+  "thumbnail": "<div><img src='images/磁性开关NPN.png' width='87' height='200'></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/磁性开关NPN.png' width='87' height='200'></div>"
+    },
+    {
+      "id": "LED",
+      "x": 0,
+      "y": 0,
+      "string": "<div><div style='position:absolute;left:20px;top:32px;width:12px;height:12px;border-radius:50%;background:#27ae60;box-shadow:0 0 6px #2ecc71;'></div></div>",
+      "bind": "lit"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "blue": {
+          "x": 19,
+          "y": 184,
+          "dir": "down",
+          "tip": "蓝色 0V"
+        },
+        "red": {
+          "x": 44,
+          "y": 184,
+          "dir": "down",
+          "tip": "红色（电源正）"
+        },
+        "black": {
+          "x": 67,
+          "y": 185,
+          "dir": "down",
+          "tip": "黑色（信号输出）"
+        }
+      },
+      "contacts": {
+        "npn": {
+          "pairs": [
+            [
+              "black",
+              "blue"
+            ]
+          ],
+          "when": "out_npn",
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "pnp": {
+          "pairs": [
+            [
+              "black",
+              "red"
+            ]
+          ],
+          "when": "out_pnp",
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "target",
+      "label": "绑定气缸",
+      "type": "bind",
+      "allow": [
+        "relative-position"
+      ],
+      "adjustable": true
+    },
+    {
+      "id": "unit",
+      "label": "检测气缸单元",
+      "type": "select",
+      "options": "bound:target.relativePositions",
+      "default": 0,
+      "adjustable": true
+    },
+    {
+      "id": "detect",
+      "label": "检测位置",
+      "type": "number",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 1,
+      "adjustable": true
+    },
+    {
+      "id": "tolerance",
+      "label": "到位容差",
+      "type": "number",
+      "default": 0.02
+    },
+    {
+      "id": "sensorType",
+      "label": "传感器类型",
+      "type": "select",
+      "options": [
+        {
+          "value": "npn",
+          "label": "NPN"
+        },
+        {
+          "value": "pnp",
+          "label": "PNP"
+        }
+      ],
+      "default": "npn",
+      "adjustable": true
+    },
+    {
+      "id": "workingVoltage",
+      "label": "工作电压",
+      "type": "number",
+      "unit": "V",
+      "min": 5,
+      "max": 60,
+      "step": 1,
+      "default": 24,
+      "adjustable": true
+    },
+    {
+      "id": "voltTol",
+      "label": "电压容差",
+      "type": "number",
+      "default": 0.1
+    },
+    {
+      "id": "lit",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "out_npn",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "out_pnp",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 49,
+        "y": 79,
+        "fontSize": 12,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

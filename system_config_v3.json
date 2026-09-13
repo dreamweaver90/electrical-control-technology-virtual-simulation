@@ -1,0 +1,136 @@
+{
+  "simulation": {
+    "refreshIntervalMs": 50
+  },
+  "canvas": {
+    "backgroundColor": "#eef0f2",
+    "minZoom": 0.5,
+    "maxZoom": 3,
+    "canvasWidth": 3000,
+    "ductRows": {
+      "initial": 2,
+      "max": 10
+    },
+    "freeLayout": {
+      "widthScale": 2,
+      "heightScale": 5,
+      "minWidth": 800,
+      "minHeight": 1500,
+      "growFactor": 1.5
+    }
+  },
+  "wireDuct": {
+    "slotWidth": 90,
+    "slotHeight": 90,
+    "color": "#d0d0d0",
+    "borderColor": "#aaaaaa"
+  },
+  "wiring": {
+    "electrical": {
+      "thickness": 5,
+      "colors": [
+        "#e74c3c",
+        "#f39c12",
+        "#2ecc71",
+        "#3498db",
+        "#000000"
+      ],
+      "defaultColor": "#e74c3c",
+      "labelFontSize": 12,
+      "labelGap": 15
+    },
+    "pneumatic": {
+      "thickness": 17,
+      "colors": [
+        "#2f6fd0",
+        "#ac160e",
+        "#1f2c34"
+      ],
+      "defaultColor": "#2f6fd0",
+      "labelFontSize": 14,
+      "labelGap": 15
+    }
+  },
+  "render": {
+    "terminalHoverColor": "#4a90d9",
+    "terminalSelectedColor": "#ff6b6b",
+    "hoverOpacityUnrelated": 0.1,
+    "hoverOpacitySameGroup": 0.75
+  },
+  "multimeter": {
+    "redProbe": {
+      "fileName": "images/红表笔.png",
+      "height": 180,
+      "tipX": 97.5,
+      "tipY": 0
+    },
+    "blackProbe": {
+      "fileName": "images/黑表笔.png",
+      "height": 180,
+      "tipX": 0,
+      "tipY": 0
+    }
+  },
+  "rules": {
+    "defaultConnectLimit": 2,
+    "tripCurrent": 100,
+    "faultLevels": [
+      "简单",
+      "中等",
+      "困难"
+    ]
+  },
+  "undo": {
+    "maxSteps": 50
+  },
+  "components": [
+    "electrical/ac_power_380v_3phase.json",
+    "electrical/smps_24v.json",
+    "electrical/transformer_1p.json",
+    "electrical/schneider_breaker_3p.json",
+    "electrical/schneider_breaker1_3p.json",
+    "electrical/schneider_breaker_2p.json",
+    "electrical/schneider_contactor.json",
+    "electrical/schneider_contactor_ex.json",
+    "electrical/schneider_contactor_ton.json",
+    "electrical/schneider_contactor_2.json",
+    "electrical/fuse_2p.json",
+    "electrical/fuse_3p.json",
+    "electrical/button_no_nc_independent.json",
+    "electrical/button_box.json",
+    "electrical/button_module_8.json",
+    "electrical/indicator_module_8.json",
+    "electrical/three_phase_asynchronous_motor.json",
+    "electrical/motor_speed_relay.json",
+    "electrical/terminal_block_6.json",
+    "electrical/terminal_block_12.json",
+    "electrical/schneider_switch_disconnector.json",
+    "electrical/thermal_relay.json",
+    "electrical/voltmeter.json",
+    "electrical/electric_meter.json",
+    "electrical/ammeter.json",
+    "electrical/speed_meter.json",
+    "electrical/magnetic_sensor.json",
+    "electrical/limit_switch.json",
+    "electrical/schneider_contactor_thermal.json",
+    "pneumatic/pneumatic_source.json",
+    "pneumatic/pneumatic_manual_valve.json",
+    "pneumatic/pneumatic_parallel.json",
+    "pneumatic/pressure_regulator.json",
+    "pneumatic/valve_module.json",
+    "pneumatic/cylinder_double.json",
+    "pneumatic/execution_module.json",
+    "mechanical/slide_table.json",
+    "electrical/terminal_block_i1o2_6.json",
+    "electrical/terminal_block_i1o2_12.json",
+    "electrical/resistor.json",
+    "electrical/resistor_3p.json"
+  ],
+  "scenes": [
+    "scene1.json",
+    "scene2.json",
+    "scene3.json",
+    "scene4.json",
+    "scene5.json"
+  ]
+}

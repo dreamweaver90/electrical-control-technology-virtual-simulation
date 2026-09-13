@@ -1,0 +1,135 @@
+{
+  "class": "ComponentInstance",
+  "category": "其它",
+  "id": "resistor_3p",
+  "name": "电阻模块",
+  "description": "三组独立电阻，阻值统一调节。",
+  "tags": [
+    "电阻",
+    "三相",
+    "降压启动",
+    "限流"
+  ],
+  "size": {
+    "width": 243,
+    "height": 250
+  },
+  "thumbnail": "<div><img src='images/电阻3.png' width='243' height='250'></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/电阻3.png' width='243' height='250'></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "r1_in": {
+          "x": 12,
+          "y": 33,
+          "dir": "up",
+          "tip": "第1组进线"
+        },
+        "r2_in": {
+          "x": 94,
+          "y": 33,
+          "dir": "up",
+          "tip": "第2组进线"
+        },
+        "r3_in": {
+          "x": 176,
+          "y": 33,
+          "dir": "up",
+          "tip": "第3组进线"
+        },
+        "r1_out": {
+          "x": 11,
+          "y": 216,
+          "dir": "down",
+          "tip": "第1组出线"
+        },
+        "r2_out": {
+          "x": 93,
+          "y": 216,
+          "dir": "down",
+          "tip": "第2组出线"
+        },
+        "r3_out": {
+          "x": 175,
+          "y": 216,
+          "dir": "down",
+          "tip": "第3组出线"
+        }
+      },
+      "contacts": {},
+      "loads": {
+        "r1": {
+          "pins": [
+            "r1_in",
+            "r1_out"
+          ],
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "r2": {
+          "pins": [
+            "r2_in",
+            "r2_out"
+          ],
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "r3": {
+          "pins": [
+            "r3_in",
+            "r3_out"
+          ],
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "impedance",
+      "label": "电阻值",
+      "type": "number",
+      "unit": "Ω",
+      "min": 0.5,
+      "max": 500,
+      "step": 0.5,
+      "default": 10,
+      "adjustable": true
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 128,
+        "y": 125,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

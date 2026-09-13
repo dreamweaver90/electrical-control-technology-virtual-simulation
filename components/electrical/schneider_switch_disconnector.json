@@ -1,0 +1,159 @@
+{
+  "class": "ComponentInstance",
+  "category": "开关",
+  "id": "schneider_switch_disconnector",
+  "name": "隔离开关",
+  "description": "施耐德隔离开关3P+N",
+  "tags": [
+    "隔离开关",
+    "施耐德"
+  ],
+  "terminalHitRadius": 14,
+  "size": {
+    "width": 225,
+    "height": 250
+  },
+  "image": [
+    {
+      "id": "断开",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/隔离开关.png' width='225' height='250'></div>",
+      "bind": "!pushed"
+    },
+    {
+      "id": "闭合",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/隔离开关_闭合.png' width='225' height='250'></div>",
+      "bind": "pushed"
+    }
+  ],
+  "zones": [
+    {
+      "id": "switch",
+      "event": "click",
+      "action": "toggle",
+      "state": "pushed",
+      "tips": "点击合闸或分闸",
+      "x": 133,
+      "y": 123,
+      "r": 40
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "main_no_1_u": {
+          "x": 27,
+          "y": 25,
+          "dir": "up",
+          "tip": "1L1",
+          "faultLevel":2
+        },
+        "main_no_1_d": {
+          "x": 28,
+          "y": 220,
+          "dir": "down",
+          "tip": "2T1",
+          "faultLevel":2
+        },
+        "main_no_2_u": {
+          "x": 82,
+          "y": 22,
+          "dir": "up",
+          "tip": "3L2",
+          "faultLevel":2
+        },
+        "main_no_2_d": {
+          "x": 85,
+          "y": 222,
+          "dir": "down",
+          "tip": "4T2",
+          "faultLevel":2
+        },
+        "main_no_3_u": {
+          "x": 133,
+          "y": 24,
+          "dir": "up",
+          "tip": "5L3",
+          "faultLevel":2
+        },
+        "main_no_3_d": {
+          "x": 139,
+          "y": 222,
+          "dir": "down",
+          "tip": "6T3",
+          "faultLevel":2
+        },
+        "main_no_4_u": {
+          "x": 183,
+          "y": 25,
+          "dir": "up",
+          "tip": "N",
+          "faultLevel":2
+        },
+        "main_no_4_d": {
+          "x": 194,
+          "y": 224,
+          "dir": "down",
+          "tip": "N",
+          "faultLevel":2
+        }
+      },
+      "contacts": {
+        "main_no": {
+          "pairs": [
+            [
+              "main_no_1_u",
+              "main_no_1_d"
+            ],
+            [
+              "main_no_2_u",
+              "main_no_2_d"
+            ],
+            [
+              "main_no_3_u",
+              "main_no_3_d"
+            ],
+            [
+              "main_no_4_u",
+              "main_no_4_d"
+            ]
+          ],
+          "when": "pushed",
+          "closeDelay": 0,
+          "openDelay": 0,
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "pushed",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 197,
+        "y": 54,
+        "fontSize": 12,
+        "class": "red-plate"
+      }
+    }
+  ]
+}

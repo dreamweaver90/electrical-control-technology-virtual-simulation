@@ -1,0 +1,188 @@
+{
+  "class": "LimitSwitchInstance",
+  "category": "传感器",
+  "id": "limit_switch",
+  "name": "行程开关",
+  "description": "机械触点式行程开关（限位开关），检测气缸位置：绑定气缸后，气缸当前位置进入检测位置 ±容差（0.05）→ 动作（NO 闭合、NC 断开）；点击器件上部滚轮区域可手动强制动作。",
+  "tags": [
+    "行程开关",
+    "限位开关",
+    "机械触点",
+    "位置检测"
+  ],
+  "terminalHitRadius": 10,
+  "size": {
+    "width": 114,
+    "height": 200
+  },
+  "image": [
+    {
+      "id": "复位",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='114' height='200'><image href='images/行程开关.png' x='0' y='0' width='114' height='200'/></svg>",
+      "bind": "!actuated"
+    },
+    {
+      "id": "动作",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='114' height='200'><image href='images/行程开关_动作.png' x='0' y='0' width='114' height='200'/></svg>",
+      "bind": "actuated"
+    },
+    {
+      "id": "端子",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='114' height='200'><circle cx='14' cy='186' r='8' fill='none' stroke='#FC404D' stroke-width='2.5'/><circle cx='43' cy='186' r='8' fill='none' stroke='#FC404D' stroke-width='2.5'/><circle cx='71' cy='186' r='8' fill='none' stroke='#5ce2d1' stroke-width='2.5'/><circle cx='100' cy='186' r='8' fill='none' stroke='#5ce2d1' stroke-width='2.5'/><text x='28.5' y='170' font-size='12' font-weight='bold' fill='#FC404D' stroke='#fff' stroke-width='2.5' paint-order='stroke' text-anchor='middle'>NO</text><text x='85.5' y='170' font-size='12' font-weight='bold' fill='#5ce2d1' stroke='#fff' stroke-width='2.5' paint-order='stroke' text-anchor='middle'>NC</text></svg>"
+    },
+    {
+      "id": "强制字样",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='114' height='200'><text x='55' y='40' font-size='18' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='3' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>强制</text></svg>",
+      "bind": "forced"
+    }
+  ],
+  "zones": [
+    {
+      "id": "force",
+      "event": "click",
+      "action": "toggle",
+      "state": "forced",
+      "tips": "点击强制动作/解除强制",
+      "x": 55,
+      "y": 40,
+      "r": 20
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "no_in": {
+          "x": 14,
+          "y": 186,
+          "dir": "down",
+          "tip": "NO进"
+        },
+        "no_out": {
+          "x": 43,
+          "y": 186,
+          "dir": "down",
+          "tip": "NO出"
+        },
+        "nc_in": {
+          "x": 71,
+          "y": 186,
+          "dir": "down",
+          "tip": "NC进"
+        },
+        "nc_out": {
+          "x": 100,
+          "y": 186,
+          "dir": "down",
+          "tip": "NC出"
+        }
+      },
+      "contacts": {
+        "no": {
+          "pairs": [
+            [
+              "no_in",
+              "no_out"
+            ]
+          ],
+          "when": "actuated",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "nc": {
+          "pairs": [
+            [
+              "nc_in",
+              "nc_out"
+            ]
+          ],
+          "when": "!actuated",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "target",
+      "label": "绑定移动机构",
+      "type": "bind",
+      "allow": [
+        "relative-position"
+      ],
+      "adjustable": true
+    },
+    {
+      "id": "unit",
+      "label": "检测移动单元",
+      "type": "select",
+      "options": "bound:target.relativePositions",
+      "default": 0,
+      "adjustable": true
+    },
+    {
+      "id": "detect",
+      "label": "检测位置",
+      "type": "number",
+      "min": 0,
+      "max": 1,
+      "step": 0.01,
+      "default": 1,
+      "adjustable": true
+    },
+    {
+      "id": "tolerance",
+      "label": "到位容差",
+      "type": "number",
+      "default": 0.05
+    },
+    {
+      "id": "forced",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "actuated",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 55,
+        "y": 140,
+        "fontSize": 12,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

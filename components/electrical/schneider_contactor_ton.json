@@ -1,0 +1,359 @@
+{
+  "class": "CoilDeviceInstance",
+  "category": "继电器&接触器",
+  "id": "schneider_contactor_ton",
+  "name": "TON接触器",
+  "description": "施耐德交流接触器，线圈220V AC（电压/类型可调），3组主触点+1常开辅助+1常闭辅助+1通电延时常开+1通电延时常闭",
+  "tags": [
+    "接触器",
+    "施耐德",
+    "AC",
+    "TON"
+  ],
+  "params": [
+    {
+      "id": "coilVoltage",
+      "label": "线圈电压",
+      "type": "number",
+      "unit": "V",
+      "min": 12,
+      "max": 500,
+      "step": 1,
+      "default": 220,
+      "adjustable": true
+    },
+    {
+      "id": "coilType",
+      "label": "线圈类型",
+      "type": "select",
+      "options": [
+        { "value": "ac", "label": "交流 AC" },
+        { "value": "dc", "label": "直流 DC" }
+      ],
+      "default": "ac",
+      "adjustable": true
+    },
+    {
+      "id": "pickup",
+      "default": 0.85
+    },
+    {
+      "id": "dropout",
+      "default": 0.6
+    },
+    {
+      "id": "impedance",
+      "default": {
+        "re": 730,
+        "im": 6300
+      }
+    },
+    {
+      "id": "dcResistance",
+      "default": 550
+    },
+    {
+      "id": "delayTime",
+      "label": "延时时间",
+      "type": "number",
+      "unit": "s",
+      "min": 0.1,
+      "max": 30,
+      "step": 0.1,
+      "default": 5,
+      "adjustable": true
+    },
+    {
+      "id": "energized",
+      "default": false
+    },
+    {
+      "id": "ton_delayed",
+      "default": false
+    },
+    {
+      "id": "tof_delayed",
+      "default": false
+    },
+    {
+      "id": "forced",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 107,
+        "y": 154,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ],
+  "terminalHitRadius": 14,
+  "size": {
+    "width": 220,
+    "height": 300
+  },
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='220' height='300'><image href='images/交流接触器.png' x='0' y='0' width='220' height='300'/><image href='images/延时触点.png' x='18' y='67' width='180' height='163'/></svg>"
+    },
+    {
+      "id": "得电字样",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='220' height='300'><text x='55' y='146' font-size='32' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='3' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>得电</text></svg>",
+      "bind": "energized"
+    },
+    {
+      "id": "强制字样",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='220' height='300'><text x='165' y='146' font-size='32' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='3' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>强制</text></svg>",
+      "bind": "forced"
+    }
+  ],
+  "zones": [
+    {
+      "id": "force",
+      "event": "click",
+      "action": "toggle",
+      "state": "forced",
+      "tips": "点击强制/解除强制",
+      "x": 110,
+      "y": 150,
+      "r": 30
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "main_1_u": {
+          "x": 53,
+          "y": 32,
+          "dir": "up",
+          "tip": "1L1",
+          "faultLevel":1
+        },
+        "main_1_d": {
+          "x": 50,
+          "y": 265,
+          "dir": "down",
+          "tip": "2T1",
+          "faultLevel":1
+        },
+        "main_2_u": {
+          "x": 105,
+          "y": 32,
+          "dir": "up",
+          "tip": "3L2",
+          "faultLevel":1
+        },
+        "main_2_d": {
+          "x": 104,
+          "y": 266,
+          "dir": "down",
+          "tip": "4T2",
+          "faultLevel":1
+        },
+        "main_3_u": {
+          "x": 160,
+          "y": 35,
+          "dir": "up",
+          "tip": "5L3",
+          "faultLevel":1
+        },
+        "main_3_d": {
+          "x": 156,
+          "y": 267,
+          "dir": "down",
+          "tip": "6T3",
+          "faultLevel":1
+        },
+        "no_1_u": {
+          "x": 86,
+          "y": 67,
+          "dir": "up",
+          "tip": "13常开"
+        },
+        "no_1_d": {
+          "x": 84,
+          "y": 231,
+          "dir": "down",
+          "tip": "14常开"
+        },
+        "nc_1_u": {
+          "x": 131,
+          "y": 69,
+          "dir": "up",
+          "tip": "21常闭"
+        },
+        "nc_1_d": {
+          "x": 129,
+          "y": 231,
+          "dir": "down",
+          "tip": "22常闭"
+        },
+        "a1": {
+          "x": 176,
+          "y": 68,
+          "dir": "up",
+          "tip": "A1线圈"
+        },
+        "a2": {
+          "x": 173,
+          "y": 230,
+          "dir": "down",
+          "tip": "A2线圈"
+        },
+        "ton_nc_u": {
+          "x": 55,
+          "y": 108,
+          "dir": "up",
+          "tip": "55延时常闭"
+        },
+        "ton_nc_d": {
+          "x": 55,
+          "y": 195,
+          "dir": "down",
+          "tip": "56延时常闭"
+        },
+        "ton_no_u": {
+          "x": 159,
+          "y": 108,
+          "dir": "up",
+          "tip": "67延时常开"
+        },
+        "ton_no_d": {
+          "x": 159,
+          "y": 195,
+          "dir": "down",
+          "tip": "68延时常开"
+        }
+      },
+      "contacts": {
+        "main_no": {
+          "pairs": [
+            [
+              "main_1_u",
+              "main_1_d"
+            ],
+            [
+              "main_2_u",
+              "main_2_d"
+            ],
+            [
+              "main_3_u",
+              "main_3_d"
+            ]
+          ],
+          "when": "energized || forced",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "no": {
+          "pairs": [
+            [
+              "no_1_u",
+              "no_1_d"
+            ]
+          ],
+          "when": "energized || forced",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "nc": {
+          "pairs": [
+            [
+              "nc_1_u",
+              "nc_1_d"
+            ]
+          ],
+          "when": "!(energized || forced)",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "ton_no": {
+          "pairs": [
+            [
+              "ton_no_u",
+              "ton_no_d"
+            ]
+          ],
+          "when": "ton_delayed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "ton_nc": {
+          "pairs": [
+            [
+              "ton_nc_u",
+              "ton_nc_d"
+            ]
+          ],
+          "when": "!ton_delayed",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        }
+      },
+      "loads": {
+        "coil1": {
+          "pins": [
+            "a1",
+            "a2"
+          ],
+          "state": "energized",
+          "tonState": "ton_delayed",
+          "tofState": "tof_delayed",
+          "delayForceKey": "forced",
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "permanent": {},
+      "sensors": {}
+    }
+  }
+}

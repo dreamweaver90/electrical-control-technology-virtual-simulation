@@ -1,0 +1,117 @@
+{
+  "class": "SlideTableInstance",
+  "category": "执行机构",
+  "id": "slide_table",
+  "name": "十字工作台",
+  "description": "电机驱动的 XY 十字工作台（3D 悬浮视窗）。绑定两台电机分别驱动 X/Y 轴；可被位置开关/行程开关检测到位，可被电机绑定反馈堵转",
+  "tags": [
+    "执行机构",
+    "十字滑台",
+    "XY 平台",
+    "3D"
+  ],
+  "singleton": true,
+  "size": {
+    "width": 200,
+    "height": 200
+  },
+  "params": [
+    {
+      "id": "xMotor",
+      "label": "X轴电机",
+      "type": "bind",
+      "allow": [
+        "speed"
+      ],
+      "adjustable": true
+    },
+    {
+      "id": "yMotor",
+      "label": "Y轴电机",
+      "type": "bind",
+      "allow": [
+        "speed"
+      ],
+      "adjustable": true
+    },
+    {
+      "id": "strokeTimeX",
+      "label": "X行程时间@1000rpm",
+      "type": "number",
+      "unit": "s",
+      "min": 1,
+      "max": 120,
+      "step": 1,
+      "default": 10,
+      "adjustable": true
+    },
+    {
+      "id": "strokeTimeY",
+      "label": "Y行程时间@1000rpm",
+      "type": "number",
+      "unit": "s",
+      "min": 1,
+      "max": 120,
+      "step": 1,
+      "default": 10,
+      "adjustable": true
+    },
+    {
+      "id": "x_pos",
+      "type": "number",
+      "default": 0.5,
+      "display": {
+        "x": 100,
+        "y": 42,
+        "fontSize": 17,
+        "color": "#58a6ff",
+        "prefix": "X ",
+        "scale": 100,
+        "decimals": 0,
+        "suffix": "%"
+      }
+    },
+    {
+      "id": "y_pos",
+      "type": "number",
+      "default": 0.5,
+      "display": {
+        "x": 100,
+        "y": 68,
+        "fontSize": 17,
+        "color": "#3fb950",
+        "prefix": "Y ",
+        "scale": 100,
+        "decimals": 0,
+        "suffix": "%"
+      }
+    }
+  ],
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect x='1.5' y='1.5' width='197' height='197' rx='14' fill='#eef1f5' stroke='#c8cfd8' stroke-width='1.5'/><text x='100' y='24' font-size='14' fill='#55606b' text-anchor='middle'>十字工作台（3D）</text><rect x='146' y='142' width='48' height='36' rx='9' fill='#2f81f7'/><text x='170' y='160' font-size='20' font-weight='bold' fill='#fff' text-anchor='middle' dominant-baseline='central'>3D</text><path d='M100 82 L123 95 L100 108 L77 95 Z' fill='#cfd6de' stroke='#8f99a3' stroke-width='1.2'/><path d='M77 95 L100 108 L100 134 L77 121 Z' fill='#aab3bd' stroke='#8f99a3' stroke-width='1.2'/><path d='M123 95 L100 108 L100 134 L123 121 Z' fill='#8f99a3' stroke='#7b858f' stroke-width='1.2'/><rect x='93.5' y='89.5' width='13' height='10' rx='2' fill='#5a92e8' stroke='#3f6ea5' stroke-width='1'/><line x1='129' y1='108' x2='164' y2='108' stroke='#f2363c' stroke-width='2.5'/><path d='M164 108 l-6 -4 v8 Z' fill='#f2363c'/><text x='172' y='112' font-size='15' font-weight='bold' fill='#f2363c'>X</text><line x1='100' y1='140' x2='100' y2='174' stroke='#33c15b' stroke-width='2.5'/><path d='M100 174 l-4 -6 h8 Z' fill='#33c15b'/><text x='106' y='170' font-size='15' font-weight='bold' fill='#33c15b'>Y</text></svg></div>"
+    }
+  ],
+  "zones": [
+    {
+      "id": "view3d",
+      "action": "view3d",
+      "x": 170,
+      "y": 160,
+      "r": 27,
+      "tips": "打开/关闭 3D 视图"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {},
+      "contacts": {},
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "class": "CylinderInstance",
+  "category": "气动",
+  "id": "cylinder_double",
+  "name": "双作用气缸",
+  "description": "双作用气缸：推出气口（右，无杆腔）通气推杆伸出，缩回气口（左，有杆腔）通气缩回；两侧同压往推杆方向（伸出）；都断气位置保持。模块总宽 = 3/4 推杆宽 + 本体宽（左侧为推杆伸出区），推杆在底层被本体遮挡，行程时间右键可调（节流调速）。",
+  "tags": [
+    "气缸",
+    "双作用",
+    "推杆",
+    "气动"
+  ],
+  "terminalHitRadius": 12,
+  "size": {
+    "width": 432,
+    "height": 75
+  },
+  "thumbnail": "<div><svg xmlns='http://www.w3.org/2000/svg' width='125' height='22'><image href='images/推杆气缸缩略图.png' x='0' y='0' width='125' height='22'/></svg></div>",
+  "pneumatic": {
+    "cylinders": [
+      {
+        "posKey": "position",
+        "label": "推杆",
+        "ports": [
+          {
+            "id": "a",
+            "target": 1
+          },
+          {
+            "id": "b",
+            "target": 0
+          }
+        ],
+        "equalBehavior": 1
+      }
+    ]
+  },
+  "image": [
+    {
+      "id": "rod",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='432' height='75' viewBox='0 0 432 75'><image data-bind='rod' href='images/推杆.png' x='0' y='0' width='226' height='75'/></svg></div>",
+      "anims": {
+        "rod": {
+          "source": "position",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "move": {
+            "from": [
+              94.51,
+              0
+            ],
+            "to": [
+              0,
+              0
+            ]
+          },
+          "smooth": true
+        }
+      }
+    },
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='432 height='75' viewBox='0 0 432 75'><image href='images/推杆气缸.png' x='170' y='0' width='262' height='75'/></svg></div>"
+    }
+  ],
+  "terminals": {
+    "pneumatic": {
+      "pins": {
+        "a": {
+          "x": 410,
+          "y": 34.5,
+          "tip": "推出气口"
+        },
+        "b": {
+          "x": 210,
+          "y": 34.5,
+          "tip": "缩回气口"
+        }
+      },
+      "contacts": {},
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "position",
+      "type": "number",
+      "default": 0
+    },
+    {
+      "id": "strokeTime",
+      "label": "行程时间",
+      "type": "number",
+      "unit": "s",
+      "min": 0.3,
+      "max": 10,
+      "step": 0.1,
+      "default": 1,
+      "adjustable": true
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 300,
+        "y": 34,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

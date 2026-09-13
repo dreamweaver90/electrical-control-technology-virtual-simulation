@@ -1,0 +1,289 @@
+{
+  "class": "PneumaticValveInstance",
+  "category": "气动",
+  "id": "valve_module",
+  "name": "电磁阀模块",
+  "description": "电磁阀模块：上部为两位五通双控电磁阀（线圈1 得电且进气有压→A 出气、线圈2 得电且进气有压→B 出气、都失电保持最后位、默认 A 出气），下部为两位五通单控电磁阀（失电默认 A 出气、线圈得电→B 出气）。默认直流24V线圈，右键可改线圈类型、直流电阻与交流阻抗。",
+  "tags": [
+    "电磁阀",
+    "模块",
+    "双控",
+    "单控",
+    "两位五通",
+    "气动"
+  ],
+  "terminalHitRadius": 12,
+  "size": {
+    "width": 178,
+    "height": 450
+  },
+  "pneumatic": {
+    "valves": [
+      {
+        "type": "5_2_double",
+        "posKeys": [
+          "v1_a",
+          "v1_b"
+        ],
+        "coilMap": {
+          "coil1": "v1_a",
+          "coil2": "v1_b"
+        },
+        "defaultPosKey": "v1_a",
+        "inletPort": "p1"
+      }
+    ]
+  },
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/电磁阀模块.png' width='178' height='450'></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "c1a": {
+          "x": 35,
+          "y": 127,
+          "dir": "up",
+          "tip": "双控线圈1-A1"
+        },
+        "c1b": {
+          "x": 35,
+          "y": 173,
+          "dir": "down",
+          "tip": "双控线圈1-A2"
+        },
+        "c2a": {
+          "x": 143,
+          "y": 125,
+          "dir": "up",
+          "tip": "双控线圈2-B1"
+        },
+        "c2b": {
+          "x": 143,
+          "y": 171,
+          "dir": "up",
+          "tip": "双控线圈2-B2"
+        },
+        "c3a": {
+          "x": 143,
+          "y": 373,
+          "dir": "down",
+          "tip": "单控线圈-A1"
+        },
+        "c3b": {
+          "x": 143,
+          "y": 417,
+          "dir": "down",
+          "tip": "单控线圈-A2"
+        }
+      },
+      "contacts": {},
+      "loads": {
+        "coil1": {
+          "pins": [
+            "c1a",
+            "c1b"
+          ],
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "coil2": {
+          "pins": [
+            "c2a",
+            "c2b"
+          ],
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "coil3": {
+          "pins": [
+            "c3a",
+            "c3b"
+          ],
+          "state": "en3",
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "permanent": {},
+      "sensors": {}
+    },
+    "pneumatic": {
+      "pins": {
+        "a1": {
+          "x": 51,
+          "y": 27,
+          "tip": "双控出气孔A"
+        },
+        "b1": {
+          "x": 127,
+          "y": 26,
+          "tip": "双控出气孔B"
+        },
+        "p1": {
+          "x": 89,
+          "y": 146,
+          "tip": "双控进气孔P"
+        },
+        "a2": {
+          "x": 52,
+          "y": 293,
+          "tip": "单控出气孔A"
+        },
+        "b2": {
+          "x": 127,
+          "y": 291,
+          "tip": "单控出气孔B"
+        },
+        "p2": {
+          "x": 89,
+          "y": 406,
+          "tip": "单控进气孔P"
+        }
+      },
+      "contacts": {
+        "d_a": {
+          "pairs": [
+            [
+              "p1",
+              "a1"
+            ]
+          ],
+          "when": "v1_a"
+        },
+        "d_b": {
+          "pairs": [
+            [
+              "p1",
+              "b1"
+            ]
+          ],
+          "when": "v1_b"
+        },
+        "s_idle": {
+          "pairs": [
+            [
+              "p2",
+              "a2"
+            ]
+          ],
+          "when": "!en3"
+        },
+        "s_work": {
+          "pairs": [
+            [
+              "p2",
+              "b2"
+            ]
+          ],
+          "when": "en3"
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "coilVoltage",
+      "label": "线圈电压",
+      "type": "number",
+      "unit": "V",
+      "min": 5,
+      "max": 380,
+      "step": 1,
+      "default": 24,
+      "adjustable": true
+    },
+    {
+      "id": "coilType",
+      "label": "线圈类型",
+      "type": "select",
+      "options": [
+        {
+          "value": "dc",
+          "label": "直流 DC"
+        },
+        {
+          "value": "ac",
+          "label": "交流 AC"
+        }
+      ],
+      "default": "dc",
+      "adjustable": true
+    },
+    {
+      "id": "dcResistance",
+      "label": "线圈直流电阻",
+      "type": "number",
+      "unit": "Ω",
+      "default": 730
+    },
+    {
+      "id": "impedance",
+      "label": "线圈交流阻抗",
+      "type": "number",
+      "unit": "Ω",
+      "default": 6342
+    },
+    {
+      "id": "en3",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "v1_a",
+      "type": "bool",
+      "default": true
+    },
+    {
+      "id": "v1_b",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "name_1",
+      "label": "双控电磁阀名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 89,
+        "y": 205,
+        "fontSize": 14,
+        "class": "yellow-plate"
+      }
+    },
+    {
+      "id": "name_2",
+      "label": "单控电磁阀名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 89,
+        "y": 243,
+        "fontSize": 14,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

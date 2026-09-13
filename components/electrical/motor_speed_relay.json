@@ -1,0 +1,439 @@
+{
+  "class": "MotorInstance",
+  "category": "电动机",
+  "id": "motor_speed_relay",
+  "name": "三相电机带速度继电器",
+  "description": "三相异步电动机内置速度继电器：转速 > +120 rpm 正转组动作（NO 闭合/NC 断开），转速 < -120 rpm 反转组动作，|转速| ≤ 120 两组复位（阈值定值不可调，无滞回）。",
+  "tags": [
+    "电动机",
+    "三相",
+    "AC",
+    "速度继电器"
+  ],
+  "speedRelay": [
+    {
+      "stateKey": "fwd_act",
+      "dir": "pos"
+    },
+    {
+      "stateKey": "rev_act",
+      "dir": "neg"
+    }
+  ],
+  "params": [
+    {
+      "id": "coilVoltage",
+      "default": 380
+    },
+    {
+      "id": "ratedConnection",
+      "label": "额定接法",
+      "type": "select",
+      "options": [
+        {
+          "value": "Y",
+          "label": "星形（Y）"
+        },
+        {
+          "value": "D",
+          "label": "三角形（Δ）"
+        }
+      ],
+      "default": "Y",
+      "adjustable": true
+    },
+    {
+      "id": "minStartVoltage",
+      "default": 0.4
+    },
+    {
+      "id": "balanceTol",
+      "default": 0.1
+    },
+    {
+      "id": "phaseTol",
+      "default": 10
+    },
+    {
+      "id": "ratedPower",
+      "label": "额定功率",
+      "type": "number",
+      "unit": "W",
+      "min": 10,
+      "max": 100000,
+      "step": 10,
+      "default": 370,
+      "adjustable": true
+    },
+    {
+      "id": "powerFactor",
+      "label": "功率因数",
+      "type": "number",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.05,
+      "default": 0.8,
+      "adjustable": true
+    },
+    {
+      "id": "lockRatio",
+      "label": "堵转电流倍数",
+      "type": "number",
+      "min": 2,
+      "max": 10,
+      "step": 0.5,
+      "default": 6
+    },
+    {
+      "id": "efficiency",
+      "label": "效率",
+      "type": "number",
+      "min": 0.5,
+      "max": 1,
+      "step": 0.01,
+      "default": 0.85,
+      "adjustable": true
+    },
+    {
+      "id": "ratedSpeed",
+      "label": "额定转速",
+      "type": "number",
+      "unit": "rpm",
+      "min": 100,
+      "max": 6000,
+      "step": 10,
+      "default": 1400,
+      "adjustable": true
+    },
+    {
+      "id": "ratedCurrent",
+      "label": "额定电流",
+      "type": "number",
+      "unit": "A",
+      "decimals": 2,
+      "readonly": true
+    },
+    {
+      "id": "stallCurrent",
+      "label": "堵转电流",
+      "type": "number",
+      "unit": "A",
+      "decimals": 2,
+      "readonly": true
+    },
+    {
+      "id": "accelTimeOn",
+      "label": "通电加速时间",
+      "type": "number",
+      "unit": "s",
+      "min": 0.1,
+      "max": 10,
+      "step": 0.1,
+      "default": 0.6,
+      "adjustable": true
+    },
+    {
+      "id": "accelTimeOff",
+      "label": "断电减速时间",
+      "type": "number",
+      "unit": "s",
+      "min": 0.1,
+      "max": 10,
+      "step": 0.1,
+      "default": 2,
+      "adjustable": true
+    },
+    {
+      "id": "speed",
+      "type": "number",
+      "default": 0,
+      "display": {
+        "x": 80,
+        "y": 55,
+        "class": "speed-label",
+        "suffix": " rpm",
+        "decimals": 0,
+        "when": "speed"
+      }
+    },
+    {
+      "id": "target",
+      "label": "执行机构",
+      "type": "bind",
+      "allow": [
+        "relative-position"
+      ],
+      "adjustable": true
+    },
+    {
+      "id": "unit",
+      "label": "执行单元",
+      "type": "select",
+      "options": "bound:target.relativePositions",
+      "default": 0,
+      "adjustable": true
+    },
+    {
+      "id": "stalled",
+      "type": "bool",
+      "default": false,
+      "display": {
+        "x": 80,
+        "y": 55,
+        "fontSize": 22,
+        "class": "stall-label",
+        "trueText": "堵转",
+        "when": "stalled"
+      }
+    },
+    {
+      "id": "dcResistance",
+      "default": 370
+    },
+    {
+      "id": "cw",
+      "default": false
+    },
+    {
+      "id": "ccw",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 79,
+        "y": 90,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ],
+  "terminalHitRadius": 13,
+  "size": {
+    "width": 161,
+    "height": 300
+  },
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/电动机.png' width='161' height='300'></div>"
+    },
+    {
+      "id": "relay_marks",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='161' height='300' viewBox='0 0 161 300'><circle cx='17' cy='226' r='7' fill='#fff' stroke='#FC404D' stroke-width='2.5'/><text x='30' y='230' font-size='12' font-weight='bold' fill='#FC404D' stroke='#fff' stroke-width='2.5' paint-order='stroke'>NO</text><circle cx='17' cy='256' r='7' fill='#fff' stroke='#5ce2d1' stroke-width='2.5'/><text x='30' y='260' font-size='12' font-weight='bold' fill='#5ce2d1' stroke='#fff' stroke-width='2.5' paint-order='stroke'>NC</text><circle cx='17' cy='286' r='7' fill='#fff' stroke='#333' stroke-width='2.5'/><text x='30' y='290' font-size='12' font-weight='bold' fill='#333' stroke='#fff' stroke-width='2.5' paint-order='stroke'>COM</text><circle cx='149' cy='226' r='7' fill='#fff' stroke='#FC404D' stroke-width='2.5'/><text x='131' y='230' font-size='12' font-weight='bold' fill='#FC404D' stroke='#fff' stroke-width='2.5' paint-order='stroke' text-anchor='end'>NO</text><circle cx='149' cy='256' r='7' fill='#fff' stroke='#5ce2d1' stroke-width='2.5'/><text x='131' y='260' font-size='12' font-weight='bold' fill='#5ce2d1' stroke='#fff' stroke-width='2.5' paint-order='stroke' text-anchor='end'>NC</text><circle cx='149' cy='286' r='7' fill='#fff' stroke='#333' stroke-width='2.5'/><text x='131' y='290' font-size='12' font-weight='bold' fill='#333' stroke='#fff' stroke-width='2.5' paint-order='stroke' text-anchor='end'>COM</text></svg></div>"
+    },
+    {
+      "id": "winding_names",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='161' height='300' viewBox='0 0 161 300'><text x='40' y='128' font-size='16' font-weight='bold' fill='#fffe65' stroke='#000' stroke-width='2.5' paint-order='stroke' text-anchor='end' dominant-baseline='middle'>U1</text><text x='40' y='160' font-size='16' font-weight='bold' fill='#5ce2d1' stroke='#000' stroke-width='2.5' paint-order='stroke' text-anchor='end' dominant-baseline='middle'>V1</text><text x='40' y='194' font-size='16' font-weight='bold' fill='#FC404D' stroke='#000' stroke-width='2.5' paint-order='stroke' text-anchor='end' dominant-baseline='middle'>W1</text><text x='117' y='128' font-size='16' font-weight='bold' fill='#FC404D' stroke='#000' stroke-width='2.5' paint-order='stroke' dominant-baseline='middle'>W2</text><text x='117' y='160' font-size='16' font-weight='bold' fill='#fffe65' stroke='#000' stroke-width='2.5' paint-order='stroke' dominant-baseline='middle'>U2</text><text x='117' y='194' font-size='16' font-weight='bold' fill='#5ce2d1' stroke='#000' stroke-width='2.5' paint-order='stroke' dominant-baseline='middle'>V2</text></svg></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "U1": {
+          "x": 53,
+          "y": 128,
+          "dir": "down",
+          "tip": "U1",
+          "faultLevel":1
+        },
+        "U2": {
+          "x": 104,
+          "y": 160,
+          "dir": "down",
+          "tip": "U2",
+          "faultLevel":1
+        },
+        "V1": {
+          "x": 53,
+          "y": 160,
+          "dir": "down",
+          "tip": "V1",
+          "faultLevel":1
+        },
+        "V2": {
+          "x": 104,
+          "y": 194,
+          "dir": "down",
+          "tip": "V2",
+          "faultLevel":1
+        },
+        "W1": {
+          "x": 53,
+          "y": 194,
+          "dir": "down",
+          "tip": "W1",
+          "faultLevel":1
+        },
+        "W2": {
+          "x": 104,
+          "y": 128,
+          "dir": "down",
+          "tip": "W2",
+          "faultLevel":1
+        },
+        "fwd_no": {
+          "x": 17,
+          "y": 226,
+          "dir": "down",
+          "tip": "正转组常开"
+        },
+        "fwd_nc": {
+          "x": 17,
+          "y": 256,
+          "dir": "down",
+          "tip": "正转组常闭"
+        },
+        "fwd_com": {
+          "x": 17,
+          "y": 286,
+          "dir": "down",
+          "tip": "正转组COM"
+        },
+        "rev_no": {
+          "x": 149,
+          "y": 226,
+          "dir": "down",
+          "tip": "反转组常开"
+        },
+        "rev_nc": {
+          "x": 149,
+          "y": 256,
+          "dir": "down",
+          "tip": "反转组常闭"
+        },
+        "rev_com": {
+          "x": 149,
+          "y": 286,
+          "dir": "down",
+          "tip": "反转组COM"
+        }
+      },
+      "contacts": {
+        "fwd_no": {
+          "pairs": [
+            [
+              "fwd_no",
+              "fwd_com"
+            ]
+          ],
+          "when": "fwd_act",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "fwd_nc": {
+          "pairs": [
+            [
+              "fwd_nc",
+              "fwd_com"
+            ]
+          ],
+          "when": "!fwd_act",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "rev_no": {
+          "pairs": [
+            [
+              "rev_no",
+              "rev_com"
+            ]
+          ],
+          "when": "rev_act",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "rev_nc": {
+          "pairs": [
+            [
+              "rev_nc",
+              "rev_com"
+            ]
+          ],
+          "when": "!rev_act",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "loads": {
+        "u": {
+          "pins": [
+            "U1",
+            "U2"
+          ],
+          "computed": "motor",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "v": {
+          "pins": [
+            "V1",
+            "V2"
+          ],
+          "computed": "motor",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "w": {
+          "pins": [
+            "W1",
+            "W2"
+          ],
+          "computed": "motor",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "permanent": {},
+      "sensors": {}
+    }
+  }
+}

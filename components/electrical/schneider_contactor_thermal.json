@@ -1,0 +1,480 @@
+{
+  "class": "CoilDeviceInstance",
+  "category": "继电器&接触器",
+  "id": "schneider_contactor_thermal",
+  "name": "接触器",
+  "description": "接触器，带热继电器过载保护（整定电流可调）",
+  "tags": [
+    "接触器",
+    "施耐德",
+    "热继电器",
+    "AC"
+  ],
+  "params": [
+    {
+      "id": "coilVoltage",
+      "label": "线圈电压",
+      "type": "number",
+      "unit": "V",
+      "min": 12,
+      "max": 500,
+      "step": 1,
+      "default": 220,
+      "adjustable": true
+    },
+    {
+      "id": "coilType",
+      "label": "线圈类型",
+      "type": "select",
+      "options": [
+        { "value": "ac", "label": "交流 AC" },
+        { "value": "dc", "label": "直流 DC" }
+      ],
+      "default": "ac",
+      "adjustable": true
+    },
+    {
+      "id": "pickup",
+      "default": 0.85
+    },
+    {
+      "id": "dropout",
+      "default": 0.6
+    },
+    {
+      "id": "impedance",
+      "default": {
+        "re": 730,
+        "im": 6300
+      }
+    },
+    {
+      "id": "dcResistance",
+      "default": 550
+    },
+    {
+      "id": "heaterSetting",
+      "label": "整定电流",
+      "type": "number",
+      "unit": "A",
+      "min": 0.1,
+      "max": 100,
+      "step": 0.1,
+      "default": 1,
+      "adjustable": true
+    },
+    {
+      "id": "tripDelay",
+      "label": "过载动作延时",
+      "type": "number",
+      "unit": "s",
+      "min": 0.5,
+      "max": 30,
+      "step": 0.5,
+      "default": 8,
+      "adjustable": true
+    },
+    {
+      "id": "energized",
+      "default": false
+    },
+    {
+      "id": "tripped",
+      "default": false
+    },
+    {
+      "id": "forced",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "接触器名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 90,
+        "y": 170,
+        "fontSize": 14,
+        "class": "yellow-plate"
+      }
+    },
+    {
+      "id": "name1",
+      "label": "热继名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 127,
+        "y": 310,
+        "fontSize": 14,
+        "class": "yellow-plate"
+      }
+    }
+  ],
+  "terminalHitRadius": 14,
+  "size": {
+    "width": 183,
+    "height": 450
+  },
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='183' height='450'><image href='images/交流接触器热继电器.png' x='0' y='0' width='183' height='450'/></svg>"
+    },
+    {
+      "id": "得电字样",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='183' height='450'><text x='55' y='130' font-size='32' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='3' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>得电</text></svg>",
+      "bind": "energized"
+    },
+    {
+      "id": "强制字样",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='183' height='450'><text x='128' y='130' font-size='32' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='3' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>强制</text></svg>",
+      "bind": "forced"
+    },
+    {
+      "id": "overload",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='183' height='450'><rect x='16.5' y='263' width='150' height='74' rx='12' fill='#e74c3c' opacity='0.15'/><text x='91.5' y='285' font-size='34' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='3' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>过载</text><text x='91.5' y='315' font-size='17' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='2' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>请复位</text></svg>",
+      "bind": "tripped"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "main_1_u": {
+          "x": 39,
+          "y": 27, 
+          "dir": "up",
+          "tip": "1L1",
+          "faultLevel":1
+        },
+        "main_1_d": {
+          "x": 40,
+          "y": 242,
+          "dir": "down",
+          "connectLimit": 0,
+          "tip": "2T1",
+          "faultLevel":1
+        },
+        "main_2_u": {
+          "x": 89,
+          "y": 27,
+          "dir": "up",
+          "tip": "3L2",
+          "faultLevel":1
+        },
+        "main_2_d": {
+          "x": 89,
+          "y": 243,
+          "dir": "down",
+          "connectLimit": 0,
+          "tip": "4T2",
+          "faultLevel":1
+        },
+        "main_3_u": {
+          "x": 138,
+          "y": 27,
+          "dir": "up",
+          "tip": "5L3",
+          "faultLevel":1
+        },
+        "main_3_d": {
+          "x": 139,
+          "y": 242,
+          "dir": "down",
+          "connectLimit": 0,
+          "tip": "6T3",
+          "faultLevel":1
+        },
+        "no_1_u": {
+          "x": 70,
+          "y": 62,
+          "dir": "up",
+          "tip": "13常开"
+        },
+        "no_1_d": {
+          "x": 71,
+          "y": 202,
+          "dir": "down",
+          "tip": "14常开"
+        },
+        "nc_1_u": {
+          "x": 109,
+          "y": 62,
+          "dir": "up",
+          "tip": "21常闭"
+        },
+        "nc_1_d": {
+          "x": 110,
+          "y": 202,
+          "dir": "down",
+          "tip": "22常闭"
+        },
+        "a1": {
+          "x": 146,
+          "y": 61,
+          "dir": "up",
+          "tip": "A1线圈"
+        },
+        "a2": {
+          "x": 146,
+          "y": 203,
+          "dir": "down",
+          "tip": "A2线圈"
+        },
+        "t1a": {
+          "x": 20,
+          "y": 30,
+          "dir": "up",
+          "isHidden": true,
+          "tip": "L1进",
+          "faultLevel":1
+        },
+        "t1b": {
+          "x": 46,
+          "y": 402,
+          "dir": "down",
+          "tip": "热继2T1",
+          "faultLevel":1
+        },
+        "t2a": {
+          "x": 70,
+          "y": 30,
+          "dir": "up",
+          "isHidden": true,
+          "tip": "L2进",
+          "faultLevel":1
+        },
+        "t2b": {
+          "x": 93,
+          "y": 403,
+          "dir": "down",
+          "tip": "热继4T2",
+          "faultLevel":1
+        },
+        "t3a": {
+          "x": 120,
+          "y": 30,
+          "dir": "up",
+          "isHidden": true,
+          "tip": "L3进",
+          "faultLevel":1
+        },
+        "t3b": {
+          "x": 142,
+          "y": 401,
+          "dir": "down",
+          "tip": "热继6T3",
+          "faultLevel":1
+        },
+        "ol_no_u": {
+          "x": 32,
+          "y": 367,
+          "dir": "down",
+          "tip": "热常开进"
+        },
+        "ol_no_d": {
+          "x": 71,
+          "y": 367,
+          "dir": "down",
+          "tip": "热常开出"
+        },
+        "ol_nc_u": {
+          "x": 111,
+          "y": 367,
+          "dir": "down",
+          "tip": "热常闭进"
+        },
+        "ol_nc_d": {
+          "x": 150,
+          "y": 367,
+          "dir": "down",
+          "tip": "热常闭出"
+        }
+      },
+      "contacts": {
+        "main_no": {
+          "pairs": [
+            [
+              "main_1_u",
+              "main_1_d"
+            ],
+            [
+              "main_2_u",
+              "main_2_d"
+            ],
+            [
+              "main_3_u",
+              "main_3_d"
+            ]
+          ],
+          "when": "energized || forced",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "no": {
+          "pairs": [
+            [
+              "no_1_u",
+              "no_1_d"
+            ]
+          ],
+          "when": "energized || forced",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "nc": {
+          "pairs": [
+            [
+              "nc_1_u",
+              "nc_1_d"
+            ]
+          ],
+          "when": "!(energized || forced)",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "ol_no": {
+          "pairs": [
+            [
+              "ol_no_u",
+              "ol_no_d"
+            ]
+          ],
+          "when": "tripped",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "ol_nc": {
+          "pairs": [
+            [
+              "ol_nc_u",
+              "ol_nc_d"
+            ]
+          ],
+          "when": "!tripped",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "loads": {
+        "coil1": {
+          "pins": [
+            "a1",
+            "a2"
+          ],
+          "state": "energized",
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "permanent": {
+        "j1": {
+          "pairs": [
+            [
+              "main_1_d",
+              "t1a"
+            ],
+            [
+              "main_2_d",
+              "t2a"
+            ],
+            [
+              "main_3_d",
+              "t3a"
+            ]
+          ],
+          "fault": {
+            "level": 10
+          }
+        }
+      },
+      "sensors": {
+        "ol_elem": {
+          "pairs": [
+            [
+              "t1a",
+              "t1b"
+            ],
+            [
+              "t2a",
+              "t2b"
+            ],
+            [
+              "t3a",
+              "t3b"
+            ]
+          ],
+          "resistance": 0.002,
+          "fault": {
+            "level": 10
+          }
+        }
+      }
+    }
+  },
+  "zones": [
+    {
+      "id": "reset",
+      "event": "click",
+      "action": "reset",
+      "tips": "点击复位热继电器",
+      "x": 144,
+      "y": 288,
+      "r": 10
+    },
+    {
+      "id": "force",
+      "event": "click",
+      "action": "toggle",
+      "state": "forced",
+      "tips": "点击强制/解除强制",
+      "x": 91,
+      "y": 130,
+      "r": 30
+    }
+  ]
+}

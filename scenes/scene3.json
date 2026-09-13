@@ -1,0 +1,187 @@
+{
+  "id": "power_distribution11",
+  "name": "工业机器人系统操作员中级",
+  "description": "工业机器人系统操作员中级考证-机械部件功能检查与调试模块",
+   "layout": "free",
+  "components": [
+    {
+      "id": "ac_power_380v_3phase",
+      "x": 702.5836999999999,
+      "y": 44.82051,
+      "row": 0,
+      "left": 702.5836999999999,
+      "params": {
+        "sourceImpedance": 0.05
+      }
+    },
+    {
+      "id": "smps_24v",
+      "x": 930,
+      "y": 10,
+      "row": 0,
+      "left": 930,
+      "params": {
+        "inputVoltage": 220,
+        "outputVoltage": 24,
+        "sourceImpedance": 0.05,
+        "noLoadImpedance": 48400,
+        "noLoadPowerFactor": 1,
+        "minInputImpedance": 20,
+        "dcResistance": 100000,
+        "switch": false,
+        "energized": false,
+        "short_circuit": false
+      }
+    },
+    {
+      "id": "execution_module",
+      "x": 10,
+      "y": 10,
+      "row": 0,
+      "left": 10,
+      "params": {
+        "lift_pos": 0,
+        "extend_pos": 0,
+        "grip_pos": 0,
+        "strokeTime": 1
+      }
+    },
+    {
+      "id": "pneumatic_source",
+      "x": 250,
+      "y": 790,
+      "row": 4,
+      "left": 250,
+      "params": {
+        "pressure": 0.8,
+        "switch": false
+      }
+    },
+    {
+      "id": "pressure_regulator",
+      "x": 714.0261600000001,
+      "y": 721.64789,
+      "row": 3,
+      "left": 714.0261600000001,
+      "params": {
+        "setPressure": 0.5,
+        "gaugeMax": 1,
+        "out_pressure": 0
+      }
+    },
+    {
+      "id": "pneumatic_parallel",
+      "x": 950,
+      "y": 490,
+      "row": 2,
+      "left": 950,
+      "params": {}
+    },
+    {
+      "id": "valve_module",
+      "x": 1150,
+      "y": 490,
+      "row": 2,
+      "left": 1150,
+      "params": {
+        "coilVoltage": 24,
+        "coilType": "dc",
+        "dcResistance": 730,
+        "impedance": 6342,
+        "en3": false,
+        "v1_a": true,
+        "v1_b": false
+      }
+    },
+    {
+      "id": "button_module_8",
+      "x": 1130,
+      "y": 10,
+      "row": 0,
+      "left": 1130,
+      "params": {
+        "btnName_1": "SB1",
+        "btnName_2": "SB2",
+        "btnName_3": "SB3",
+        "btnName_4": "SB4",
+        "btnName_5": "SB5",
+        "btnName_6": "SB6",
+        "btnName_7": "SB7",
+        "btnName_8": "SB8",
+        "pushed_1": false,
+        "pushed_2": false,
+        "pushed_3": false,
+        "pushed_4": false,
+        "pushed_5": false,
+        "pushed_6": false,
+        "pushed_7": false,
+        "pushed_8": false
+      }
+    },
+    {
+      "id": "magnetic_sensor",
+      "x": 1599.11614,
+      "y": 564.2682199999999,
+      "row": 3,
+      "left": 1599.11614,
+      "params": {
+        "target": null,
+        "unit": 0,
+        "detect": 1,
+        "tolerance": 0.02,
+        "sensorType": "npn",
+        "workingVoltage": 24,
+        "voltTol": 0.1,
+        "lit": false,
+        "out_npn": false,
+        "out_pnp": false
+      }
+    },
+    {
+      "id": "valve_module",
+      "x": 1350,
+      "y": 490,
+      "row": 2,
+      "left": 1350,
+      "params": {
+        "coilVoltage": 24,
+        "coilType": "dc",
+        "dcResistance": 730,
+        "impedance": 6342,
+        "en3": false,
+        "v1_a": true,
+        "v1_b": false
+      }
+    },
+    {
+      "id": "indicator_module_8",
+      "x": 1410,
+      "y": 10,
+      "row": 0,
+      "left": 1410,
+      "params": {
+        "lampType": "dc",
+        "lampVoltage": 24,
+        "impedance": 50000,
+        "dcResistance": 1000,
+        "hlName_1": "HL1",
+        "hlName_2": "HL2",
+        "hlName_3": "HL3",
+        "hlName_4": "HL4",
+        "hlName_5": "HL5",
+        "hlName_6": "HL6",
+        "hlName_7": "HL7",
+        "hlName_8": "HL8",
+        "lit_1": false,
+        "lit_2": false,
+        "lit_3": false,
+        "lit_4": false,
+        "lit_5": false,
+        "lit_6": false,
+        "lit_7": false,
+        "lit_8": false
+      }
+    }
+  ],
+  "wires": []
+}

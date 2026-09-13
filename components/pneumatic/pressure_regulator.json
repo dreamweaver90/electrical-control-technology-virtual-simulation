@@ -1,0 +1,99 @@
+{
+  "class": "PressureRegulatorInstance",
+  "category": "气动",
+  "id": "pressure_regulator",
+  "name": "调压阀",
+  "description": "调压阀（减压阀）：1 进 1 出。出气压力右键设置（默认0.5MPa），出气压力不能高于进气压力——进气不足时输出等于进气，指针显示实际输出。",
+  "tags": [
+    "调压阀",
+    "减压阀",
+    "压力表",
+    "气动"
+  ],
+  "terminalHitRadius": 12,
+  "size": {
+    "width": 141.12,
+    "height": 180
+  },
+  "regulator": {
+    "in": "p1",
+    "out": [
+      "p2"
+    ]
+  },
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/调压阀.png' width='141.12' height='180'></div>"
+    },
+    {
+      "id": "needle",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='141.12' height='180' viewBox='0 0 141.12 180'><g transform='translate(66.24 133.2)'><path data-bind='needle' d='M30.24 0 L-12.96 -2.88 L-12.96 2.88 Z' fill='#000000'/></g></svg></div>",
+      "anims": {
+        "needle": {
+          "source": "out_pressure",
+          "map": {
+            "min": 0,
+            "max": "param:gaugeMax"
+          },
+          "rotate": {
+            "center": [
+              0,
+              0
+            ],
+            "from": -215,
+            "to": 35
+          },
+          "smooth": true
+        }
+      }
+    }
+  ],
+  "terminals": {
+    "pneumatic": {
+      "pins": {
+        "p1": {
+          "x": 4.32,
+          "y": 115.2,
+          "tip": "进气口"
+        },
+        "p2": {
+          "x": 138.24,
+          "y": 115.2,
+          "tip": "出气口"
+        }
+      },
+      "contacts": {},
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "setPressure",
+      "label": "设定输出压力",
+      "type": "number",
+      "unit": "MPa",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.05,
+      "default": 0.5,
+      "adjustable": true
+    },
+    {
+      "id": "gaugeMax",
+      "type": "number",
+      "default": 1
+    },
+    {
+      "id": "out_pressure",
+      "type": "number",
+      "default": 0
+    }
+  ]
+}

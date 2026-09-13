@@ -1,0 +1,89 @@
+{
+  "class": "ElectricMeterInstance",
+  "category": "仪表",
+  "id": "electric_meter",
+  "name": "电能表",
+  "description": "单相电能表：1接电源L、2接负载（1-2电流线圈串联），3接N、4接负载（3-4内部连通），1-3测电压；实时功率kW + 累计电能kW·h",
+  "tags": [
+    "仪表",
+    "电能表",
+    "功率",
+    "测量"
+  ],
+  "terminalHitRadius": 14,
+  "size": {
+    "width": 200,
+    "height": 160
+  },
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='200' height='160' viewBox='0 0 200 160'><rect x='5' y='5' width='190' height='118' rx='8' fill='#fdfdfd' stroke='#333' stroke-width='2'/><rect x='15' y='16' width='170' height='40' rx='4' fill='#1a1a2e'/><text data-mv='p' x='80' y='36' font-size='16' fill='#7cfc00' text-anchor='end' dominant-baseline='middle' font-family='monospace'>---</text><text x='178' y='36' font-size='12' fill='#7cfc00' text-anchor='end' dominant-baseline='middle'>kW</text><rect x='15' y='64' width='170' height='40' rx='4' fill='#1a1a2e'/><text data-mv='e' x='80' y='84' font-size='16' fill='#7cfc00' text-anchor='end' dominant-baseline='middle' font-family='monospace'>0.00</text><text x='178' y='84' font-size='12' fill='#7cfc00' text-anchor='end' dominant-baseline='middle'>kWh</text><circle cx='30' cy='140' r='7' fill='#e74c3c' stroke='#c0392b' stroke-width='1.5'/><circle cx='75' cy='140' r='7' fill='#e74c3c' stroke='#c0392b' stroke-width='1.5'/><circle cx='120' cy='140' r='7' fill='#3498db' stroke='#2980b9' stroke-width='1.5'/><circle cx='165' cy='140' r='7' fill='#3498db' stroke='#2980b9' stroke-width='1.5'/><text x='30' y='131' font-size='9' fill='#333' text-anchor='middle'>1</text><text x='75' y='131' font-size='9' fill='#333' text-anchor='middle'>2</text><text x='120' y='131' font-size='9' fill='#333' text-anchor='middle'>3</text><text x='165' y='131' font-size='9' fill='#333' text-anchor='middle'>4</text></svg></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "t1": {
+          "x": 30,
+          "y": 140,
+          "dir": "down",
+          "tip": "1·L进",
+          "faultLevel":10
+        },
+        "t2": {
+          "x": 75,
+          "y": 140,
+          "dir": "down",
+          "tip": "2·负载",
+          "faultLevel":10
+        },
+        "t3": {
+          "x": 120,
+          "y": 140,
+          "dir": "down",
+          "tip": "3·N",
+          "faultLevel":10
+        },
+        "t4": {
+          "x": 165,
+          "y": 140,
+          "dir": "down",
+          "tip": "4·负载",
+          "faultLevel":10
+        }
+      },
+      "contacts": {},
+      "loads": {},
+      "permanent": {
+        "j1": {
+          "pairs": [
+            [
+              "t3",
+              "t4"
+            ]
+          ],
+          "fault": {
+            "level": 10
+          }
+        }
+      },
+      "sensors": {
+        "cur_coil": {
+          "pairs": [
+            [
+              "t1",
+              "t2"
+            ]
+          ],
+          "resistance": 0.001,
+          "fault": {
+            "level": 10
+          }
+        }
+      }
+    }
+  }
+}

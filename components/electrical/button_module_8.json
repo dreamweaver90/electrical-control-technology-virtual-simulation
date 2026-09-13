@@ -1,0 +1,529 @@
+{
+  "class": "ComponentInstance",
+  "category": "按钮&指示灯",
+  "id": "button_module_8",
+  "name": "按钮模块",
+  "description": "按钮模块，上方4个自复位式按钮成组共用公共端COM，下方4个独立按钮自保持式，所有按钮全部常开触点",
+  "tags": [
+    "按钮",
+    "模块",
+    "常开",
+    "自复位",
+    "自保持"
+  ],
+  "zones": [
+    {
+      "id": "b1",
+      "event": "press",
+      "action": "toggle",
+      "state": "pushed_1",
+      "tips": "SB1 自复位按钮",
+      "x": 125,
+      "y": 54,
+      "r": 15
+    },
+    {
+      "id": "b2",
+      "event": "press",
+      "action": "toggle",
+      "state": "pushed_2",
+      "tips": "SB2 自复位按钮",
+      "x": 125,
+      "y": 98,
+      "r": 15
+    },
+    {
+      "id": "b3",
+      "event": "press",
+      "action": "toggle",
+      "state": "pushed_3",
+      "tips": "SB3 自复位按钮",
+      "x": 125,
+      "y": 142,
+      "r": 15
+    },
+    {
+      "id": "b4",
+      "event": "press",
+      "action": "toggle",
+      "state": "pushed_4",
+      "tips": "SB4 自复位按钮",
+      "x": 125,
+      "y": 186,
+      "r": 15
+    },
+    {
+      "id": "s1",
+      "event": "click",
+      "action": "toggle",
+      "state": "pushed_5",
+      "tips": "SB5 自保持按钮",
+      "x": 125,
+      "y": 278,
+      "r": 15
+    },
+    {
+      "id": "s2",
+      "event": "click",
+      "action": "toggle",
+      "state": "pushed_6",
+      "tips": "SB6 自保持按钮",
+      "x": 125,
+      "y": 322,
+      "r": 15
+    },
+    {
+      "id": "s3",
+      "event": "click",
+      "action": "toggle",
+      "state": "pushed_7",
+      "tips": "SB7 自保持按钮",
+      "x": 125,
+      "y": 366,
+      "r": 15
+    },
+    {
+      "id": "s4",
+      "event": "click",
+      "action": "toggle",
+      "state": "pushed_8",
+      "tips": "SB8 自保持按钮",
+      "x": 125,
+      "y": 410,
+      "r": 15
+    }
+  ],
+  "terminalHitRadius": 12,
+  "size": {
+    "width": 250,
+    "height": 450
+  },
+  "thumbnail": "<div><svg xmlns='http://www.w3.org/2000/svg' width='125' height='225' viewBox='0 0 250 450'><rect x='0' y='0' width='250' height='450' fill='#f6f4e8'/><path d='M215 64 V226 H21' stroke='#999' stroke-width='2' fill='none'/><rect x='107' y='42' width='36' height='12' fill='#2e7d32'/><rect x='107' y='86' width='36' height='12' fill='#2e7d32'/><rect x='107' y='130' width='36' height='12' fill='#2e7d32'/><rect x='107' y='174' width='36' height='12' fill='#2e7d32'/><rect x='107' y='266' width='36' height='12' fill='#2e7d32'/><rect x='107' y='310' width='36' height='12' fill='#2e7d32'/><rect x='107' y='354' width='36' height='12' fill='#2e7d32'/><rect x='107' y='398' width='36' height='12' fill='#2e7d32'/><circle cx='15' cy='64' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='108' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='152' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='196' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='226' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='288' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='215' cy='288' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='332' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='215' cy='332' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='376' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='215' cy='376' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='420' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='215' cy='420' r='6' fill='#fff' stroke='#999' stroke-width='2'/></svg></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='0' y='0' width='250' height='450' fill='#f6f4e8'/><path d='M215 64 V226 H21' stroke='#000' stroke-width='1.5' fill='none'/><text x='178' y='218' font-size='13' fill='#333' text-anchor='middle'>COM</text><rect x='107' y='42' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/><circle cx='104' cy='64' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><circle cx='146' cy='64' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><line x1='21' y1='64' x2='99.5' y2='64' stroke='#000' stroke-width='1.5'/><line x1='150.5' y1='64' x2='215' y2='64' stroke='#000' stroke-width='1.5'/><rect x='107' y='86' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/><circle cx='104' cy='108' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><circle cx='146' cy='108' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><line x1='21' y1='108' x2='99.5' y2='108' stroke='#000' stroke-width='1.5'/><line x1='150.5' y1='108' x2='215' y2='108' stroke='#000' stroke-width='1.5'/><rect x='107' y='130' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/><circle cx='104' cy='152' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><circle cx='146' cy='152' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><line x1='21' y1='152' x2='99.5' y2='152' stroke='#000' stroke-width='1.5'/><line x1='150.5' y1='152' x2='215' y2='152' stroke='#000' stroke-width='1.5'/><rect x='107' y='174' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/><circle cx='104' cy='196' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><circle cx='146' cy='196' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><line x1='21' y1='196' x2='99.5' y2='196' stroke='#000' stroke-width='1.5'/><line x1='150.5' y1='196' x2='215' y2='196' stroke='#000' stroke-width='1.5'/><rect x='107' y='266' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/><circle cx='104' cy='288' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><circle cx='146' cy='288' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><line x1='21' y1='288' x2='99.5' y2='288' stroke='#000' stroke-width='1.5'/><line x1='150.5' y1='288' x2='209' y2='288' stroke='#000' stroke-width='1.5'/><rect x='107' y='310' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/><circle cx='104' cy='332' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><circle cx='146' cy='332' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><line x1='21' y1='332' x2='99.5' y2='332' stroke='#000' stroke-width='1.5'/><line x1='150.5' y1='332' x2='209' y2='332' stroke='#000' stroke-width='1.5'/><rect x='107' y='354' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/><circle cx='104' cy='376' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><circle cx='146' cy='376' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><line x1='21' y1='376' x2='99.5' y2='376' stroke='#000' stroke-width='1.5'/><line x1='150.5' y1='376' x2='209' y2='376' stroke='#000' stroke-width='1.5'/><rect x='107' y='398' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/><circle cx='104' cy='420' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><circle cx='146' cy='420' r='4.5' fill='#fff' stroke='#333' stroke-width='1.5'/><line x1='21' y1='420' x2='99.5' y2='420' stroke='#000' stroke-width='1.5'/><line x1='150.5' y1='420' x2='209' y2='420' stroke='#000' stroke-width='1.5'/><circle cx='15' cy='64' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='108' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='152' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='196' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='226' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='288' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='215' cy='288' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='332' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='215' cy='332' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='376' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='215' cy='376' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='420' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='215' cy='420' r='6' fill='#fff' stroke='#333' stroke-width='2'/></svg></div>"
+    },
+    {
+      "id": "b1_down",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='105' y='39' width='40' height='22' fill='#f6f4e8'/><rect x='107' y='48' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/></svg></div>",
+      "bind": "pushed_1"
+    },
+    {
+      "id": "b2_down",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='105' y='83' width='40' height='22' fill='#f6f4e8'/><rect x='107' y='92' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/></svg></div>",
+      "bind": "pushed_2"
+    },
+    {
+      "id": "b3_down",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='105' y='127' width='40' height='22' fill='#f6f4e8'/><rect x='107' y='136' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/></svg></div>",
+      "bind": "pushed_3"
+    },
+    {
+      "id": "b4_down",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='105' y='171' width='40' height='22' fill='#f6f4e8'/><rect x='107' y='180' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/></svg></div>",
+      "bind": "pushed_4"
+    },
+    {
+      "id": "s1_down",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='105' y='263' width='40' height='22' fill='#f6f4e8'/><rect x='107' y='272' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/></svg></div>",
+      "bind": "pushed_5"
+    },
+    {
+      "id": "s2_down",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='105' y='307' width='40' height='22' fill='#f6f4e8'/><rect x='107' y='316' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/></svg></div>",
+      "bind": "pushed_6"
+    },
+    {
+      "id": "s3_down",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='105' y='351' width='40' height='22' fill='#f6f4e8'/><rect x='107' y='360' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/></svg></div>",
+      "bind": "pushed_7"
+    },
+    {
+      "id": "s4_down",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='105' y='395' width='40' height='22' fill='#f6f4e8'/><rect x='107' y='404' width='36' height='12' rx='2' fill='#2e7d32' stroke='#1b5e20'/></svg></div>",
+      "bind": "pushed_8"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "b1": {
+          "x": 15,
+          "y": 64,
+          "dir": "up",
+          "tip": "SB1"
+        },
+        "b2": {
+          "x": 15,
+          "y": 108,
+          "dir": "up",
+          "tip": "SB2"
+        },
+        "b3": {
+          "x": 15,
+          "y": 152,
+          "dir": "up",
+          "tip": "SB3"
+        },
+        "b4": {
+          "x": 15,
+          "y": 196,
+          "dir": "up",
+          "tip": "SB4"
+        },
+        "com": {
+          "x": 15,
+          "y": 226,
+          "dir": "up",
+          "tip": "COM"
+        },
+        "s1_l": {
+          "x": 15,
+          "y": 288,
+          "dir": "down",
+          "tip": "SB5左"
+        },
+        "s1_r": {
+          "x": 215,
+          "y": 288,
+          "dir": "down",
+          "tip": "SB5右"
+        },
+        "s2_l": {
+          "x": 15,
+          "y": 332,
+          "dir": "down",
+          "tip": "SB6左"
+        },
+        "s2_r": {
+          "x": 215,
+          "y": 332,
+          "dir": "down",
+          "tip": "SB6右"
+        },
+        "s3_l": {
+          "x": 15,
+          "y": 376,
+          "dir": "down",
+          "tip": "SB7左"
+        },
+        "s3_r": {
+          "x": 215,
+          "y": 376,
+          "dir": "down",
+          "tip": "SB7右"
+        },
+        "s4_l": {
+          "x": 15,
+          "y": 420,
+          "dir": "down",
+          "tip": "SB8左"
+        },
+        "s4_r": {
+          "x": 215,
+          "y": 420,
+          "dir": "down",
+          "tip": "SB8右"
+        }
+      },
+      "contacts": {
+        "b1": {
+          "pairs": [
+            [
+              "b1",
+              "com"
+            ]
+          ],
+          "when": "pushed_1",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "b2": {
+          "pairs": [
+            [
+              "b2",
+              "com"
+            ]
+          ],
+          "when": "pushed_2",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "b3": {
+          "pairs": [
+            [
+              "b3",
+              "com"
+            ]
+          ],
+          "when": "pushed_3",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "b4": {
+          "pairs": [
+            [
+              "b4",
+              "com"
+            ]
+          ],
+          "when": "pushed_4",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "s1": {
+          "pairs": [
+            [
+              "s1_l",
+              "s1_r"
+            ]
+          ],
+          "when": "pushed_5",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "s2": {
+          "pairs": [
+            [
+              "s2_l",
+              "s2_r"
+            ]
+          ],
+          "when": "pushed_6",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "s3": {
+          "pairs": [
+            [
+              "s3_l",
+              "s3_r"
+            ]
+          ],
+          "when": "pushed_7",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "s4": {
+          "pairs": [
+            [
+              "s4_l",
+              "s4_r"
+            ]
+          ],
+          "when": "pushed_8",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "btnName_1",
+      "label": "按钮1名称",
+      "type": "text",
+      "default": "SB1",
+      "adjustable": true,
+      "display": {
+        "x": 186,
+        "y": 48,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "btnName_2",
+      "label": "按钮2名称",
+      "type": "text",
+      "default": "SB2",
+      "adjustable": true,
+      "display": {
+        "x": 186,
+        "y": 92,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "btnName_3",
+      "label": "按钮3名称",
+      "type": "text",
+      "default": "SB3",
+      "adjustable": true,
+      "display": {
+        "x": 186,
+        "y": 136,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "btnName_4",
+      "label": "按钮4名称",
+      "type": "text",
+      "default": "SB4",
+      "adjustable": true,
+      "display": {
+        "x": 186,
+        "y": 180,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "btnName_5",
+      "label": "按钮5名称",
+      "type": "text",
+      "default": "SB5",
+      "adjustable": true,
+      "display": {
+        "x": 186,
+        "y": 272,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "btnName_6",
+      "label": "按钮6名称",
+      "type": "text",
+      "default": "SB6",
+      "adjustable": true,
+      "display": {
+        "x": 186,
+        "y": 316,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "btnName_7",
+      "label": "按钮7名称",
+      "type": "text",
+      "default": "SB7",
+      "adjustable": true,
+      "display": {
+        "x": 186,
+        "y": 360,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "btnName_8",
+      "label": "按钮8名称",
+      "type": "text",
+      "default": "SB8",
+      "adjustable": true,
+      "display": {
+        "x": 186,
+        "y": 404,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "pushed_1",
+      "default": false
+    },
+    {
+      "id": "pushed_2",
+      "default": false
+    },
+    {
+      "id": "pushed_3",
+      "default": false
+    },
+    {
+      "id": "pushed_4",
+      "default": false
+    },
+    {
+      "id": "pushed_5",
+      "default": false
+    },
+    {
+      "id": "pushed_6",
+      "default": false
+    },
+    {
+      "id": "pushed_7",
+      "default": false
+    },
+    {
+      "id": "pushed_8",
+      "default": false
+    }
+  ]
+}

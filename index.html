@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电气控制虚拟仿真</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body data-mark="&#x7acb;&#x5fb3;&#x535a;&#x96c5;&#x3001;&#x5c1a;&#x5b9e;&#x77e5;&#x884c;">
+
+<!-- 工具栏 -->
+<div class="toolbar" id="toolbar">
+  <span class="brand">电气控制虚拟仿真</span><span class="sep"></span>
+  <label id="rowCountLabel">行数 <input type="number" id="rowCount" value="3" min="1" max="10" step="1"></label>
+  <label class="switch-row on" id="switchDuct" title="切换有线槽/无线槽">
+    <span class="switch-label" id="ductLabel">有线槽</span><span class="switch"><span class="knob"></span></span>
+  </label>
+  <label class="switch-row on" id="switchMode" title="切换自动/手动敷设">
+    <span class="switch-label" id="modeLabel">自动敷设</span><span class="switch"><span class="knob"></span></span>
+  </label>
+  <label class="switch-row on" id="switchWires" title="显示/隐藏连线（排故模式自动恢复显示）">
+    <span class="switch-label" id="wiresLabel">显示连线</span><span class="switch"><span class="knob"></span></span>
+  </label>
+  <span style="color:#aaa;font-size:11px">线色</span><span id="colorPicker"></span>
+  <span style="color:#aaa;font-size:11px">气色</span><span id="colorPickerPneu"></span><span class="sep"></span>
+  <button class="btn-sm" id="btnUndo" title="撤回 (Ctrl+Z)">↶ 撤回</button>
+  <button class="btn-sm" id="btnRedo" title="恢复 (Ctrl+Shift+Z)">↷ 恢复</button>
+  <div class="tool-group" id="clearGroup">
+    <button class="btn-sm group-trigger">清除</button>
+    <div class="group-menu">
+      <button class="btn-sm" id="btnClearWires">清除连线</button>
+      <button class="btn-sm" id="btnClearAll">清除元件</button>
+    </div>
+  </div>
+  <button class="btn-sm" id="btnExport">导出</button>
+  <button class="btn-sm" id="btnImport">导入</button>
+  <input type="file" id="fileImport" accept=".json,application/json" style="display:none"><span class="sep"></span>
+  <button class="btn-sm" id="btnMeter">万用表</button>
+  <div class="tool-group" id="faultGroup">
+    <button class="btn-sm group-trigger" id="btnFaultTrigger">排故</button>
+    <div class="group-menu" id="faultMenu"></div>
+  </div>
+  <span class="author-info" id="authorLink"><a href="https://v.douyin.com/ktcwqmHrrl8" target="_blank" rel="noopener" title="作者主页">上海科学技术职业学院 冷宇</a> &nbsp;|&nbsp; <a href="https://github.com/dreamweaver90/electrical-control-virtual-simulation" target="_blank" rel="noopener" title="开源地址（GitHub）">开源地址</a></span>
+</div>
+
+<!-- 统一告警栈（短路/串气/漏气/双线圈冲突等全部提示，按 key 动态增删） -->
+<div id="alertStack" style="position:fixed;bottom:24px;left:50%;transform:translateX(-50%);display:none;flex-direction:column;gap:6px;z-index:10001;pointer-events:none;align-items:center;"></div>
+
+<!-- 万用表悬浮面板 -->
+<div id="meterPanel" style="display:none;position:fixed;top:60px;right:240px;width:270px;background:#2d2d2d;border-radius:12px;border:2px solid #555;z-index:10000;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.5);cursor:move" >
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px" data-mark="&#x4e0a;&#x6d77;&#x79d1;&#x5b66;&#x6280;&#x672f;&#x804c;&#x4e1a;&#x5b66;&#x9662;">
+    <span style="color:#fff;font-weight:600;font-size:16px">数字万用表</span>
+    <button id="meterClose" style="background:none;border:none;color:#999;cursor:pointer;font-size:20px">×</button>
+  </div>
+  <div id="meterDisplay" style="background:#1a1a1a;color:#0f0;font-family:Consolas,monospace;font-size:28px;text-align:center;padding:10px;border-radius:6px;border:1px solid #444;margin-bottom:10px">OL</div>
+  <div style="display:flex;gap:6px">
+    <button class="btn-sm meter-mode active" data-mode="resistance" style="flex:1;font-size:14px;padding:8px">Ω 电阻</button>
+    <button class="btn-sm meter-mode" data-mode="ac_voltage" style="flex:1;font-size:14px;padding:8px">~V 交流</button>
+    <button class="btn-sm meter-mode" data-mode="dc_voltage" style="flex:1;font-size:14px;padding:8px">=V 直流</button>
+  </div>
+  <div style="font-size:11px;color:#888;margin-top:8px;text-align:center">拖动表笔尖到端子上</div>
+</div>
+
+<!-- 排故悬浮面板（可拖动；尺寸与万用表面板一致） -->
+<div id="faultPanel" style="display:none;position:fixed;top:60px;right:520px;width:405px;background:#3d2d2d;border-radius:12px;border:2px solid #e67e22;z-index:10000;padding:16px;box-shadow:0 8px 24px rgba(0,0,0,.5);cursor:move">
+  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+    <span id="faultTitle" style="color:#fff;font-weight:600;font-size:14px">排故模式</span>
+    <button id="btnFaultClose" style="background:none;border:none;color:#999;cursor:pointer;font-size:20px;line-height:1" title="退出排故">×</button>
+  </div>
+  <div style="color:#aaa;font-size:12px;margin-bottom:8px">单击导线 或 点击端子 标记故障点</div>
+  <div id="faultPick" style="color:#4a90d9;font-size:16px;font-weight:600;margin-bottom:8px;line-height:1.4;word-break:break-all"></div>
+  <button class="btn-sm" id="btnFaultConfirm" style="width:100%;background:#52b788;border-color:#52b788;color:#fff;margin-bottom:6px">确定</button>
+  <div id="faultResult" style="color:#aaa;font-size:14px;line-height:1.4"></div>
+  <div id="faultLog" style="color:#e8b4b4;font-size:13px;line-height:1.6;word-break:break-all"></div>
+</div>
+
+<!-- 主区域（配电盘占满全宽；元件库改为右上角悬浮面板） -->
+<div class="main">
+  <div class="panel-wrapper" id="panelWrapper">
+    <div class="panel" id="panel"></div>
+  </div>
+</div>
+
+<!-- 元件库悬浮按钮（右上角，点击开/关） -->
+<button id="btnLibrary" class="btn-library-fab" title="打开/关闭元件库">元件库</button>
+
+<!-- 元件库悬浮面板（两个 tab：独立元件 / 场景组合） -->
+<div class="library library-floating" id="library" style="display:none">
+  <div class="lib-header">
+    <span>元件库</span>
+    <button id="libClose" class="lib-close" title="关闭">×</button>
+  </div>
+  <div class="lib-tabs">
+    <button class="lib-tab active" data-tab="components">独立元件</button>
+    <button class="lib-tab" data-tab="scenes">场景组合</button>
+  </div>
+  <div id="libraryContent"></div>
+  <div id="libraryScenes" style="display:none"></div>
+</div>
+
+<div class="status-bar"><span id="statusText">就绪</span></div>
+<footer style="position:fixed;bottom:2px;left:0;right:0;text-align:center;font-size:11px;color:#aaa;z-index:9999;pointer-events:none;user-select:none;">本系统仅用于教学演示，非商业用途 &nbsp;|&nbsp; <a href="https://beian.miit.gov.cn" target="_blank" rel="noopener" style="color:#aaa;text-decoration:none;pointer-events:auto;" title="工信部备案查询">苏ICP备2021048873号-1</a></footer>
+<script type="module" src="js/app.js"></script>
+</body >
+</html>

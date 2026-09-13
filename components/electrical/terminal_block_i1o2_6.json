@@ -1,0 +1,235 @@
+{
+  "class": "ComponentInstance",
+  "category": "接线排",
+  "id": "terminal_block_i1o2_6",
+  "name": "一进二出",
+  "description": "一进二出接线端子排（6 组 × 上中下 3 端子恒连接）：每组上排为进线端，中排/下排为出线端；每个端子只能接一根线",
+  "tags": [
+    "接线排",
+    "端子排",
+    "一进二出",
+    "接线端子"
+  ],
+  "terminalHitRadius": 10,
+  "size": {
+    "width": 161.3,
+    "height": 200
+  },
+  "thumbnail": "<div><img src='images/接线排_i1o2_6.png' width='161.3' height='200'></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/接线排_i1o2_6.png' width='161.3' height='200'></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "t1_u": {
+          "x": 36,
+          "y": 21.3,
+          "dir": "up",
+          "tip": "第1组上排",
+          "connectLimit": 1
+        },
+        "t1_m": {
+          "x": 36,
+          "y": 61.3,
+          "dir": "up",
+          "tip": "第1组中排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t1_d": {
+          "x": 36,
+          "y": 178.7,
+          "dir": "down",
+          "tip": "第1组下排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t2_u": {
+          "x": 53.1,
+          "y": 21.3,
+          "dir": "up",
+          "tip": "第2组上排",
+          "connectLimit": 1
+        },
+        "t2_m": {
+          "x": 53.1,
+          "y": 61.3,
+          "dir": "up",
+          "tip": "第2组中排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t2_d": {
+          "x": 53.1,
+          "y": 178.7,
+          "dir": "down",
+          "tip": "第2组下排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t3_u": {
+          "x": 70.1,
+          "y": 21.3,
+          "dir": "up",
+          "tip": "第3组上排",
+          "connectLimit": 1
+        },
+        "t3_m": {
+          "x": 70.1,
+          "y": 61.3,
+          "dir": "up",
+          "tip": "第3组中排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t3_d": {
+          "x": 70.1,
+          "y": 178.7,
+          "dir": "down",
+          "tip": "第3组下排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t4_u": {
+          "x": 87.2,
+          "y": 21.3,
+          "dir": "up",
+          "tip": "第4组上排",
+          "connectLimit": 1
+        },
+        "t4_m": {
+          "x": 87.2,
+          "y": 61.3,
+          "dir": "up",
+          "tip": "第4组中排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t4_d": {
+          "x": 87.2,
+          "y": 178.7,
+          "dir": "down",
+          "tip": "第4组下排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t5_u": {
+          "x": 104.3,
+          "y": 21.3,
+          "dir": "up",
+          "tip": "第5组上排",
+          "connectLimit": 1
+        },
+        "t5_m": {
+          "x": 104.3,
+          "y": 61.3,
+          "dir": "up",
+          "tip": "第5组中排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t5_d": {
+          "x": 104.3,
+          "y": 178.7,
+          "dir": "down",
+          "tip": "第5组下排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t6_u": {
+          "x": 121.3,
+          "y": 21.3,
+          "dir": "up",
+          "tip": "第6组上排",
+          "connectLimit": 1
+        },
+        "t6_m": {
+          "x": 121.3,
+          "y": 61.3,
+          "dir": "up",
+          "tip": "第6组中排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        },
+        "t6_d": {
+          "x": 121.3,
+          "y": 178.7,
+          "dir": "down",
+          "tip": "第6组下排",
+          "faultLevel": 2,
+          "connectLimit": 1
+        }
+      },
+      "permanent": {
+        "block": {
+          "pairs": [
+            [
+              "t1_u",
+              "t1_m"
+            ],
+            [
+              "t1_m",
+              "t1_d"
+            ],
+            [
+              "t2_u",
+              "t2_m"
+            ],
+            [
+              "t2_m",
+              "t2_d"
+            ],
+            [
+              "t3_u",
+              "t3_m"
+            ],
+            [
+              "t3_m",
+              "t3_d"
+            ],
+            [
+              "t4_u",
+              "t4_m"
+            ],
+            [
+              "t4_m",
+              "t4_d"
+            ],
+            [
+              "t5_u",
+              "t5_m"
+            ],
+            [
+              "t5_m",
+              "t5_d"
+            ],
+            [
+              "t6_u",
+              "t6_m"
+            ],
+            [
+              "t6_m",
+              "t6_d"
+            ]
+          ],
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "contacts": {},
+      "loads": {},
+      "sensors": {}
+    }
+  },
+  "params": []
+}

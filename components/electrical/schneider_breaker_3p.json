@@ -1,0 +1,143 @@
+{
+  "class": "BreakerInstance",
+  "category": "开关",
+  "id": "schneider_breaker_3p",
+  "name": "断路器",
+  "description": "施耐德3极断路器",
+  "tags": [
+    "断路器",
+    "施耐德",
+    "3P"
+  ],
+  "terminalHitRadius": 14,
+  "size": {
+    "width": 161,
+    "height": 300
+  },
+  "image": [
+    {
+      "id": "断开",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/施耐德断路器.png' width='161' height='300'></div>",
+      "bind": "!switch"
+    },
+    {
+      "id": "闭合",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/施耐德断路器_闭合.png' width='161' height='300'></div>",
+      "bind": "switch"
+    }
+  ],
+  "zones": [
+    {
+      "id": "switch",
+      "event": "click",
+      "action": "toggle",
+      "state": "switch",
+      "tips": "点击合闸或分闸",
+      "x": 98,
+      "y": 136,
+      "r": 40
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "main_no_1_u": {
+          "x": 35,
+          "y": 38,
+          "dir": "up",
+          "tip": "1L1",
+          "faultLevel":2
+        },
+        "main_no_1_d": {
+          "x": 35,
+          "y": 264,
+          "dir": "down",
+          "tip": "2T1",
+          "faultLevel":1
+        },
+        "main_no_2_u": {
+          "x": 75,
+          "y": 38,
+          "dir": "up",
+          "tip": "3L2",
+          "faultLevel":2
+        },
+        "main_no_2_d": {
+          "x": 75,
+          "y": 264,
+          "dir": "down",
+          "tip": "4T2",
+          "faultLevel":1
+        },
+        "main_no_3_u": {
+          "x": 120,
+          "y": 38,
+          "dir": "up",
+          "tip": "5L3",
+          "faultLevel":2
+        },
+        "main_no_3_d": {
+          "x": 120,
+          "y": 264,
+          "dir": "down",
+          "tip": "6T3",
+          "faultLevel":1
+        }
+      },
+      "contacts": {
+        "main_no": {
+          "pairs": [
+            [
+              "main_no_1_u",
+              "main_no_1_d"
+            ],
+            [
+              "main_no_2_u",
+              "main_no_2_d"
+            ],
+            [
+              "main_no_3_u",
+              "main_no_3_d"
+            ]
+          ],
+          "when": "switch",
+          "closeDelay": 0,
+          "openDelay": 0,
+          "resistance": 0.001,
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "switch",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 120,
+        "y": 200,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

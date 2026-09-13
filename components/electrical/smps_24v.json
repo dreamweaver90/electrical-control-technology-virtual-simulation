@@ -1,0 +1,249 @@
+{
+  "class": "RectifierInstance",
+  "category": "电源",
+  "id": "smps_24v",
+  "name": "直流电源",
+  "description": "整流器，AC 220V输入（l/n）、默认 DC 24V输出；输入须接 220V±15% 交流，闭合开关后输出才有电",
+  "tags": [
+    "电源",
+    "整流器",
+    "DC",
+    "24V"
+  ],
+  "source": {
+    "type": "dc",
+    "voltage": 24,
+    "pins": {
+      "v+": 1,
+      "v-": 0
+    }
+  },
+  "input": {
+    "pins": [
+      "l",
+      "n"
+    ],
+    "voltage": 220,
+    "tolerance": 0.15
+  },
+  "params": [
+    {
+      "id": "inputVoltage",
+      "label": "输入电压",
+      "type": "number",
+      "unit": "V",
+      "min": 50,
+      "max": 400,
+      "step": 10,
+      "default": 220
+    },
+    {
+      "id": "outputVoltage",
+      "label": "输出电压",
+      "type": "number",
+      "unit": "V",
+      "min": 1,
+      "max": 100,
+      "step": 1,
+      "default": 24,
+      "adjustable": true
+    },
+    {
+      "id": "sourceImpedance",
+      "default": 0.05
+    },
+    {
+      "id": "noLoadImpedance",
+      "label": "空载电阻",
+      "type": "number",
+      "unit": "Ω",
+      "min": 100,
+      "max": 1000000,
+      "step": 500,
+      "default": 48400
+    },
+    {
+      "id": "noLoadPowerFactor",
+      "label": "空载功率因数",
+      "type": "number",
+      "min": 0.1,
+      "max": 1,
+      "step": 0.05,
+      "default": 1
+    },
+    {
+      "id": "minInputImpedance",
+      "label": "最小折算阻抗",
+      "type": "number",
+      "unit": "Ω",
+      "min": 1,
+      "max": 1000,
+      "step": 1,
+      "default": 20
+    },
+    {
+      "id": "dcResistance",
+      "label": "输入直流电阻",
+      "type": "number",
+      "unit": "Ω",
+      "min": 1000,
+      "max": 10000000,
+      "step": 1000,
+      "default": 100000
+    },
+    {
+      "id": "switch",
+      "default": false
+    },
+    {
+      "id": "energized",
+      "default": false
+    },
+    {
+      "id": "short_circuit",
+      "default": false
+    }
+  ],
+  "terminalHitRadius": 8,
+  "zones": [
+    {
+      "id": "switch",
+      "event": "click",
+      "action": "toggle",
+      "state": "switch",
+      "tips": "电源开关，点击通电或断电",
+      "x": 27,
+      "y": 113,
+      "r": 20
+    },
+    {
+      "id": "fuse",
+      "event": "click",
+      "action": "reset",
+      "state": "short_circuit",
+      "tips": "点击更换熔断器",
+      "x": 33,
+      "y": 309,
+      "r": 13
+    }
+  ],
+  "size": {
+    "width": 177,
+    "height": 450
+  },
+  "thumbnail": "<div><svg xmlns='http://www.w3.org/2000/svg' width='162' height='450'><image href='images/直流电源.png' x='0' y='0' width='162' height='450'/></svg></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/直流电源.png' width='177' height='450'></div>",
+      "bind": "!switch"
+    },
+    {
+      "id": "开关断开",
+      "x": 11,
+      "y": 93,
+      "string": "<div><img src='images/直流电源-按钮关.png' width='33' height='42'></div>",
+      "bind": "!switch"
+    },
+    {
+      "id": "开关闭合",
+      "x": 11,
+      "y": 93,
+      "string": "<div><img src='images/直流电源-按钮通.png' width='33' height='42'></div>",
+      "bind": "switch"
+    },
+    {
+      "id": "开关闭合并通电",
+      "x": 11,
+      "y": 93,
+      "string": "<div><img src='images/直流电源-按钮通-亮.png' width='33' height='42'></div>",
+      "bind": "energized"
+    },
+    {
+      "id": "short_circuit",
+      "x": 17,
+      "y": 289,
+      "string": "<div><img src='images/爆炸.png' width='33' height='30'></div>",
+      "bind": "short_circuit"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "l": {
+          "x": 35,
+          "y": 15,
+          "dir": "up",
+          "tip": "L",
+          "allowLiveConnect": true,
+          "faultLevel":2
+        },
+        "n": {
+          "x": 35,
+          "y": 54,
+          "dir": "up",
+          "tip": "N",
+          "allowLiveConnect": true,
+          "faultLevel":2
+        },
+        "v+": {
+          "x": 125,
+          "y": 394,
+          "dir": "down",
+          "tip": "+24V"
+        },
+        "v-": {
+          "x": 125,
+          "y": 434,
+          "dir": "down",
+          "tip": "0V"
+        },
+        "v+_1": {
+          "x": 159,
+          "y": 397,
+          "dir": "down",
+          "tip": "+24V"
+        },
+        "v-_1": {
+          "x": 159,
+          "y": 433,
+          "dir": "down",
+          "tip": "0V"
+        }
+      },
+      "contacts": {},
+      "loads": {
+        "reflect": {
+          "pins": [
+            "l",
+            "n"
+          ],
+          "computed": "reflect",
+          "fault": {
+            "level": 10
+          }
+        }
+      },
+      "permanent": {
+        "j1": {
+          "pairs": [
+            [
+              "v-",
+              "v-_1"
+            ],
+            [
+              "v+",
+              "v+_1"
+            ]
+          ],
+          "fault": {
+            "level": 10
+          }
+        }
+      },
+      "sensors": {}
+    }
+  }
+}

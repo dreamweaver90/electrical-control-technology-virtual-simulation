@@ -1,0 +1,488 @@
+{
+  "id": "scene4",
+  "name": "<测试>工业机器人中级",
+  "description": "工业机器人系统操作员中级考证-机械部件功能检查与调试模块",
+  "layout": "free",
+  "components": [
+    {
+      "id": "ac_power_380v_3phase",
+      "x": 713,
+      "y": 48,
+      "row": 0,
+      "left": 713,
+      "params": {
+        "sourceImpedance": 0.05
+      }
+    },
+    {
+      "id": "execution_module",
+      "x": 10,
+      "y": 10,
+      "row": 0,
+      "left": 10,
+      "params": {
+        "lift_pos": 1,
+        "extend_pos": 0,
+        "grip_pos": 0,
+        "strokeTime": 1
+      }
+    },
+    {
+      "id": "pneumatic_source",
+      "x": 298.5299999999999,
+      "y": 789.6310000000001,
+      "row": 4,
+      "left": 298.5299999999999,
+      "params": {
+        "pressure": 1,
+        "switch": true
+      }
+    },
+    {
+      "id": "pressure_regulator",
+      "x": 728.7389999999999,
+      "y": 724.186,
+      "row": 3,
+      "left": 728.7389999999999,
+      "params": {
+        "setPressure": 0.5,
+        "gaugeMax": 1,
+        "out_pressure": 0.5
+      }
+    },
+    {
+      "id": "smps_24v",
+      "x": 966,
+      "y": 10,
+      "row": 0,
+      "left": 966,
+      "params": {
+        "inputVoltage": 220,
+        "outputVoltage": 24,
+        "sourceImpedance": 0.05,
+        "noLoadImpedance": 48400,
+        "noLoadPowerFactor": 1,
+        "minInputImpedance": 20,
+        "dcResistance": 100000,
+        "switch": true,
+        "energized": true,
+        "short_circuit": false
+      }
+    },
+    {
+      "id": "button_module_8",
+      "x": 1176.718,
+      "y": 10,
+      "row": 0,
+      "left": 1176.718,
+      "params": {
+        "btnName_1": "SB1",
+        "btnName_2": "SB2",
+        "btnName_3": "SB3",
+        "btnName_4": "SB4",
+        "btnName_5": "SB5",
+        "btnName_6": "SB6",
+        "btnName_7": "SB7",
+        "btnName_8": "SB8",
+        "pushed_1": false,
+        "pushed_2": false,
+        "pushed_3": false,
+        "pushed_4": false,
+        "pushed_5": false,
+        "pushed_6": false,
+        "pushed_7": false,
+        "pushed_8": false
+      }
+    },
+    {
+      "id": "indicator_module_8",
+      "x": 1465.5450000000003,
+      "y": 10,
+      "row": 0,
+      "left": 1465.5450000000003,
+      "params": {
+        "lampType": "dc",
+        "lampVoltage": 24,
+        "impedance": 50000,
+        "dcResistance": 1000,
+        "hlName_1": "HL1",
+        "hlName_2": "HL2",
+        "hlName_3": "HL3",
+        "hlName_4": "HL4",
+        "hlName_5": "HL5",
+        "hlName_6": "HL6",
+        "hlName_7": "HL7",
+        "hlName_8": "HL8",
+        "lit_1": false,
+        "lit_2": false,
+        "lit_3": false,
+        "lit_4": false,
+        "lit_5": true,
+        "lit_6": false,
+        "lit_7": false,
+        "lit_8": false
+      }
+    },
+    {
+      "id": "magnetic_sensor",
+      "x": 1769.3220000000003,
+      "y": 106.30500000000004,
+      "row": 0,
+      "left": 1769.3220000000003,
+      "params": {
+        "target": "@1",
+        "unit": "2",
+        "detect": 0,
+        "tolerance": 0.02,
+        "sensorType": "npn",
+        "workingVoltage": 24,
+        "voltTol": 0.1,
+        "lit": true,
+        "out_npn": true,
+        "out_pnp": false
+      }
+    },
+    {
+      "id": "pneumatic_parallel",
+      "x": 982.2650000000003,
+      "y": 536.3320000000001,
+      "row": 2,
+      "left": 982.2650000000003,
+      "params": {}
+    },
+    {
+      "id": "valve_module",
+      "x": 1246.147,
+      "y": 524.606,
+      "row": 2,
+      "left": 1246.147,
+      "params": {
+        "coilVoltage": 24,
+        "coilType": "dc",
+        "dcResistance": 730,
+        "impedance": 6342,
+        "en3": false,
+        "v1_a": true,
+        "v1_b": false
+      }
+    },
+    {
+      "id": "valve_module",
+      "x": 1479.352,
+      "y": 516.62,
+      "row": 2,
+      "left": 1479.352,
+      "params": {
+        "coilVoltage": 24,
+        "coilType": "dc",
+        "dcResistance": 730,
+        "impedance": 6342,
+        "en3": false,
+        "v1_a": false,
+        "v1_b": true
+      }
+    }
+  ],
+  "wires": [
+    {
+      "from": [
+        0,
+        "l3"
+      ],
+      "to": [
+        4,
+        "l"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        0,
+        "n"
+      ],
+      "to": [
+        4,
+        "n"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        4,
+        "v+_1"
+      ],
+      "to": [
+        5,
+        "com"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "c1b"
+      ],
+      "to": [
+        9,
+        "c2b"
+      ],
+      "color": "#000000",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "c2b"
+      ],
+      "to": [
+        10,
+        "c1b"
+      ],
+      "color": "#000000",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        10,
+        "c1b"
+      ],
+      "to": [
+        10,
+        "c2b"
+      ],
+      "color": "#000000",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "c1b"
+      ],
+      "to": [
+        4,
+        "v-_1"
+      ],
+      "color": "#000000",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "b1"
+      ],
+      "to": [
+        9,
+        "c1a"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "b2"
+      ],
+      "to": [
+        9,
+        "c2a"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "b3"
+      ],
+      "to": [
+        10,
+        "c1a"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "b4"
+      ],
+      "to": [
+        10,
+        "c2a"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        2,
+        "out"
+      ],
+      "to": [
+        3,
+        "p1"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        3,
+        "p2"
+      ],
+      "to": [
+        8,
+        "a1"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        5,
+        "com"
+      ],
+      "to": [
+        7,
+        "red"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        7,
+        "black"
+      ],
+      "to": [
+        6,
+        "h5b"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        4,
+        "v+"
+      ],
+      "to": [
+        6,
+        "h5a"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        10,
+        "c2b"
+      ],
+      "to": [
+        7,
+        "blue"
+      ],
+      "color": "#000000",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        8,
+        "a2"
+      ],
+      "to": [
+        8,
+        "b1"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        8,
+        "b2"
+      ],
+      "to": [
+        1,
+        "lift_up"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        8,
+        "a3"
+      ],
+      "to": [
+        9,
+        "p1"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        8,
+        "b3"
+      ],
+      "to": [
+        10,
+        "p1"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        1,
+        "extend_out"
+      ],
+      "to": [
+        10,
+        "a1"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        1,
+        "extend_retract"
+      ],
+      "to": [
+        10,
+        "b1"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        9,
+        "a1"
+      ],
+      "to": [
+        1,
+        "grip_close"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    },
+    {
+      "from": [
+        9,
+        "b1"
+      ],
+      "to": [
+        1,
+        "grip_open"
+      ],
+      "color": "#2f6fd0",
+      "media": "pneumatic"
+    }
+  ]
+}

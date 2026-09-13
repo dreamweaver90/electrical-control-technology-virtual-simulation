@@ -1,0 +1,453 @@
+{
+  "class": "IndicatorInstance",
+  "category": "按钮&指示灯",
+  "id": "indicator_module_8",
+  "name": "指示灯模块",
+  "description": "8灯指示灯模块：上方4个成组共用公共端COM，下方4个独立；亮灯条件：电压类型匹配且电压值达到设定值，默认DC 24V，8灯统一生效；名称HL1~HL8可改",
+  "tags": [
+    "指示灯",
+    "模块",
+    "信号"
+  ],
+  "terminalHitRadius": 12,
+  "size": {
+    "width": 250,
+    "height": 450
+  },
+  "thumbnail": "<div><svg xmlns='http://www.w3.org/2000/svg' width='125' height='225' viewBox='0 0 250 450'><rect x='0' y='0' width='250' height='450' fill='#f6f4e8'/><path d='M215 48 V226 H21' stroke='#999' stroke-width='2' fill='none'/><circle cx='125' cy='48' r='13' fill='#d5d5d5' stroke='#9e9e9e'/><circle cx='125' cy='92' r='13' fill='#d5d5d5' stroke='#9e9e9e'/><circle cx='125' cy='136' r='13' fill='#d5d5d5' stroke='#9e9e9e'/><circle cx='125' cy='180' r='13' fill='#d5d5d5' stroke='#9e9e9e'/><circle cx='125' cy='272' r='13' fill='#d5d5d5' stroke='#9e9e9e'/><circle cx='125' cy='316' r='13' fill='#d5d5d5' stroke='#9e9e9e'/><circle cx='125' cy='360' r='13' fill='#d5d5d5' stroke='#9e9e9e'/><circle cx='125' cy='404' r='13' fill='#d5d5d5' stroke='#9e9e9e'/><circle cx='15' cy='48' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='92' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='136' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='180' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='226' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='272' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='215' cy='272' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='316' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='215' cy='316' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='360' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='215' cy='360' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='15' cy='404' r='6' fill='#fff' stroke='#999' stroke-width='2'/><circle cx='215' cy='404' r='6' fill='#fff' stroke='#999' stroke-width='2'/></svg></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><rect x='0' y='0' width='250' height='450' fill='#f6f4e8'/><path d='M215 48 V226 H21' stroke='#000' stroke-width='1.5' fill='none'/><line x1='21' y1='48' x2='112' y2='48' stroke='#000' stroke-width='1.5'/><line x1='138' y1='48' x2='215' y2='48' stroke='#000' stroke-width='1.5'/><circle cx='125' cy='48' r='13' fill='#d5d5d5' stroke='#9e9e9e' stroke-width='1.5'/><line x1='21' y1='92' x2='112' y2='92' stroke='#000' stroke-width='1.5'/><line x1='138' y1='92' x2='215' y2='92' stroke='#000' stroke-width='1.5'/><circle cx='125' cy='92' r='13' fill='#d5d5d5' stroke='#9e9e9e' stroke-width='1.5'/><line x1='21' y1='136' x2='112' y2='136' stroke='#000' stroke-width='1.5'/><line x1='138' y1='136' x2='215' y2='136' stroke='#000' stroke-width='1.5'/><circle cx='125' cy='136' r='13' fill='#d5d5d5' stroke='#9e9e9e' stroke-width='1.5'/><line x1='21' y1='180' x2='112' y2='180' stroke='#000' stroke-width='1.5'/><line x1='138' y1='180' x2='215' y2='180' stroke='#000' stroke-width='1.5'/><circle cx='125' cy='180' r='13' fill='#d5d5d5' stroke='#9e9e9e' stroke-width='1.5'/><line x1='21' y1='272' x2='112' y2='272' stroke='#000' stroke-width='1.5'/><line x1='138' y1='272' x2='209' y2='272' stroke='#000' stroke-width='1.5'/><circle cx='125' cy='272' r='13' fill='#d5d5d5' stroke='#9e9e9e' stroke-width='1.5'/><line x1='21' y1='316' x2='112' y2='316' stroke='#000' stroke-width='1.5'/><line x1='138' y1='316' x2='209' y2='316' stroke='#000' stroke-width='1.5'/><circle cx='125' cy='316' r='13' fill='#d5d5d5' stroke='#9e9e9e' stroke-width='1.5'/><line x1='21' y1='360' x2='112' y2='360' stroke='#000' stroke-width='1.5'/><line x1='138' y1='360' x2='209' y2='360' stroke='#000' stroke-width='1.5'/><circle cx='125' cy='360' r='13' fill='#d5d5d5' stroke='#9e9e9e' stroke-width='1.5'/><line x1='21' y1='404' x2='112' y2='404' stroke='#000' stroke-width='1.5'/><line x1='138' y1='404' x2='209' y2='404' stroke='#000' stroke-width='1.5'/><circle cx='125' cy='404' r='13' fill='#d5d5d5' stroke='#9e9e9e' stroke-width='1.5'/><text x='170' y='214' font-size='13' fill='#333' text-anchor='middle'>COM</text><circle cx='15' cy='48' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='92' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='136' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='180' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='226' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='272' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='215' cy='272' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='316' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='215' cy='316' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='360' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='215' cy='360' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='15' cy='404' r='6' fill='#fff' stroke='#333' stroke-width='2'/><circle cx='215' cy='404' r='6' fill='#fff' stroke='#333' stroke-width='2'/></svg></div>"
+    },
+    {
+      "id": "l1_on",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><circle cx='125' cy='48' r='15' fill='rgba(255,82,82,0.4)'/><circle cx='125' cy='48' r='13' fill='#ff5252' stroke='#d32f2f' stroke-width='1.5'/></svg></div>",
+      "bind": "lit_1"
+    },
+    {
+      "id": "l2_on",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><circle cx='125' cy='92' r='15' fill='rgba(255,82,82,0.4)'/><circle cx='125' cy='92' r='13' fill='#ff5252' stroke='#d32f2f' stroke-width='1.5'/></svg></div>",
+      "bind": "lit_2"
+    },
+    {
+      "id": "l3_on",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><circle cx='125' cy='136' r='15' fill='rgba(255,82,82,0.4)'/><circle cx='125' cy='136' r='13' fill='#ff5252' stroke='#d32f2f' stroke-width='1.5'/></svg></div>",
+      "bind": "lit_3"
+    },
+    {
+      "id": "l4_on",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><circle cx='125' cy='180' r='15' fill='rgba(255,82,82,0.4)'/><circle cx='125' cy='180' r='13' fill='#ff5252' stroke='#d32f2f' stroke-width='1.5'/></svg></div>",
+      "bind": "lit_4"
+    },
+    {
+      "id": "l5_on",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><circle cx='125' cy='272' r='15' fill='rgba(255,82,82,0.4)'/><circle cx='125' cy='272' r='13' fill='#ff5252' stroke='#d32f2f' stroke-width='1.5'/></svg></div>",
+      "bind": "lit_5"
+    },
+    {
+      "id": "l6_on",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><circle cx='125' cy='316' r='15' fill='rgba(255,82,82,0.4)'/><circle cx='125' cy='316' r='13' fill='#ff5252' stroke='#d32f2f' stroke-width='1.5'/></svg></div>",
+      "bind": "lit_6"
+    },
+    {
+      "id": "l7_on",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><circle cx='125' cy='360' r='15' fill='rgba(255,82,82,0.4)'/><circle cx='125' cy='360' r='13' fill='#ff5252' stroke='#d32f2f' stroke-width='1.5'/></svg></div>",
+      "bind": "lit_7"
+    },
+    {
+      "id": "l8_on",
+      "x": 0,
+      "y": 0,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' width='250' height='450' viewBox='0 0 250 450'><circle cx='125' cy='404' r='15' fill='rgba(255,82,82,0.4)'/><circle cx='125' cy='404' r='13' fill='#ff5252' stroke='#d32f2f' stroke-width='1.5'/></svg></div>",
+      "bind": "lit_8"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "l1": {
+          "x": 15,
+          "y": 48,
+          "dir": "up",
+          "tip": "HL1"
+        },
+        "l2": {
+          "x": 15,
+          "y": 92,
+          "dir": "up",
+          "tip": "HL2"
+        },
+        "l3": {
+          "x": 15,
+          "y": 136,
+          "dir": "up",
+          "tip": "HL3"
+        },
+        "l4": {
+          "x": 15,
+          "y": 180,
+          "dir": "up",
+          "tip": "HL4"
+        },
+        "com": {
+          "x": 15,
+          "y": 226,
+          "dir": "up",
+          "tip": "COM"
+        },
+        "h5a": {
+          "x": 15,
+          "y": 272,
+          "dir": "down",
+          "tip": "HL5左"
+        },
+        "h5b": {
+          "x": 215,
+          "y": 272,
+          "dir": "down",
+          "tip": "HL5右"
+        },
+        "h6a": {
+          "x": 15,
+          "y": 316,
+          "dir": "down",
+          "tip": "HL6左"
+        },
+        "h6b": {
+          "x": 215,
+          "y": 316,
+          "dir": "down",
+          "tip": "HL6右"
+        },
+        "h7a": {
+          "x": 15,
+          "y": 360,
+          "dir": "down",
+          "tip": "HL7左"
+        },
+        "h7b": {
+          "x": 215,
+          "y": 360,
+          "dir": "down",
+          "tip": "HL7右"
+        },
+        "h8a": {
+          "x": 15,
+          "y": 404,
+          "dir": "down",
+          "tip": "HL8左"
+        },
+        "h8b": {
+          "x": 215,
+          "y": 404,
+          "dir": "down",
+          "tip": "HL8右"
+        }
+      },
+      "contacts": {},
+      "loads": {
+        "lamp1": {
+          "pins": [
+            "l1",
+            "com"
+          ],
+          "state": "lit_1",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "lamp2": {
+          "pins": [
+            "l2",
+            "com"
+          ],
+          "state": "lit_2",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "lamp3": {
+          "pins": [
+            "l3",
+            "com"
+          ],
+          "state": "lit_3",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "lamp4": {
+          "pins": [
+            "l4",
+            "com"
+          ],
+          "state": "lit_4",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "lamp5": {
+          "pins": [
+            "h5a",
+            "h5b"
+          ],
+          "state": "lit_5",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "lamp6": {
+          "pins": [
+            "h6a",
+            "h6b"
+          ],
+          "state": "lit_6",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "lamp7": {
+          "pins": [
+            "h7a",
+            "h7b"
+          ],
+          "state": "lit_7",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "lamp8": {
+          "pins": [
+            "h8a",
+            "h8b"
+          ],
+          "state": "lit_8",
+          "fault": {
+            "level": 1,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "lampType",
+      "label": "电压类型",
+      "type": "select",
+      "options": [
+        {
+          "value": "ac",
+          "label": "交流"
+        },
+        {
+          "value": "dc",
+          "label": "直流"
+        }
+      ],
+      "default": "dc",
+      "adjustable": true
+    },
+    {
+      "id": "lampVoltage",
+      "label": "电压值",
+      "type": "number",
+      "unit": "V",
+      "min": 1,
+      "max": 690,
+      "step": 1,
+      "default": 24,
+      "adjustable": true
+    },
+    {
+      "id": "impedance",
+      "label": "交流阻抗",
+      "type": "number",
+      "unit": "Ω",
+      "min": 1,
+      "max": 100000,
+      "step": 10,
+      "default": 50000
+    },
+    {
+      "id": "dcResistance",
+      "label": "直流电阻",
+      "type": "number",
+      "unit": "Ω",
+      "min": 1,
+      "max": 100000,
+      "step": 10,
+      "default": 1000
+    },
+    {
+      "id": "hlName_1",
+      "label": "指示灯1名称",
+      "type": "text",
+      "default": "HL1",
+      "adjustable": true,
+      "display": {
+        "x": 170,
+        "y": 34,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "hlName_2",
+      "label": "指示灯2名称",
+      "type": "text",
+      "default": "HL2",
+      "adjustable": true,
+      "display": {
+        "x": 170,
+        "y": 78,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "hlName_3",
+      "label": "指示灯3名称",
+      "type": "text",
+      "default": "HL3",
+      "adjustable": true,
+      "display": {
+        "x": 170,
+        "y": 122,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "hlName_4",
+      "label": "指示灯4名称",
+      "type": "text",
+      "default": "HL4",
+      "adjustable": true,
+      "display": {
+        "x": 170,
+        "y": 164,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "hlName_5",
+      "label": "指示灯5名称",
+      "type": "text",
+      "default": "HL5",
+      "adjustable": true,
+      "display": {
+        "x": 180,
+        "y": 253,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "hlName_6",
+      "label": "指示灯6名称",
+      "type": "text",
+      "default": "HL6",
+      "adjustable": true,
+      "display": {
+        "x": 180,
+        "y": 297,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "hlName_7",
+      "label": "指示灯7名称",
+      "type": "text",
+      "default": "HL7",
+      "adjustable": true,
+      "display": {
+        "x": 180,
+        "y": 341,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "hlName_8",
+      "label": "指示灯8名称",
+      "type": "text",
+      "default": "HL8",
+      "adjustable": true,
+      "display": {
+        "x": 180,
+        "y": 385,
+        "fontSize": 13
+      }
+    },
+    {
+      "id": "lit_1",
+      "default": false
+    },
+    {
+      "id": "lit_2",
+      "default": false
+    },
+    {
+      "id": "lit_3",
+      "default": false
+    },
+    {
+      "id": "lit_4",
+      "default": false
+    },
+    {
+      "id": "lit_5",
+      "default": false
+    },
+    {
+      "id": "lit_6",
+      "default": false
+    },
+    {
+      "id": "lit_7",
+      "default": false
+    },
+    {
+      "id": "lit_8",
+      "default": false
+    }
+  ]
+}

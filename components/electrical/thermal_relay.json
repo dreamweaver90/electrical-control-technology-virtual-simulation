@@ -1,0 +1,217 @@
+{
+  "class": "CoilDeviceInstance",
+  "category": "继电器&接触器",
+  "id": "thermal_relay",
+  "name": "热继电器",
+  "description": "三相热继电器：过载电流流经热元件延时后触点动作，点击复位",
+  "tags": [
+    "继电器",
+    "热继电器",
+    "过载保护"
+  ],
+  "params": [
+    {
+      "id": "heaterSetting",
+      "label": "整定电流",
+      "type": "number",
+      "unit": "A",
+      "min": 0.1,
+      "max": 100,
+      "step": 0.1,
+      "default": 1,
+      "adjustable": true
+    },
+    {
+      "id": "tripDelay",
+      "label": "过载动作延时",
+      "type": "number",
+      "unit": "s",
+      "min": 0.5,
+      "max": 30,
+      "step": 0.5,
+      "default": 8,
+      "adjustable": true
+    },
+    {
+      "id": "tripped",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 87,
+        "y": 21,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ],
+  "terminalHitRadius": 14,
+  "size": {
+    "width": 170,
+    "height": 300
+  },
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/热继电器.png' width='170' height='300'></div>"
+    },
+    {
+      "id": "overload",
+      "x": 0,
+      "y": 0,
+      "string": "<svg xmlns='http://www.w3.org/2000/svg' width='170' height='300'><rect x='12' y='92' width='146' height='74' rx='12' fill='#e74c3c' opacity='0.15'/><text x='85' y='124' font-size='34' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='3' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>过载</text><text x='85' y='154' font-size='17' font-weight='bold' fill='#e74c3c' stroke='#fff' stroke-width='2' paint-order='stroke' text-anchor='middle' dominant-baseline='middle'>请复位</text></svg>",
+      "bind": "tripped"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "t1a": {
+          "x": 41,
+          "y": 56,
+          "dir": "up",
+          "tip": "1L1",
+          "faultLevel":1
+        },
+        "t1b": {
+          "x": 47,
+          "y": 253,
+          "dir": "down",
+          "tip": "2T1",
+          "faultLevel":1
+        },
+        "t2a": {
+          "x": 87,
+          "y": 55,
+          "dir": "up",
+          "tip": "3L2",
+          "faultLevel":1
+        },
+        "t2b": {
+          "x": 92,
+          "y": 253,
+          "dir": "down",
+          "tip": "4T2",
+          "faultLevel":1
+        },
+        "t3a": {
+          "x": 132,
+          "y": 55,
+          "dir": "up",
+          "tip": "5L3",
+          "faultLevel":1
+        },
+        "t3b": {
+          "x": 137,
+          "y": 252,
+          "dir": "down",
+          "tip": "6T3",
+          "faultLevel":1
+        },
+        "ol_no_u": {
+          "x": 33,
+          "y": 222,
+          "dir": "down",
+          "tip": "热常开左"
+        },
+        "ol_no_d": {
+          "x": 69,
+          "y": 223,
+          "dir": "down",
+          "tip": "热常开右"
+        },
+        "ol_nc_u": {
+          "x": 107,
+          "y": 223,
+          "dir": "down",
+          "tip": "热常闭左"
+        },
+        "ol_nc_d": {
+          "x": 142,
+          "y": 222,
+          "dir": "down",
+          "tip": "热常闭右"
+        }
+      },
+      "contacts": {
+        "ol_no": {
+          "pairs": [
+            [
+              "ol_no_u",
+              "ol_no_d"
+            ]
+          ],
+          "when": "tripped",
+          "closeDelay": 1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open",
+              "stuck"
+            ]
+          }
+        },
+        "ol_nc": {
+          "pairs": [
+            [
+              "ol_nc_u",
+              "ol_nc_d"
+            ]
+          ],
+          "when": "!tripped",
+          "closeDelay":1,
+          "openDelay": 0,
+          "fault": {
+            "level": 0,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {
+        "ol_elem": {
+          "pairs": [
+            [
+              "t1a",
+              "t1b"
+            ],
+            [
+              "t2a",
+              "t2b"
+            ],
+            [
+              "t3a",
+              "t3b"
+            ]
+          ],
+          "resistance": 0.002,
+          "fault": {
+            "level": 10
+          }
+        }
+      }
+    }
+  },
+  "zones": [
+    {
+      "id": "reset",
+      "event": "click",
+      "action": "reset",
+      "tips": "点击复位热继电器",
+      "x": 138,
+      "y": 146,
+      "r": 9
+    }
+  ]
+}

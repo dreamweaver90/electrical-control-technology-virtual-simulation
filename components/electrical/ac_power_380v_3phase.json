@@ -1,0 +1,103 @@
+{
+  "class": "AcPowerInstance",
+  "category": "电源",
+  "singleton": true,
+  "id": "ac_power_380v_3phase",
+  "name": "交流电源",
+  "description": "三相380V交流电源，含L1 L2 L3三根火线和N零线",
+  "tags": [
+    "电源",
+    "AC",
+    "380V",
+    "三相"
+  ],
+  "source": {
+    "type": "ac",
+    "voltage": 380,
+    "phases": [
+      {
+        "pin": "l1",
+        "angle": 0,
+        "label": "L1"
+      },
+      {
+        "pin": "l2",
+        "angle": 120,
+        "label": "L2"
+      },
+      {
+        "pin": "l3",
+        "angle": -120,
+        "label": "L3"
+      },
+      {
+        "pin": "n",
+        "angle": 0,
+        "label": "N",
+        "magnitude": 0
+      }
+    ]
+  },
+  "params": [
+    {
+      "id": "sourceImpedance",
+      "default": 0.05
+    }
+  ],
+  "terminalHitRadius": 10,
+  "size": {
+    "width": 176,
+    "height": 50
+  },
+  "thumbnail": "<div><svg xmlns='http://www.w3.org/2000/svg' width='176' height='50'><image href='images/交流电源.png' x='0' y='0' width='176' height='50'/></svg></div>",
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/交流电源.png' width='176' height='50'></div>"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "l1": {
+          "x": 20,
+          "y": 32,
+          "dir": "down",
+          "tip": "L1",
+          "allowLiveConnect": true,
+          "faultLevel":2
+        },
+        "l2": {
+          "x": 64,
+          "y": 32,
+          "dir": "down",
+          "tip": "L2",
+          "allowLiveConnect": true,
+          "faultLevel":2
+        },
+        "l3": {
+          "x": 110,
+          "y": 32,
+          "dir": "down",
+          "tip": "L3",
+          "allowLiveConnect": true,
+          "faultLevel":2
+        },
+        "n": {
+          "x": 156,
+          "y": 32,
+          "dir": "down",
+          "tip": "N",
+          "allowLiveConnect": true,
+          "faultLevel":2
+        }
+      },
+      "contacts": {},
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  }
+}

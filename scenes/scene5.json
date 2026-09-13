@@ -1,0 +1,752 @@
+{
+  "id": "scene5",
+  "name": "<测试>三相异步电动机正反转控制",
+  "description": "三相异步电动机正反转控制",
+  "layout": "duct",
+  "components": [
+    {
+      "id": "ac_power_380v_3phase",
+      "row": 0,
+      "left": 12,
+      "x": 12,
+      "y": 60,
+      "params": {
+        "sourceImpedance": 0.05
+      }
+    },
+    {
+      "id": "schneider_switch_disconnector",
+      "row": 0,
+      "left": 216,
+      "x": 216,
+      "y": 60,
+      "params": {
+        "pushed": false
+      }
+    },
+    {
+      "id": "schneider_breaker_2p",
+      "row": 0,
+      "left": 658,
+      "x": 658,
+      "y": 60,
+      "params": {
+        "switch": false
+      }
+    },
+    {
+      "id": "terminal_block_6",
+      "row": 1,
+      "left": 12,
+      "x": 12,
+      "y": 280,
+      "params": {}
+    },
+    {
+      "id": "terminal_block_6",
+      "row": 1,
+      "left": 260,
+      "x": 260,
+      "y": 280,
+      "params": {}
+    },
+    {
+      "id": "terminal_block_12",
+      "row": 1,
+      "left": 508,
+      "x": 508,
+      "y": 280,
+      "params": {}
+    },
+    {
+      "id": "three_phase_asynchronous_motor",
+      "row": 1,
+      "left": 925,
+      "x": 925,
+      "y": 280,
+      "params": {
+        "coilVoltage": 380,
+        "ratedPower": 370,
+        "powerFactor": 0.8,
+        "lockRatio": 6,
+        "efficiency": 0.85,
+        "ratedSpeed": 1450,
+        "accelTimeOn": 0.6,
+        "accelTimeOff": 2,
+        "speed": 0,
+        "dcResistance": 500,
+        "cw": false,
+        "ccw": false
+      }
+    },
+    {
+      "id": "button_box",
+      "row": 1,
+      "left": 1114,
+      "x": 1114,
+      "y": 280,
+      "params": {
+        "red_pressed": false,
+        "white_pressed": false,
+        "black_pressed": false
+      }
+    },
+    {
+      "id": "schneider_breaker_3p",
+      "row": 0,
+      "left": 469,
+      "x": 469,
+      "y": 60,
+      "params": {
+        "switch": false
+      }
+    },
+    {
+      "id": "schneider_contactor_2",
+      "row": 0,
+      "left": 938.05,
+      "x": 938.05,
+      "y": 60,
+      "params": {
+        "coilVoltage": 220,
+        "coilType": "ac",
+        "pickup": 0.85,
+        "dropout": 0.6,
+        "impedance": {
+          "re": 730,
+          "im": 6300
+        },
+        "dcResistance": 730,
+        "heaterSetting": 1,
+        "tripDelay": 8,
+        "energized": false,
+        "energized_1": false,
+        "tripped": false,
+        "forced": false,
+        "forced_1": false
+      }
+    }
+  ],
+  "wires": [
+    {
+      "from": [
+        0,
+        "l1"
+      ],
+      "to": [
+        1,
+        "main_no_2_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        0,
+        "l2"
+      ],
+      "to": [
+        1,
+        "main_no_3_u"
+      ],
+      "color": "#f39c12",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        0,
+        "l3"
+      ],
+      "to": [
+        1,
+        "main_no_4_u"
+      ],
+      "color": "#2ecc71",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        0,
+        "n"
+      ],
+      "to": [
+        1,
+        "main_no_1_u"
+      ],
+      "color": "#3498db",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        1,
+        "main_no_1_d"
+      ],
+      "to": [
+        2,
+        "main_no_2_u"
+      ],
+      "color": "#3498db",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        1,
+        "main_no_2_d"
+      ],
+      "to": [
+        8,
+        "main_no_1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        8,
+        "main_no_1_u"
+      ],
+      "to": [
+        2,
+        "main_no_1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        1,
+        "main_no_3_d"
+      ],
+      "to": [
+        8,
+        "main_no_2_u"
+      ],
+      "color": "#f39c12",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        1,
+        "main_no_4_d"
+      ],
+      "to": [
+        8,
+        "main_no_3_u"
+      ],
+      "color": "#2ecc71",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        7,
+        "r_nc1"
+      ],
+      "to": [
+        5,
+        "t1_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "停止NC",
+      "labelSide": "end"
+    },
+    {
+      "from": [
+        5,
+        "t2_d"
+      ],
+      "to": [
+        7,
+        "r_nc2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "停止NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "t3_d"
+      ],
+      "to": [
+        7,
+        "w_no1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "正转NO",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "t4_d"
+      ],
+      "to": [
+        7,
+        "w_no2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "正转NO",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "t5_d"
+      ],
+      "to": [
+        7,
+        "w_nc1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "正转NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "t6_d"
+      ],
+      "to": [
+        7,
+        "w_nc2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "正转NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "t7_d"
+      ],
+      "to": [
+        7,
+        "b_no1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "反转NO",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "t8_d"
+      ],
+      "to": [
+        7,
+        "b_no2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "反转NO",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "t9_d"
+      ],
+      "to": [
+        7,
+        "b_nc1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "反转NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "t10_d"
+      ],
+      "to": [
+        7,
+        "b_nc2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "反转NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        6,
+        "U1"
+      ],
+      "to": [
+        3,
+        "t1_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "U1",
+      "labelSide": "end"
+    },
+    {
+      "from": [
+        3,
+        "t2_d"
+      ],
+      "to": [
+        6,
+        "V1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "V1",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        6,
+        "W1"
+      ],
+      "to": [
+        3,
+        "t3_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "W1",
+      "labelSide": "end"
+    },
+    {
+      "from": [
+        3,
+        "t4_d"
+      ],
+      "to": [
+        6,
+        "U2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "U2",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        6,
+        "V2"
+      ],
+      "to": [
+        3,
+        "t5_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "V2",
+      "labelSide": "end"
+    },
+    {
+      "from": [
+        3,
+        "t6_d"
+      ],
+      "to": [
+        6,
+        "W2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "W2",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        8,
+        "main_no_1_d"
+      ],
+      "to": [
+        9,
+        "main_1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "main_2_u"
+      ],
+      "to": [
+        8,
+        "main_no_2_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        8,
+        "main_no_3_d"
+      ],
+      "to": [
+        9,
+        "main_3_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "t1b"
+      ],
+      "to": [
+        3,
+        "t1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        3,
+        "t2_u"
+      ],
+      "to": [
+        9,
+        "t2b"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "t3b"
+      ],
+      "to": [
+        3,
+        "t3_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        2,
+        "main_no_1_d"
+      ],
+      "to": [
+        9,
+        "ol_nc_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "ol_nc_d"
+      ],
+      "to": [
+        5,
+        "t1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "t2_u"
+      ],
+      "to": [
+        5,
+        "t3_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "t3_u"
+      ],
+      "to": [
+        5,
+        "t7_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "t7_u"
+      ],
+      "to": [
+        9,
+        "no_1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "no_1_u"
+      ],
+      "to": [
+        9,
+        "no_1_u_1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "no_1_d"
+      ],
+      "to": [
+        5,
+        "t4_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "t4_u"
+      ],
+      "to": [
+        5,
+        "t9_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "t10_u"
+      ],
+      "to": [
+        9,
+        "nc_1_u_1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "nc_1_d_1"
+      ],
+      "to": [
+        9,
+        "a1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "a2_1"
+      ],
+      "to": [
+        9,
+        "a2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "a2"
+      ],
+      "to": [
+        2,
+        "main_no_2_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "no_1_d_1"
+      ],
+      "to": [
+        5,
+        "t8_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "t8_u"
+      ],
+      "to": [
+        5,
+        "t5_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        5,
+        "t6_u"
+      ],
+      "to": [
+        9,
+        "nc_1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        9,
+        "nc_1_d"
+      ],
+      "to": [
+        9,
+        "a1_1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        3,
+        "t5_u"
+      ],
+      "to": [
+        3,
+        "t6_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        3,
+        "t4_u"
+      ],
+      "to": [
+        3,
+        "t5_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    }
+  ]
+}

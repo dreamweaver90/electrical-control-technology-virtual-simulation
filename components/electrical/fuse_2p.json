@@ -1,0 +1,179 @@
+{
+  "class": "FuseInstance",
+  "category": "熔断器",
+  "id": "fuse_2p",
+  "name": "熔断器",
+  "description": "2P 熔断器，流经电流 > 熔断电流（默认80A）持续熔断时间（默认0.1s）；点击每组熔丝中间区域更换熔断器。",
+  "tags": [
+    "熔断器",
+    "保险丝",
+    "2P",
+    "短路保护"
+  ],
+  "terminalHitRadius": 12,
+  "size": {
+    "width": 139,
+    "height": 300
+  },
+  "thumbnail": "<div><img src='images/熔断器2p.png' width='139' height='300'></div>",
+  "zones": [
+    {
+      "id": "fuse1_zone",
+      "event": "click",
+      "action": "reset",
+      "tips": "更换第1路熔断器",
+      "state": "fuse_L1",
+      "x": 35,
+      "y": 144,
+      "r": 18
+    },
+    {
+      "id": "fuse2_zone",
+      "event": "click",
+      "action": "reset",
+      "tips": "更换第2路熔断器",
+      "state": "fuse_L2",
+      "x": 99,
+      "y": 144,
+      "r": 18
+    }
+  ],
+  "image": [
+    {
+      "id": "default",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/熔断器2p.png' width='139' height='300'></div>"
+    },
+    {
+      "id": "boom1",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/爆炸.png' style='position:absolute;left:17px;top:126px' width='36' height='36'></div>",
+      "bind": "fuse_L1"
+    },
+    {
+      "id": "boom2",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/爆炸.png' style='position:absolute;left:81px;top:126px' width='36' height='36'></div>",
+      "bind": "fuse_L2"
+    }
+  ],
+  "terminals": {
+    "electrical": {
+      "pins": {
+        "l1a": {
+          "x": 35,
+          "y": 30,
+          "dir": "up",
+          "tip": "第1路熔丝上端",
+          "faultLevel":2
+        },
+        "l1b": {
+          "x": 35,
+          "y": 258,
+          "dir": "down",
+          "tip": "第1路熔丝下端"
+        },
+        "l2a": {
+          "x": 99,
+          "y": 30,
+          "dir": "up",
+          "tip": "第2路熔丝上端",
+          "faultLevel":2
+        },
+        "l2b": {
+          "x": 99,
+          "y": 258,
+          "dir": "down",
+          "tip": "第2路熔丝下端"
+        }
+      },
+      "contacts": {
+        "fuse1": {
+          "pairs": [
+            [
+              "l1a",
+              "l1b"
+            ]
+          ],
+          "when": "!fuse_L1",
+          "resistance": 0.005,
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        },
+        "fuse2": {
+          "pairs": [
+            [
+              "l2a",
+              "l2b"
+            ]
+          ],
+          "when": "!fuse_L2",
+          "resistance": 0.005,
+          "fault": {
+            "level": 2,
+            "types": [
+              "open"
+            ]
+          }
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "fuseCurrent",
+      "label": "熔断电流",
+      "type": "number",
+      "unit": "A",
+      "min": 1,
+      "max": 2000,
+      "step": 1,
+      "default": 80,
+      "adjustable": true
+    },
+    {
+      "id": "fuseTime",
+      "label": "熔断时间",
+      "type": "number",
+      "unit": "s",
+      "min": 0.05,
+      "max": 5,
+      "step": 0.05,
+      "default": 0.1,
+      "adjustable": true
+    },
+    {
+      "id": "fuse_L1",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "fuse_L2",
+      "type": "bool",
+      "default": false
+    },
+    {
+      "id": "name",
+      "label": "名称",
+      "type": "text",
+      "default": "",
+      "adjustable": true,
+      "display": {
+        "x": 100,
+        "y": 90,
+        "fontSize": 16,
+        "class": "yellow-plate"
+      }
+    }
+  ]
+}

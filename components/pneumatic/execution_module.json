@@ -1,0 +1,380 @@
+{
+  "class": "CylinderInstance",
+  "category": "气动",
+  "id": "execution_module",
+  "name": "执行模块",
+  "description": "三气缸执行模块：升降气缸（上升/下降气孔，断气自动下降抵消重力）驱动执行机构与夹爪同步上升180；伸缩气缸驱动同步向左伸出100；夹紧气缸驱动夹爪张开30°（左爪绕右上角顺时针、右爪绕左上角逆时针）。夹紧气缸两气孔为相对执行机构的坐标，随其移动，气管自动重排。",
+  "tags": [
+    "执行模块",
+    "夹爪",
+    "升降气缸",
+    "伸缩气缸",
+    "夹紧气缸",
+    "气动"
+  ],
+  "terminalHitRadius": 12,
+  "size": {
+    "width": 642,
+    "height": 750
+  },
+  "thumbnail": "<div><img src='images/执行机构缩率图.png' width='243' height='295'></div>",
+  "pneumatic": {
+    "cylinders": [
+      {
+        "posKey": "lift_pos",
+        "label": "升降气缸",
+        "ports": [
+          {
+            "id": "lift_up",
+            "target": 1
+          },
+          {
+            "id": "lift_down",
+            "target": 0
+          }
+        ],
+        "noAirTarget": 0
+      },
+      {
+        "posKey": "extend_pos",
+        "label": "伸缩气缸",
+        "ports": [
+          {
+            "id": "extend_out",
+            "target": 1
+          },
+          {
+            "id": "extend_retract",
+            "target": 0
+          }
+        ]
+      },
+      {
+        "posKey": "grip_pos",
+        "label": "夹紧气缸",
+        "ports": [
+          {
+            "id": "grip_open",
+            "target": 1
+          },
+          {
+            "id": "grip_close",
+            "target": 0
+          }
+        ]
+      }
+    ]
+  },
+  "image": [
+    {
+      "id": "台子_左",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/台子_左.png' width='288' height='750'></div>"
+    },
+    {
+      "id": "夹爪_左",
+      "x": 171.9,
+      "y": 597,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' style='width:31.2px;height:96px' width='31.2' height='96' viewBox='-31.2 0 31.2 96' overflow='visible'><g data-bind='lift'><g data-bind='extend'><g data-bind='grip'><image href='images/夹爪_左.png' x='-31.2' y='0' width='31.2' height='96'/></g></g></g></svg></div>",
+      "anims": {
+        "lift": {
+          "source": "lift_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "move": {
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0,
+              -180
+            ]
+          },
+          "smooth": true
+        },
+        "extend": {
+          "source": "extend_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "move": {
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              -100,
+              0
+            ]
+          },
+          "smooth": true
+        },
+        "grip": {
+          "source": "grip_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "rotate": {
+            "center": [
+              0,
+              0
+            ],
+            "from": 0,
+            "to": 30
+          },
+          "smooth": true
+        }
+      }
+    },
+    {
+      "id": "夹爪_右",
+      "x": 200.7,
+      "y": 597,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' style='width:31.2px;height:96px' width='31.2' height='96' viewBox='0 0 31.2 96' overflow='visible'><g data-bind='lift'><g data-bind='extend'><g data-bind='grip'><image href='images/夹爪_右.png' x='0' y='0' width='31.2' height='96'/></g></g></g></svg></div>",
+      "anims": {
+        "lift": {
+          "source": "lift_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "move": {
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0,
+              -180
+            ]
+          },
+          "smooth": true
+        },
+        "extend": {
+          "source": "extend_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "move": {
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              -100,
+              0
+            ]
+          },
+          "smooth": true
+        },
+        "grip": {
+          "source": "grip_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "rotate": {
+            "center": [
+              0,
+              0
+            ],
+            "from": 0,
+            "to": -30
+          },
+          "smooth": true
+        }
+      }
+    },
+    {
+      "id": "执行机构",
+      "x": 151.5,
+      "y": 255,
+      "string": "<div><svg xmlns='http://www.w3.org/2000/svg' style='width:234px;height:373.2px' width='234' height='373.2' viewBox='0 0 234 373.2' overflow='visible'><g data-bind='lift'><g data-bind='extend'><image href='images/执行机构.png' x='0' y='0' width='234' height='373.2'/></g></g></g><g data-bind='go_y'/><g data-bind='gc_x'/></svg></div>",
+      "anims": {
+        "lift": {
+          "source": "lift_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "move": {
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              0,
+              -180
+            ]
+          },
+          "smooth": true,
+          "terminal": {
+            "id": "grip_close",
+            "move": {
+              "from": [
+                233,
+                514
+              ],
+              "to": [
+                233,
+                334
+              ]
+            }
+          }
+        },
+        "extend": {
+          "source": "extend_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "move": {
+            "from": [
+              0,
+              0
+            ],
+            "to": [
+              -100,
+              0
+            ]
+          },
+          "smooth": true,
+          "terminal": {
+            "id": "grip_open",
+            "move": {
+              "from": [
+                233,
+                464
+              ],
+              "to": [
+                133,
+                464
+              ]
+            }
+          }
+        },
+        "go_y": {
+          "source": "lift_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "terminal": {
+            "id": "grip_open",
+            "move": {
+              "from": [
+                233,
+                464
+              ],
+              "to": [
+                233,
+                284
+              ]
+            }
+          }
+        },
+        "gc_x": {
+          "source": "extend_pos",
+          "map": {
+            "min": 0,
+            "max": 1
+          },
+          "terminal": {
+            "id": "grip_close",
+            "move": {
+              "from": [
+                233,
+                514
+              ],
+              "to": [
+                133,
+                514
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "台子_右",
+      "x": 287,
+      "y": 0,
+      "string": "<div><img src='images/台子_右.png' width='354' height='750'></div>"
+    }
+  ],
+  "terminals": {
+    "pneumatic": {
+      "pins": {
+        "lift_up": {
+          "x": 518,
+          "y": 626,
+          "tip": "上升气孔"
+        },
+        "lift_down": {
+          "x": 606,
+          "y": 627,
+          "tip": "下降气孔"
+        },
+        "extend_out": {
+          "x": 520,
+          "y": 712,
+          "tip": "向前气孔"
+        },
+        "extend_retract": {
+          "x": 605,
+          "y": 711,
+          "tip": "向后气孔"
+        },
+        "grip_open": {
+          "x": 233,
+          "y": 464,
+          "tip": "张开气孔"
+        },
+        "grip_close": {
+          "x": 233,
+          "y": 514,
+          "tip": "夹紧气孔"
+        }
+      },
+      "contacts": {},
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "lift_pos",
+      "type": "number",
+      "default": 0
+    },
+    {
+      "id": "extend_pos",
+      "type": "number",
+      "default": 0
+    },
+    {
+      "id": "grip_pos",
+      "type": "number",
+      "default": 0
+    },
+    {
+      "id": "strokeTime",
+      "label": "行程时间",
+      "type": "number",
+      "unit": "s",
+      "min": 0.3,
+      "max": 10,
+      "step": 0.1,
+      "default": 1,
+      "adjustable": true
+    }
+  ]
+}

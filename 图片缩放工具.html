@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>元器件图片缩放工具</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+    background: #f0f2f5;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ===== 顶部标题栏 ===== */
+  .header {
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .header h1 {
+    font-size: 18px;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+  .header .subtitle {
+    font-size: 13px;
+    color: #888;
+  }
+
+  /* ===== 主区域 ===== */
+  .main {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* ===== 左侧：图片显示区 ===== */
+  .image-panel {
+    flex: 1;
+    background: #e8eaed;
+    position: relative;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #ddd;
+  }
+  .image-panel.drag-over {
+    background: #d4e4f7;
+    outline: 3px dashed #4a90d9;
+    outline-offset: -8px;
+  }
+  .image-panel .placeholder {
+    text-align: center;
+    color: #999;
+    user-select: none;
+  }
+  .image-panel .placeholder .icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+  }
+  .image-panel .placeholder p {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  canvas {
+    display: block;
+    cursor: crosshair;
+  }
+
+  /* ===== 右侧：控制面板 ===== */
+  .control-panel {
+    width: 300px;
+    background: #fff;
+    padding: 24px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-shrink: 0;
+    overflow-y: auto;
+  }
+  .control-panel .section-title {
+    font-size: 13px;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: -8px;
+  }
+
+  /* 按钮样式 */
+  .btn {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-family: inherit;
+  }
+  .btn:active { transform: scale(0.98); }
+  .btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+  }
+  .btn-primary {
+    background: #4a90d9;
+    color: #fff;
+  }
+  .btn-primary:hover:not(:disabled) { background: #3a7bc8; }
+  .btn-success {
+    background: #52b788;
+    color: #fff;
+  }
+  .btn-success:hover:not(:disabled) { background: #409d6c; }
+  .btn-outline {
+    background: #fff;
+    color: #4a90d9;
+    border: 1.5px solid #4a90d9;
+  }
+  .btn-outline:hover:not(:disabled) { background: #f0f6fd; }
+
+  /* 输入框 */
+  .input-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .input-group label {
+    font-size: 13px;
+    color: #555;
+    white-space: nowrap;
+  }
+  .input-group input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1.5px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .input-group input:focus {
+    border-color: #4a90d9;
+    box-shadow: 0 0 0 3px rgba(74,144,217,0.1);
+  }
+  .input-group .unit {
+    font-size: 13px;
+    color: #999;
+    white-space: nowrap;
+  }
+
+  /* 信息展示 */
+  .info-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .info-card .label { color: #888; }
+  .info-card .value { color: #333; font-weight: 500; }
+
+  /* 状态提示 */
+  .status-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .status-badge.ready  { background: #e6f7e9; color: #3a8c4f; }
+  .status-badge.empty { background: #f5f5f5; color: #999; }
+
+  /* ===== 底部状态栏 ===== */
+  .footer {
+    background: #1e1e1e;
+    color: #ccc;
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-family: "Consolas", "Menlo", "Courier New", monospace;
+  }
+  .footer .coord {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .footer .coord .dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .footer .coord .dot.x { background: #ff6b6b; }
+  .footer .coord .dot.y { background: #4ecdc4; }
+  .footer .coord-value {
+    color: #fff;
+    font-weight: 600;
+    min-width: 60px;
+  }
+  .footer .color-swatch {
+    width: 14px; height: 14px;
+    border-radius: 3px;
+    border: 1px solid #555;
+    display: inline-block;
+    background: #444;
+    flex-shrink: 0;
+  }
+  .footer .rgb-value {
+    color: #fff;
+    font-weight: 600;
+  }
+  .footer .divider {
+    width: 1px; height: 16px;
+    background: #444;
+  }
+  .footer .file-info {
+    color: #999;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部 -->
+<div class="header">
+  <h1>📐 元器件图片缩放工具</h1>
+  <span class="subtitle">— 等比例缩放 · 像素坐标查看</span>
+</div>
+
+<!-- 主体 -->
+<div class="main">
+
+  <!-- 左侧：图片显示 -->
+  <div class="image-panel" id="imagePanel">
+    <div class="placeholder" id="placeholder">
+      <div class="icon">🖼️</div>
+      <p>点击右侧「选择图片」或拖拽图片到此处</p>
+    </div>
+    <canvas id="canvas" style="display:none;"></canvas>
+  </div>
+
+  <!-- 右侧：控制 -->
+  <div class="control-panel">
+    <span class="section-title">📁 图片操作</span>
+    <button class="btn btn-primary" id="btnSelect">📂 选择本地图片</button>
+    <button class="btn btn-outline" id="btnClear" disabled>✕ 清除当前图片</button>
+
+    <span class="section-title">📏 缩放设置</span>
+    <div class="input-group">
+      <label>目标高度</label>
+      <input type="number" id="targetHeight" value="200" min="1" max="10000" step="1">
+      <span class="unit">px</span>
+    </div>
+    <button class="btn btn-success" id="btnScale" disabled>↕ 等比例缩放</button>
+
+    <span class="section-title">💾 保存</span>
+    <button class="btn btn-primary" id="btnSave" disabled>💾 保存到「缩放元器件」</button>
+
+    <span class="section-title">ℹ️ 图片信息</span>
+    <div class="info-card" id="infoCard">
+      <div><span class="label">状态：</span><span class="status-badge empty" id="statusBadge">未加载</span></div>
+      <div><span class="label">原始尺寸：</span><span class="value" id="infoOriginal">—</span></div>
+      <div><span class="label">当前尺寸：</span><span class="value" id="infoCurrent">—</span></div>
+      <div><span class="label">原始格式：</span><span class="value" id="infoFormat">—</span></div>
+      <div><span class="label">文件大小：</span><span class="value" id="infoFileSize">—</span></div>
+      <div style="margin-top:6px;font-size:12px;color:#aaa;">
+        提示：鼠标在图片上移动<br>即可在底部查看像素坐标与颜色(RGB)
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 底部状态栏 -->
+<div class="footer">
+  <span style="color:#999;">📍 像素坐标</span>
+  <div class="coord">
+    <span class="dot x"></span>
+    <span>X =</span>
+    <span class="coord-value" id="coordX">—</span>
+  </div>
+  <div class="coord">
+    <span class="dot y"></span>
+    <span>Y =</span>
+    <span class="coord-value" id="coordY">—</span>
+  </div>
+  <span class="divider"></span>
+  <span style="color:#999;">🎨 颜色</span>
+  <div class="coord">
+    <span class="color-swatch" id="colorSwatch"></span>
+    <span class="rgb-value" id="colorRGB">—</span>
+    <span class="rgb-value" id="colorHEX">—</span>
+  </div>
+  <span class="divider"></span>
+  <span class="file-info" id="fileInfo" title="">未加载图片</span>
+</div>
+
+<script>
+(function() {
+  // ============ DOM 引用 ============
+  const imagePanel = document.getElementById('imagePanel');
+  const placeholder = document.getElementById('placeholder');
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const btnSelect = document.getElementById('btnSelect');
+  const btnClear = document.getElementById('btnClear');
+  const btnScale = document.getElementById('btnScale');
+  const btnSave = document.getElementById('btnSave');
+  const targetHeight = document.getElementById('targetHeight');
+
+  const coordX = document.getElementById('coordX');
+  const coordY = document.getElementById('coordY');
+  const colorSwatch = document.getElementById('colorSwatch');
+  const colorRGB = document.getElementById('colorRGB');
+  const colorHEX = document.getElementById('colorHEX');
+  const fileInfo = document.getElementById('fileInfo');
+  const statusBadge = document.getElementById('statusBadge');
+  const infoOriginal = document.getElementById('infoOriginal');
+  const infoCurrent = document.getElementById('infoCurrent');
+  const infoFormat = document.getElementById('infoFormat');
+  const infoFileSize = document.getElementById('infoFileSize');
+
+  // ============ 状态 ============
+  let currentImage = null;        // Image 对象（原始图片）
+  let currentBlob = null;        // 原始文件的 Blob（用于格式判断）
+  let originalWidth = 0;
+  let originalHeight = 0;
+  let scaledWidth = 0;
+  let scaledHeight = 0;
+  let scaleFactor = 1;           // 显示缩放比例
+  let hasScaled = false;         // 是否已执行过缩放
+
+  // ============ 更新 UI 状态 ============
+  function updateUI() {
+    const hasImage = currentImage !== null;
+    btnClear.disabled = !hasImage;
+    btnScale.disabled = !hasImage;
+    btnSave.disabled = !hasImage;
+
+    if (hasImage) {
+      placeholder.style.display = 'none';
+      canvas.style.display = 'block';
+
+      const w = hasScaled ? scaledWidth : originalWidth;
+      const h = hasScaled ? scaledHeight : originalHeight;
+      canvas.width = w;
+      canvas.height = h;
+      canvas.style.width = w + 'px';
+      canvas.style.height = h + 'px';
+
+      // 绘制图片
+      ctx.clearRect(0, 0, w, h);
+      ctx.drawImage(currentImage, 0, 0, w, h);
+
+      statusBadge.textContent = hasScaled ? '已缩放' : '已加载';
+      statusBadge.className = 'status-badge ready';
+      infoOriginal.textContent = originalWidth + ' × ' + originalHeight + ' px';
+      infoCurrent.textContent = w + ' × ' + h + ' px';
+      fileInfo.textContent = currentImage._fileName || '图片';
+      fileInfo.title = fileInfo.textContent;
+    } else {
+      placeholder.style.display = '';
+      canvas.style.display = 'none';
+      statusBadge.textContent = '未加载';
+      statusBadge.className = 'status-badge empty';
+      infoOriginal.textContent = '—';
+      infoCurrent.textContent = '—';
+      infoFormat.textContent = '—';
+      infoFileSize.textContent = '—';
+      fileInfo.textContent = '未加载图片';
+      fileInfo.title = '';
+      resetCoords();
+    }
+  }
+
+  function resetCoords() {
+    coordX.textContent = '—';
+    coordY.textContent = '—';
+    colorRGB.textContent = '—';
+    colorHEX.textContent = '—';
+    colorSwatch.style.background = '#444';
+  }
+
+  /** 数值 → 两位大写十六进制（0 → "00", 255 → "FF"） */
+  function hex2(v) {
+    return v.toString(16).toUpperCase().padStart(2, '0');
+  }
+
+  // ============ 加载图片 ============
+  function loadImage(blob, fileName) {
+    const url = URL.createObjectURL(blob);
+    const img = new Image();
+    img.onload = function() {
+      currentImage = img;
+      currentBlob = blob;
+      originalWidth = img.naturalWidth;
+      originalHeight = img.naturalHeight;
+      scaledWidth = originalWidth;
+      scaledHeight = originalHeight;
+      scaleFactor = 1;
+      hasScaled = false;
+      img._fileName = fileName;
+
+      const format = getFormatFromBlob(blob, fileName);
+      infoFormat.textContent = format;
+      infoFileSize.textContent = formatFileSize(blob.size);
+
+      updateUI();
+      URL.revokeObjectURL(url);
+    };
+    img.onerror = function() {
+      alert('无法加载该图片文件，请检查文件格式。');
+      URL.revokeObjectURL(url);
+    };
+    img.src = url;
+  }
+
+  function getFormatFromBlob(blob, fileName) {
+    const mime = blob.type.toLowerCase();
+    const ext = fileName.split('.').pop().toLowerCase();
+
+    const mimeMap = {
+      'image/jpeg': 'JPEG',
+      'image/png': 'PNG',
+      'image/webp': 'WebP',
+      'image/gif': 'GIF',
+      'image/bmp': 'BMP',
+      'image/tiff': 'TIFF',
+      'image/svg+xml': 'SVG',
+    };
+
+    if (mimeMap[mime]) return mimeMap[mime];
+    // fallback 用扩展名
+    if (ext) return ext.toUpperCase();
+    return mime || '未知';
+  }
+
+  function getMimeType(blob, fileName) {
+    // 优先用 Blob 的 type
+    if (blob.type && blob.type.startsWith('image/') && blob.type !== 'image/') {
+      return blob.type;
+    }
+    // 根据扩展名推测
+    const ext = fileName.split('.').pop().toLowerCase();
+    const extMap = {
+      'jpg': 'image/jpeg',
+      'jpeg': 'image/jpeg',
+      'png': 'image/png',
+      'webp': 'image/webp',
+      'gif': 'image/gif',
+      'bmp': 'image/bmp',
+      'svg': 'image/svg+xml',
+    };
+    return extMap[ext] || 'image/png'; // 默认PNG
+  }
+
+  function formatFileSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+  }
+
+  // ============ 缩放 ============
+  function doScale() {
+    if (!currentImage) return;
+
+    const newH = parseInt(targetHeight.value);
+    if (isNaN(newH) || newH <= 0) {
+      alert('请输入有效的目标高度（正整数）。');
+      return;
+    }
+
+    const ratio = newH / originalHeight;
+    const newW = Math.round(originalWidth * ratio);
+
+    scaledWidth = newW;
+    scaledHeight = newH;
+    scaleFactor = ratio;
+    hasScaled = true;
+
+    updateUI();
+
+    // 滚动到左上角
+    imagePanel.scrollTop = 0;
+    imagePanel.scrollLeft = 0;
+  }
+
+  // ============ 保存 ============
+  function doSave() {
+    if (!currentImage) return;
+
+    const w = hasScaled ? scaledWidth : originalWidth;
+    const h = hasScaled ? scaledHeight : originalHeight;
+
+    // 重新绘制确保画布是最新的
+    canvas.width = w;
+    canvas.height = h;
+    ctx.drawImage(currentImage, 0, 0, w, h);
+
+    const fileName = currentImage._fileName || 'component.png';
+    const baseName = fileName.replace(/\.[^.]+$/, '');
+    const ext = fileName.split('.').pop().toLowerCase();
+
+    const mimeType = getMimeType(currentBlob, fileName);
+    const quality = (mimeType === 'image/jpeg' || mimeType === 'image/webp') ? 0.92 : undefined;
+
+    canvas.toBlob(function(blob) {
+      if (!blob) {
+        alert('保存失败：无法生成图片数据。');
+        return;
+      }
+
+      // 生成下载文件名
+      const saveName = baseName + '_' + w + 'x' + h + '.' + ext;
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = saveName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+
+      URL.revokeObjectURL(url);
+
+      // 视觉反馈
+      showSaveFeedback();
+    }, mimeType, quality);
+  }
+
+  function showSaveFeedback() {
+    const origText = btnSave.textContent;
+    btnSave.textContent = '✅ 保存成功！';
+    btnSave.style.background = '#409d6c';
+    setTimeout(() => {
+      btnSave.textContent = origText;
+      btnSave.style.background = '';
+    }, 1500);
+  }
+
+  // ============ 像素坐标跟踪 ============
+  canvas.addEventListener('mousemove', function(e) {
+    if (!currentImage) return;
+
+    const rect = canvas.getBoundingClientRect();
+    // 相对于 canvas 左上角的像素坐标
+    const px = Math.round(e.clientX - rect.left);
+    const py = Math.round(e.clientY - rect.top);
+
+    if (px >= 0 && py >= 0 && px < canvas.width && py < canvas.height) {
+      coordX.textContent = px;
+      coordY.textContent = py;
+
+      // 读取该像素的颜色：十进制 RGB 与十六进制 #RRGGBB 同时显示（附色块预览）
+      try {
+        const d = ctx.getImageData(px, py, 1, 1).data;
+        const r = d[0], g = d[1], b = d[2];
+        colorRGB.textContent = 'RGB(' + r + ', ' + g + ', ' + b + ')';
+        colorHEX.textContent = '#' + hex2(r) + hex2(g) + hex2(b);
+        colorSwatch.style.background = 'rgb(' + r + ',' + g + ',' + b + ')';
+      } catch (err) {
+        // 个别情况下（如画布被污染）getImageData 会抛 SecurityError，静默兜底
+        colorRGB.textContent = '—';
+        colorHEX.textContent = '—';
+      }
+    } else {
+      resetCoords();
+    }
+  });
+
+  canvas.addEventListener('mouseleave', resetCoords);
+
+  // ============ 拖拽支持 ============
+  imagePanel.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    imagePanel.classList.add('drag-over');
+  });
+
+  imagePanel.addEventListener('dragleave', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    imagePanel.classList.remove('drag-over');
+  });
+
+  imagePanel.addEventListener('drop', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    imagePanel.classList.remove('drag-over');
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      if (file.type.startsWith('image/')) {
+        loadImage(file, file.name);
+      } else {
+        alert('请拖入图片文件。');
+      }
+    }
+  });
+
+  // ============ 按钮事件 ============
+  btnSelect.addEventListener('click', function() {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*';
+    input.onchange = function() {
+      if (input.files.length > 0) {
+        const file = input.files[0];
+        loadImage(file, file.name);
+      }
+    };
+    input.click();
+  });
+
+  btnClear.addEventListener('click', function() {
+    currentImage = null;
+    currentBlob = null;
+    originalWidth = 0;
+    originalHeight = 0;
+    scaledWidth = 0;
+    scaledHeight = 0;
+    scaleFactor = 1;
+    hasScaled = false;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvas.width = 0;
+    canvas.height = 0;
+    updateUI();
+    resetCoords();
+  });
+
+  btnScale.addEventListener('click', doScale);
+
+  btnSave.addEventListener('click', doSave);
+
+  // 回车键触发缩放
+  targetHeight.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doScale();
+  });
+
+  // ============ 初始状态 ============
+  updateUI();
+  resetCoords();
+})();
+</script>
+</body>
+</html>

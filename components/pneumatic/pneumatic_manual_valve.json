@@ -1,0 +1,83 @@
+{
+  "class": "ComponentInstance",
+  "category": "气动",
+  "id": "pneumatic_manual_valve",
+  "name": "气路开关",
+  "description": "手动气路开关（类似常开触点）：一进一出。点击手柄接通后两个气口等压直通，再点断开。进出气口双向可用（可反向接气），未通气时另一孔空着会漏气提示。",
+  "tags": [
+    "气路开关",
+    "手动阀",
+    "球阀",
+    "气动"
+  ],
+  "terminalHitRadius": 12,
+  "size": {
+    "width": 158,
+    "height": 150
+  },
+  "zones": [
+    {
+      "id": "handle",
+      "event": "click",
+      "action": "toggle",
+      "state": "open",
+      "tips": "手动开关（点击接通/断开）",
+      "x": 78,
+      "y": 60,
+      "r": 36
+    }
+  ],
+  "image": [
+    {
+      "id": "断开",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/气路开关_断.png' width='158' height='150'></div>",
+      "bind": "!open"
+    },
+    {
+      "id": "接通",
+      "x": 0,
+      "y": 0,
+      "string": "<div><img src='images/气路开关_通.png' width='158' height='150'></div>",
+      "bind": "open"
+    }
+  ],
+  "terminals": {
+    "pneumatic": {
+      "pins": {
+        "in": {
+          "x": 2,
+          "y": 96,
+          "tip": "进气"
+        },
+        "out": {
+          "x": 156,
+          "y": 96,
+          "tip": "出气"
+        }
+      },
+      "contacts": {
+        "closed": {
+          "pairs": [
+            [
+              "in",
+              "out"
+            ]
+          ],
+          "when": "open"
+        }
+      },
+      "loads": {},
+      "permanent": {},
+      "sensors": {}
+    }
+  },
+  "params": [
+    {
+      "id": "open",
+      "type": "bool",
+      "default": false
+    }
+  ]
+}

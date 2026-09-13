@@ -1,0 +1,444 @@
+{
+  "id": "scene1",
+  "name": "施耐德电机保护实训台",
+  "description": "三相电源经隔离开关至3P断路器、2P断路器；按钮盒、电动机引至接线排",
+  "layout": "duct",
+  "components": [
+    {
+      "id": "ac_power_380v_3phase",
+      "row": 0,
+      "left": 12,
+      "x": 12,
+      "y": 60,
+      "params": {
+        "sourceImpedance": 0.05
+      }
+    },
+    {
+      "id": "schneider_switch_disconnector",
+      "row": 0,
+      "left": 216,
+      "x": 216,
+      "y": 60,
+      "params": {
+        "pushed": false,
+        "name": ""
+      }
+    },
+    {
+      "id": "schneider_breaker_2p",
+      "row": 0,
+      "left": 500,
+      "x": 500,
+      "y": 60,
+      "params": {
+        "switch": false,
+        "name": ""
+      }
+    },
+    {
+      "id": "terminal_block_i1o2_6",
+      "row": 1,
+      "left": 392.6,
+      "x": 392.6,
+      "y": 280,
+      "params": {}
+    },
+    {
+      "id": "terminal_block_i1o2_12",
+      "row": 1,
+      "left": 587.9,
+      "x": 587.9,
+      "y": 280,
+      "params": {}
+    },
+    {
+      "id": "three_phase_asynchronous_motor",
+      "row": 1,
+      "left": 924.2900000000001,
+      "x": 924.2900000000001,
+      "y": 280,
+      "params": {
+        "coilVoltage": 380,
+        "ratedConnection": "Y",
+        "ratedPower": 370,
+        "powerFactor": 0.8,
+        "lockRatio": 6,
+        "efficiency": 0.85,
+        "ratedSpeed": 1450,
+        "ratedCurrent": 0.8267012368427304,
+        "stallCurrent": 4.960207421056383,
+        "accelTimeOn": 0.6,
+        "accelTimeOff": 2,
+        "speed": 0,
+        "target": null,
+        "unit": 0,
+        "stalled": false,
+        "dcResistance": 500,
+        "cw": false,
+        "ccw": false,
+        "name": ""
+      }
+    },
+    {
+      "id": "button_box",
+      "row": 1,
+      "left": 1177.43,
+      "x": 1177.43,
+      "y": 280,
+      "params": {
+        "red_pressed": false,
+        "white_pressed": false,
+        "black_pressed": false,
+        "name_red": "",
+        "name_white": "",
+        "name_black": ""
+      }
+    },
+    {
+      "id": "schneider_breaker_3p",
+      "row": 0,
+      "left": 676,
+      "x": 676,
+      "y": 60,
+      "params": {
+        "switch": false,
+        "name": ""
+      }
+    }
+  ],
+  "wires": [
+    {
+      "from": [
+        0,
+        "l1"
+      ],
+      "to": [
+        1,
+        "main_no_2_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        0,
+        "l2"
+      ],
+      "to": [
+        1,
+        "main_no_3_u"
+      ],
+      "color": "#f39c12",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        0,
+        "l3"
+      ],
+      "to": [
+        1,
+        "main_no_4_u"
+      ],
+      "color": "#2ecc71",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        0,
+        "n"
+      ],
+      "to": [
+        1,
+        "main_no_1_u"
+      ],
+      "color": "#3498db",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        1,
+        "main_no_1_d"
+      ],
+      "to": [
+        2,
+        "main_no_2_u"
+      ],
+      "color": "#3498db",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        1,
+        "main_no_2_d"
+      ],
+      "to": [
+        7,
+        "main_no_1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        7,
+        "main_no_1_u"
+      ],
+      "to": [
+        2,
+        "main_no_1_u"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        1,
+        "main_no_3_d"
+      ],
+      "to": [
+        7,
+        "main_no_2_u"
+      ],
+      "color": "#f39c12",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        1,
+        "main_no_4_d"
+      ],
+      "to": [
+        7,
+        "main_no_3_u"
+      ],
+      "color": "#2ecc71",
+      "media": "electrical"
+    },
+    {
+      "from": [
+        6,
+        "r_nc1"
+      ],
+      "to": [
+        4,
+        "t1_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "停止NC",
+      "labelSide": "end"
+    },
+    {
+      "from": [
+        4,
+        "t2_d"
+      ],
+      "to": [
+        6,
+        "r_nc2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "停止NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        4,
+        "t3_d"
+      ],
+      "to": [
+        6,
+        "w_no1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "正转NO",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        4,
+        "t4_d"
+      ],
+      "to": [
+        6,
+        "w_no2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "正转NO",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        4,
+        "t5_d"
+      ],
+      "to": [
+        6,
+        "w_nc1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "正转NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        4,
+        "t6_d"
+      ],
+      "to": [
+        6,
+        "w_nc2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "正转NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        4,
+        "t7_d"
+      ],
+      "to": [
+        6,
+        "b_no1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "反转NO",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        4,
+        "t8_d"
+      ],
+      "to": [
+        6,
+        "b_no2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "反转NO",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        4,
+        "t9_d"
+      ],
+      "to": [
+        6,
+        "b_nc1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "反转NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        4,
+        "t10_d"
+      ],
+      "to": [
+        6,
+        "b_nc2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "反转NC",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "U1"
+      ],
+      "to": [
+        3,
+        "t1_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "U1",
+      "labelSide": "end"
+    },
+    {
+      "from": [
+        3,
+        "t2_d"
+      ],
+      "to": [
+        5,
+        "V1"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "V1",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "W1"
+      ],
+      "to": [
+        3,
+        "t3_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "W1",
+      "labelSide": "end"
+    },
+    {
+      "from": [
+        3,
+        "t4_d"
+      ],
+      "to": [
+        5,
+        "U2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "U2",
+      "labelSide": "start"
+    },
+    {
+      "from": [
+        5,
+        "V2"
+      ],
+      "to": [
+        3,
+        "t5_d"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "V2",
+      "labelSide": "end"
+    },
+    {
+      "from": [
+        3,
+        "t6_d"
+      ],
+      "to": [
+        5,
+        "W2"
+      ],
+      "color": "#e74c3c",
+      "media": "electrical",
+      "label": "W2",
+      "labelSide": "start"
+    }
+  ]
+}

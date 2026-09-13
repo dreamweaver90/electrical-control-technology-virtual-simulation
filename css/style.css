@@ -1,0 +1,455 @@
+/* ============================================================
+   虚拟接线仿真系统 — 全局样式
+   ============================================================ */
+:root {
+  --body-bg: #1a1a2e;
+  --library-bg: #f8f9fa;
+  --library-width: 220px;
+  --toolbar-height: 44px;
+  --drop-highlight: rgba(74,144,217,0.18);
+  --text-primary: #222;
+  --danger: #e74c3c;
+  /* 主题色（App 启动时按主配置注入；默认 = 当前视觉） */
+  --panel-bg: #eef0f2;
+  --term-hover-fill: rgba(74,144,217,0.4);
+  --term-hover-ring: rgba(74,144,217,0.4);
+  --term-hover-probe: rgba(74,144,217,0.15);
+  --term-hover-probed: rgba(74,144,217,0.45);
+  --term-selected-fill: rgba(255,107,107,0.55);
+  --term-selected-ring: rgba(255,107,107,0.4);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+  background: var(--body-bg);
+  height: 100vh; width: 100vw;
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ---- 工具栏 ---- */
+.toolbar {
+  height: var(--toolbar-height);
+  background: #2d2d44;
+  display: flex; align-items: center;
+  padding: 0 16px; gap: 12px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #3d3d54;
+}
+.toolbar .brand {
+  color: #fff; font-size: 15px; font-weight: 600;
+  letter-spacing: 1px; margin-right: 8px;
+}
+.toolbar .sep { width: 1px; height: 22px; background: #4a4a6a; }
+.toolbar label {
+  color: #aaa; font-size: 12px;
+  display: flex; align-items: center; gap: 6px;
+}
+.toolbar input[type="number"] {
+  width: 50px; padding: 4px 6px;
+  border: 1px solid #555; border-radius: 4px;
+  background: #3d3d54; color: #ddd;
+  font-size: 13px; text-align: center; font-family: inherit;
+}
+.toolbar input[type="number"]:focus { outline: none; border-color: #4a90d9; }
+/* iOS 风格开关（线槽/敷设模式切换） */
+.toolbar .switch-row {
+  display: inline-flex; align-items: center; gap: 6px;
+  cursor: pointer; user-select: none; padding: 2px 0;
+}
+.toolbar .switch-row .switch-label {
+  color: #ddd; font-size: 12px; min-width: 52px; text-align: right;
+}
+.toolbar .switch-row .switch {
+  width: 36px; height: 20px; border-radius: 10px;
+  background: #666; position: relative; transition: background .2s;
+  flex-shrink: 0;
+}
+.toolbar .switch-row .switch .knob {
+  width: 16px; height: 16px; border-radius: 50%; background: #fff;
+  position: absolute; top: 2px; left: 2px; transition: left .2s;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+}
+.toolbar .switch-row.on .switch { background: #4a90d9; }
+.toolbar .switch-row.on .knob { left: 18px; }
+/* hover 展开工具组（清除 / 排故） */
+.toolbar .tool-group { position: relative; display: inline-block; }
+.toolbar .tool-group .group-menu {
+  display: none; position: absolute; top: 100%; left: 0;
+  background: #3d3d54; border: 1px solid #4a4a6a; border-radius: 8px;
+  padding: 6px; z-index: 60; box-shadow: 0 4px 12px rgba(0, 0, 0, .45);
+  white-space: nowrap; gap: 6px; flex-direction: column; align-items: stretch;
+}
+.toolbar .tool-group:hover .group-menu { display: flex; }
+.toolbar .tool-group .group-menu .btn-sm { width: 100%; }
+.toolbar .tool-group .group-menu .btn-sm.active { background: #4a90d9; color: #fff; }
+.toolbar .btn-sm {
+  padding: 5px 12px; border: 1px solid #555; border-radius: 4px;
+  background: #3d3d54; color: #ccc; font-size: 12px;
+  cursor: pointer; font-family: inherit;
+  transition: all 0.12s; white-space: nowrap;
+}
+.toolbar .btn-sm:hover { background: #4d4d6a; }
+.toolbar .btn-sm.active,
+.toolbar .btn-sm.always-on { background: #4a90d9; border-color: #4a90d9; color: #fff; }
+.toolbar .info-text { color: #888; font-size: 11px; margin-left: auto; }
+
+/* 颜色选择器 */
+.color-swatch {
+  display: inline-block; width: 18px; height: 18px;
+  border-radius: 3px; border: 2px solid transparent;
+  cursor: pointer; vertical-align: middle;
+  transition: border-color 0.12s;
+}
+.color-swatch:hover { border-color: #fff; }
+.color-swatch.active { border-color: #fff; box-shadow: 0 0 6px rgba(255,255,255,0.5); }
+
+/* ---- 主区域 ---- */
+.main { flex: 1; display: flex; min-height: 0; }
+
+/* 配电盘区域 */
+.panel-wrapper {
+  flex: 1; background: #bcc0c5;
+  overflow: auto; position: relative; padding: 0;
+}
+.panel { position: relative; margin: 0 auto; background: var(--panel-bg, #eef0f2); }
+.wire-duct { box-sizing: border-box; }
+.wire-duct.horizontal { width: 100%; }
+.wire-duct.vertical { position: absolute; height: auto; }
+.panel.no-duct .wire-duct { display: none; }
+.panel-row { position: relative; transition: background 0.2s; }
+.panel-row.drag-over {
+  background: var(--drop-highlight);
+  outline: 2px dashed #4a90d9; outline-offset: -2px; z-index: 1;
+}
+#wireCanvas { position: absolute; top: 0; left: 0; pointer-events: none; z-index: 5; }
+
+/* 元器件卡片 */
+.component-card {
+  position: absolute; display: inline-flex;
+  flex-direction: column; align-items: center;
+  cursor: grab; background: transparent;
+  padding: 4px 6px 2px; border: 2px solid transparent;
+  border-radius: 4px; transition: border-color 0.15s;
+  top: 50%; transform: translateY(-50%);
+}
+.component-card:hover { border-color: rgba(74,144,217,0.4); }
+.component-card.wired,
+.component-card.wired:hover { cursor: grab; border-color: transparent; }
+.component-card.wired .del-btn { display: none !important; }
+.component-card.dragging-in-row {
+  cursor: grabbing; border-color: #4a90d9; z-index: 10;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+/* v3 图像层：SVG 拉伸填满（viewBox 与器件 size 一致，坐标对齐端子）；pointer-events:none 不挡端子/热区点击 */
+.component-card .comp-img-layer { pointer-events: none; }
+.component-card .comp-img-layer svg { display: block; width: 100%; height: 100%; }
+/* 占位元素：撑起卡片宽高（图像层 absolute 脱离文档流，需占位防卡片坍缩） */
+.component-card .comp-img-holder { pointer-events: none; flex-shrink: 0; }
+/* 参数显示标签（params display 属性 overlay）：布局内联，字体/颜色等样式可由 display.class 引用的 CSS 类控制 */
+.component-card .comp-text-label { font-family: inherit; }
+.component-card .comp-text-label.pneu-pressure {
+  font-size: 22px;
+  font-weight: bold;
+  color: #1a3d5c;
+  text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff;   /* 白色描边（图片上更清晰） */
+}
+.component-card .comp-text-label.speed-label {
+  font-size: 22px;
+  font-weight: bold;
+  color: #e74c3c;
+  text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff;   /* 白色描边 */
+}
+/* 堵转提示（params display.class 引用，显示在原转速读数位置）：纯红粗体白描边 */
+.component-card .comp-text-label.stall-label {
+  font-weight: bold;
+  color: #e74c3c;
+  text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff;   /* 白色描边 */
+}
+/* 按钮钮帽配色（image 内 SVG 元素的 class，params.classBind 注入：参数值即 class 名） */
+.cap-red    { fill: #e74c3c; }
+.cap-yellow { fill: #f1c40f; }
+.cap-blue   { fill: #3498db; }
+.cap-green  { fill: #2ecc71; }
+.cap-white  { fill: #ecf0f1; }
+.cap-black  { fill: #34495e; }
+/* 器件标牌（黄底黑字标签，params display.class 引用）：名称等 text 参数图上叠加 */
+.component-card .comp-text-label.yellow-plate {
+  background: #ffef00;
+  color: #222;
+  padding: 1px 3px;
+  font-weight: 600;
+}
+/* 器件标牌（红底白字标签） */
+.component-card .comp-text-label.red-plate {
+  background: #e74c3c;
+  color: #fff;
+  padding: 1px 3px;
+  font-weight: 600;
+}
+/* 空文本标签（如未填名称）不显示 */
+.component-card .comp-text-label:empty { display: none; }
+.component-card .comp-label {
+  color: #555; margin-top: 2px; text-align: center;
+  max-width: 120px; min-width: 30px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  border: 1px solid transparent; border-radius: 2px;
+  padding: 1px 4px; cursor: text; background: transparent;
+}
+.component-card .comp-label:hover { border-color: #ccc; }
+.component-card .comp-label:focus {
+  outline: none; border-color: #4a90d9;
+  background: rgba(255,255,255,0.9);
+  white-space: normal; overflow: visible; z-index: 5;
+}
+.component-card .del-btn {
+  position: absolute; top: -10px; right: -10px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--danger); color: #fff;
+  border: none; font-size: 13px; line-height: 22px;
+  text-align: center; cursor: pointer;
+  display: none; z-index: 2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+}
+.component-card:hover .del-btn { display: block; }
+.component-card .del-btn:hover { background: #c0392b; }
+
+/* 拖动悬浮面板（万用表/排故）期间：禁用盘上导线/热区/端子的悬停光标与高亮效果 */
+body.panel-dragging .comp-zone { cursor: default !important; }
+body.panel-dragging .term-dot { cursor: default !important; }
+body.panel-dragging .term-dot:hover { background: transparent !important; }
+
+/* 端子圆点 */
+.term-dot {
+  position: absolute; border-radius: 50%; cursor: pointer;
+  z-index: 4; background: transparent;
+  transition: background 0.15s, box-shadow 0.15s;
+}
+.term-dot:hover { background: var(--term-hover-fill, rgba(74,144,217,0.4)) !important; }
+.term-dot.full { cursor: default; pointer-events: none; }
+.fault-active .term-dot.full { pointer-events: auto; cursor: pointer; }
+.term-dot.full:hover { background: transparent !important; }
+/* 只可检测端子（isProbeOnly）：半透明空心标识，点击无效果（不可接线） */
+.term-dot.probe-only {
+  background: var(--term-hover-probe, rgba(74, 144, 217, 0.15)) !important;
+}
+.term-dot.selected {
+  background: var(--term-selected-fill, rgba(255,107,107,0.55)) !important;
+  box-shadow: 0 0 0 3px var(--term-selected-ring, rgba(255,107,107,0.4));
+}
+.term-dot.probed {
+  background: var(--term-hover-probed, rgba(74,144,217,0.45)) !important;
+  box-shadow: 0 0 0 3px var(--term-hover-ring, rgba(74,144,217,0.4));
+}
+/* 统一告警栈条目（引擎按 key 动态增删；背景色由告警类型内联指定） */
+.alert-item {
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* 漏气端子标记：💨 漏气符号放大悬浮在气孔上，漏气时显示 + 呼吸闪烁（恢复自动消失） */
+.term-dot.leak::after {
+  content: '💨';
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 36px; line-height: 1;
+  pointer-events: none; z-index: 9;
+  animation: leak-blink 0.9s ease-in-out infinite;
+}
+@keyframes leak-blink {
+  0%, 100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  50%      { opacity: 0.6; transform: translate(-50%, -50%) scale(1.3); }
+}
+
+/* 元件库 */
+.library {
+  width: var(--library-width); background: var(--library-bg);
+  flex-shrink: 0; display: flex; flex-direction: column;
+  border-left: 1px solid #ddd; overflow-y: auto;
+}
+.library .lib-header {
+  padding: 14px 16px 10px; font-size: 13px; font-weight: 600;
+  color: var(--text-primary); border-bottom: 1px solid #eee;
+}
+.library .lib-section { border-bottom: 1px solid #f0f0f0; }
+.library .lib-section-title {
+  font-size: 11px; color: #999; padding: 8px 16px 4px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+/* 元件库：按分类横排（每类一行或多行，缩略图 + 名字，悬停缩略图显示完整 description） */
+#libraryContent {
+  padding: 10px 12px;
+}
+.library .lib-section { margin-bottom: 14px; }
+.library .lib-section-title {
+  font-size: 11px; color: #999; padding: 4px 0 8px;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.lib-section .lib-cards {
+  display: flex; flex-wrap: wrap; gap: 8px;
+}
+.lib-card {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex: 1 1 0; min-width: 76px; padding: 10px 6px; cursor: grab; transition: background 0.12s;
+  border-radius: 8px; position: relative;
+}
+.lib-card:hover { background: #eef4fb; }
+.lib-card.dragging { opacity: 0.4; }
+.lib-card.disabled { opacity: 0.35; cursor: not-allowed; pointer-events: none; }
+.lib-card.disabled::after {
+  content: "已放置"; position: absolute; right: 8px; top: 8px;
+  font-size: 10px; color: #999; background: #eee;
+  padding: 2px 8px; border-radius: 10px;
+}
+.lib-card .lib-thumb {
+  position: relative;   /* absolute 定位参照（内部可能有 <div> 包裹，div 高度 auto 导致百分比高度失效） */
+  width: 64px; height: 64px;
+  border-radius: 6px; background: #fff;
+  border: 1px solid #eee; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+/* contain 等比缩放：内容相对 thumb 定位居中，宽高哪个方向超出就按哪个方向压缩，图片完整显示在框内 */
+.lib-card .lib-thumb svg,
+.lib-card .lib-thumb img {
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  margin: auto;
+  max-width: 100%; max-height: 100%;
+  object-fit: contain;
+  pointer-events: none;   /* 事件穿透：缩略图上按下也能拖拽（拖拽源 = card），悬停 title 由 thumb 承担 */
+}
+.lib-card .lib-name {
+  font-size: 12px; color: var(--text-primary); font-weight: 500;
+  text-align: center; line-height: 1.3;
+  overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+  -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+
+/* ---- 元件库悬浮化（右上角按钮 + 悬浮面板 + tab） ---- */
+.btn-library-fab {
+  position: fixed; top: 60px; right: 16px; z-index: 10002;
+  padding: 9px 16px; font-size: 14px; font-weight: 600;
+  color: #fff; background: #4a90d9; border: 1px solid #357abd;
+  border-radius: 22px; cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+  transition: background 0.15s;
+}
+.btn-library-fab:hover { background: #5ba0e5; }
+.btn-library-fab.active { background: #357abd; box-shadow: inset 0 2px 6px rgba(0,0,0,0.25); }
+.library.library-floating {
+  position: fixed; top: 108px; right: 16px; z-index: 10001;
+  width: 380px; max-height: calc(100vh - 140px);
+  background: #fff; border: 1px solid #ddd; border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  display: flex; flex-direction: column; overflow: hidden;
+}
+.library.library-floating .lib-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 14px; border-bottom: 1px solid #eee;
+}
+.library.library-floating .lib-close {
+  background: none; border: none; color: #999;
+  font-size: 20px; cursor: pointer; line-height: 1; padding: 0 4px;
+}
+.library.library-floating .lib-close:hover { color: #e74c3c; }
+.lib-tabs { display: flex; gap: 4px; padding: 8px 12px 0; border-bottom: 1px solid #eee; }
+.lib-tab {
+  flex: 1; padding: 7px 0; font-size: 13px; text-align: center;
+  background: none; border: none; border-bottom: 2px solid transparent;
+  color: #888; cursor: pointer;
+}
+.lib-tab.active { color: #4a90d9; font-weight: 600; border-bottom-color: #4a90d9; }
+#libraryContent, #libraryScenes { overflow-y: auto; padding: 10px 12px; }
+/* 场景卡片 */
+.lib-scene-card {
+  display: flex; gap: 10px; align-items: center;
+  padding: 10px; margin-bottom: 8px; border: 1px solid #eee;
+  border-radius: 8px; cursor: grab; background: #fafcff;
+  transition: background 0.12s, border-color 0.12s;
+}
+.lib-scene-card:hover { background: #eef4fb; border-color: #bcd8f5; }
+.lib-scene-card.dragging { opacity: 0.4; }
+.lib-scene-icon {
+  width: 40px; height: 40px; border-radius: 8px; flex-shrink: 0;
+  background: #e8f2fc; display: flex; align-items: center; justify-content: center;
+  font-size: 26px; font-weight: 700; color: #4a90d9;
+}
+.lib-scene-name { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+.lib-scene-desc { font-size: 11px; color: #999; line-height: 1.4; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  padding: 10px 24px; border-radius: 8px;
+  font-size: 13px; color: #fff; z-index: 10000;
+  animation: toastIn 0.25s ease, toastOut 0.25s ease 1.8s forwards;
+}
+.toast.warn { background: #e67e22; }
+.toast.info { background: #4a90d9; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@keyframes toastOut {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+/* ---- 右上角作者信息（可点击跳转作者主页） & 左下角状态栏 ---- */
+.toolbar .author-info {
+  color: #888; font-size: 11px;
+  margin-left: auto; white-space: nowrap;
+  text-decoration: none; cursor: pointer;
+}
+.toolbar .author-info a { color: #888; text-decoration: none; }
+.toolbar .author-info a:hover { color: #4a90d9; }
+.status-bar {
+  position: fixed; left: 12px; bottom: 8px; z-index: 9999;
+  background: rgba(0, 0, 0, 0.4); color: #ddd;
+  font-size: 12px; padding: 2px 10px; border-radius: 4px;
+  max-width: 60vw; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* ---- 无线槽自由布局：无行，元件绝对定位 ---- */
+.panel.free-layout .component-card { top: 0; transform: none; }
+
+/* ---- 十字工作台 3D 悬浮视窗（初始位置由 JS 设置，供 makeDraggable 拖动） ---- */
+.table3d-window {
+  position: fixed; width: 620px; height: 560px; z-index: 10050;
+  background: #1e242b; border: 1px solid #2c3540; border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, .5);
+  display: flex; flex-direction: column; overflow: hidden;
+  user-select: none;
+}
+.table3d-title {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 12px; cursor: move; flex: none;
+  color: #e6edf3; font-size: 13px; font-weight: 600;
+  background: #232b33; border-bottom: 1px solid #2c3540;
+}
+.table3d-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.table3d-close {
+  background: none; border: none; color: #8b98a5; font-size: 18px;
+  cursor: pointer; line-height: 1; padding: 0 6px; border-radius: 6px;
+}
+.table3d-close:hover { color: #fff; background: #d64550; }
+.table3d-canvas-wrap { flex: 1; position: relative; min-height: 0; }
+.table3d-canvas { display: block; width: 100%; height: 100%; cursor: grab; }
+.table3d-canvas:active { cursor: grabbing; }
+.table3d-hud {
+  display: flex; align-items: center; gap: 18px;
+  padding: 7px 14px; flex: none;
+  background: #232b33; border-top: 1px solid #2c3540;
+  font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.table3d-hud .hud-x { color: #58a6ff; }
+.table3d-hud .hud-y { color: #3fb950; }
+.table3d-hint { margin-left: auto; font-size: 11px; color: #8b98a5; font-weight: 400; }
